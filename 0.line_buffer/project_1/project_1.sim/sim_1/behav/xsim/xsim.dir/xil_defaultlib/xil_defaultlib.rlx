@@ -1,0 +1,7 @@
+0.7
+2020.2
+Oct 14 2022
+05:07:14
+/home/goeun/gitHub/Braille_generator_FPGA/line_buffer/line_buffer.v,1753010425,verilog,,,,line_buffer,,uvm,,,,,,
+/home/goeun/gitHub/Braille_generator_FPGA/line_buffer/project_1/project_1.sim/sim_1/behav/xsim/glbl.v,1665704903,verilog,,,,glbl,,uvm,,,,,,
+/home/goeun/gitHub/Braille_generator_FPGA/line_buffer/tb_line_buffer.sv,1753010468,systemVerilog,,,,tb_line_buffer,,uvm,,,,,,

@@ -1,0 +1,16 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../../cnn_acc_ci.v" \
+"../../../../../cnn_core.v" \
+"../../../../../cnn_kernel.v" \
+"../../../../../cnn_top.v" \
+"../../../../../line_buffer.v" \
+
+sv xil_defaultlib  \
+"../../../../../tb_cnn_top.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

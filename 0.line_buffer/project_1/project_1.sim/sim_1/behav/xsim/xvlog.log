@@ -1,0 +1,4 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/goeun/gitHub/Braille_generator_FPGA/line_buffer/line_buffer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module line_buffer
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/goeun/gitHub/Braille_generator_FPGA/line_buffer/tb_line_buffer.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_line_buffer

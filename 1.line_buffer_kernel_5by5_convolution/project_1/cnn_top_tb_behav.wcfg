@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="cnn_top_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="cnn_top_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="16.980001 us"></ZoomEndTime>
+      <Cursor1Time time="1.735000 us"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="331"></NameColumnWidth>
+      <ValueColumnWidth column_width="263"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="41" />
+   <wvobject type="logic" fp_name="/cnn_top_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/reset_n">
+      <obj_property name="ElementShortName">reset_n</obj_property>
+      <obj_property name="ObjectShortName">reset_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/i_valid">
+      <obj_property name="ElementShortName">i_valid</obj_property>
+      <obj_property name="ObjectShortName">i_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/i_pixel">
+      <obj_property name="ElementShortName">i_pixel[7:0]</obj_property>
+      <obj_property name="ObjectShortName">i_pixel[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/i_cnn_weight">
+      <obj_property name="ElementShortName">i_cnn_weight[524:0]</obj_property>
+      <obj_property name="ObjectShortName">i_cnn_weight[524:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/i_cnn_bias">
+      <obj_property name="ElementShortName">i_cnn_bias[20:0]</obj_property>
+      <obj_property name="ObjectShortName">i_cnn_bias[20:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/o_done">
+      <obj_property name="ElementShortName">o_done</obj_property>
+      <obj_property name="ObjectShortName">o_done</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/i">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/k">
+      <obj_property name="ElementShortName">k[31:0]</obj_property>
+      <obj_property name="ObjectShortName">k[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/image_mem">
+      <obj_property name="ElementShortName">image_mem[0:783][7:0]</obj_property>
+      <obj_property name="ObjectShortName">image_mem[0:783][7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf">
+      <obj_property name="ElementShortName">line_buf[0:4][0:27][7:0]</obj_property>
+      <obj_property name="ObjectShortName">line_buf[0:4][0:27][7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0]">
+         <obj_property name="ElementShortName">[0][0:27][7:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][0:27][7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][0]">
+            <obj_property name="ElementShortName">[0][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[0][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][1]">
+            <obj_property name="ElementShortName">[1][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[1][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][2]">
+            <obj_property name="ElementShortName">[2][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[2][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][3]">
+            <obj_property name="ElementShortName">[3][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[3][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][4]">
+            <obj_property name="ElementShortName">[4][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[4][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][5]">
+            <obj_property name="ElementShortName">[5][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[5][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][6]">
+            <obj_property name="ElementShortName">[6][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[6][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][7]">
+            <obj_property name="ElementShortName">[7][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[7][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][8]">
+            <obj_property name="ElementShortName">[8][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[8][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][9]">
+            <obj_property name="ElementShortName">[9][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[9][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][10]">
+            <obj_property name="ElementShortName">[10][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[10][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][11]">
+            <obj_property name="ElementShortName">[11][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[11][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][12]">
+            <obj_property name="ElementShortName">[12][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[12][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][13]">
+            <obj_property name="ElementShortName">[13][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[13][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][14]">
+            <obj_property name="ElementShortName">[14][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[14][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][15]">
+            <obj_property name="ElementShortName">[15][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[15][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][16]">
+            <obj_property name="ElementShortName">[16][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[16][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][17]">
+            <obj_property name="ElementShortName">[17][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[17][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][18]">
+            <obj_property name="ElementShortName">[18][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[18][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][19]">
+            <obj_property name="ElementShortName">[19][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[19][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][20]">
+            <obj_property name="ElementShortName">[20][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[20][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][21]">
+            <obj_property name="ElementShortName">[21][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[21][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][22]">
+            <obj_property name="ElementShortName">[22][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[22][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][23]">
+            <obj_property name="ElementShortName">[23][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[23][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][24]">
+            <obj_property name="ElementShortName">[24][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[24][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][25]">
+            <obj_property name="ElementShortName">[25][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[25][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][26]">
+            <obj_property name="ElementShortName">[26][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[26][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[0][27]">
+            <obj_property name="ElementShortName">[27][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[27][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1]">
+         <obj_property name="ElementShortName">[1][0:27][7:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][0:27][7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][0]">
+            <obj_property name="ElementShortName">[0][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[0][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][1]">
+            <obj_property name="ElementShortName">[1][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[1][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][2]">
+            <obj_property name="ElementShortName">[2][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[2][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][3]">
+            <obj_property name="ElementShortName">[3][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[3][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][4]">
+            <obj_property name="ElementShortName">[4][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[4][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][5]">
+            <obj_property name="ElementShortName">[5][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[5][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][6]">
+            <obj_property name="ElementShortName">[6][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[6][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][7]">
+            <obj_property name="ElementShortName">[7][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[7][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][8]">
+            <obj_property name="ElementShortName">[8][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[8][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][9]">
+            <obj_property name="ElementShortName">[9][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[9][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][10]">
+            <obj_property name="ElementShortName">[10][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[10][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][11]">
+            <obj_property name="ElementShortName">[11][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[11][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][12]">
+            <obj_property name="ElementShortName">[12][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[12][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][13]">
+            <obj_property name="ElementShortName">[13][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[13][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][14]">
+            <obj_property name="ElementShortName">[14][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[14][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][15]">
+            <obj_property name="ElementShortName">[15][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[15][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][16]">
+            <obj_property name="ElementShortName">[16][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[16][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][17]">
+            <obj_property name="ElementShortName">[17][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[17][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][18]">
+            <obj_property name="ElementShortName">[18][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[18][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][19]">
+            <obj_property name="ElementShortName">[19][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[19][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][20]">
+            <obj_property name="ElementShortName">[20][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[20][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][21]">
+            <obj_property name="ElementShortName">[21][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[21][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][22]">
+            <obj_property name="ElementShortName">[22][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[22][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][23]">
+            <obj_property name="ElementShortName">[23][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[23][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][24]">
+            <obj_property name="ElementShortName">[24][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[24][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][25]">
+            <obj_property name="ElementShortName">[25][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[25][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][26]">
+            <obj_property name="ElementShortName">[26][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[26][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[1][27]">
+            <obj_property name="ElementShortName">[27][7:0]</obj_property>
+            <obj_property name="ObjectShortName">[27][7:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[2]">
+         <obj_property name="ElementShortName">[2][0:27][7:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][0:27][7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[3]">
+         <obj_property name="ElementShortName">[3][0:27][7:0]</obj_property>
+         <obj_property name="ObjectShortName">[3][0:27][7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /line_buf[4]">
+         <obj_property name="ElementShortName">[4][0:27][7:0]</obj_property>
+         <obj_property name="ObjectShortName">[4][0:27][7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /x_cnt">
+      <obj_property name="ElementShortName">x_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">x_cnt[4:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /y_cnt">
+      <obj_property name="ElementShortName">y_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">y_cnt[4:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider243" type="divider">
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /r_window">
+      <obj_property name="ElementShortName">r_window[199:0]</obj_property>
+      <obj_property name="ObjectShortName">r_window[199:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_line_buffer[0].u_line_buffer /o_window_valid">
+      <obj_property name="ElementShortName">o_window_valid</obj_property>
+      <obj_property name="ObjectShortName">o_window_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /i_window">
+      <obj_property name="ElementShortName">i_window[199:0]</obj_property>
+      <obj_property name="ObjectShortName">i_window[199:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider241" type="divider">
+      <obj_property name="label">kernel</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /\gen_mul_inst[0].u_cnn_kernel /i_in_valid">
+      <obj_property name="ElementShortName">i_in_valid</obj_property>
+      <obj_property name="ObjectShortName">i_in_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /\gen_mul_inst[0].u_cnn_kernel /i_in_fmap">
+      <obj_property name="ElementShortName">i_in_fmap[199:0]</obj_property>
+      <obj_property name="ObjectShortName">i_in_fmap[199:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /\gen_mul_inst[0].u_cnn_kernel /o_ot_valid">
+      <obj_property name="ElementShortName">o_ot_valid</obj_property>
+      <obj_property name="ObjectShortName">o_ot_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /\gen_mul_inst[0].u_cnn_kernel /o_ot_kernel_acc">
+      <obj_property name="ElementShortName">o_ot_kernel_acc[19:0]</obj_property>
+      <obj_property name="ObjectShortName">o_ot_kernel_acc[19:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /i_cnn_weight">
+      <obj_property name="ElementShortName">i_cnn_weight[174:0]</obj_property>
+      <obj_property name="ObjectShortName">i_cnn_weight[174:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider244" type="divider">
+      <obj_property name="label">CH1</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /i_in_valid">
+      <obj_property name="ElementShortName">i_in_valid</obj_property>
+      <obj_property name="ObjectShortName">i_in_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /i_window">
+      <obj_property name="ElementShortName">i_window[199:0]</obj_property>
+      <obj_property name="ObjectShortName">i_window[199:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /o_ot_valid">
+      <obj_property name="ElementShortName">o_ot_valid</obj_property>
+      <obj_property name="ObjectShortName">o_ot_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /o_ot_ci_acc">
+      <obj_property name="ElementShortName">o_ot_ci_acc[21:0]</obj_property>
+      <obj_property name="ObjectShortName">o_ot_ci_acc[21:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[0].u_cnn_acc_ci /w_ot_kernel_acc">
+      <obj_property name="ElementShortName">w_ot_kernel_acc[19:0]</obj_property>
+      <obj_property name="ObjectShortName">w_ot_kernel_acc[19:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider497" type="divider">
+      <obj_property name="label">CH2</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[1].u_cnn_acc_ci /o_ot_valid">
+      <obj_property name="ElementShortName">o_ot_valid</obj_property>
+      <obj_property name="ObjectShortName">o_ot_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[1].u_cnn_acc_ci /o_ot_ci_acc">
+      <obj_property name="ElementShortName">o_ot_ci_acc[21:0]</obj_property>
+      <obj_property name="ObjectShortName">o_ot_ci_acc[21:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider522" type="divider">
+      <obj_property name="label">CH3</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[2].u_cnn_acc_ci /o_ot_valid">
+      <obj_property name="ElementShortName">o_ot_valid</obj_property>
+      <obj_property name="ObjectShortName">o_ot_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/u_cnn_core/\gen_ci_inst[2].u_cnn_acc_ci /o_ot_ci_acc">
+      <obj_property name="ElementShortName">o_ot_ci_acc[21:0]</obj_property>
+      <obj_property name="ObjectShortName">o_ot_ci_acc[21:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider526" type="divider">
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/w_core_valid">
+      <obj_property name="ElementShortName">w_core_valid</obj_property>
+      <obj_property name="ObjectShortName">w_core_valid</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/x_cnt">
+      <obj_property name="ElementShortName">x_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">x_cnt[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/y_cnt">
+      <obj_property name="ElementShortName">y_cnt[4:0]</obj_property>
+      <obj_property name="ObjectShortName">y_cnt[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/cnn_top_tb/dut/o_done">
+      <obj_property name="ElementShortName">o_done</obj_property>
+      <obj_property name="ObjectShortName">o_done</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap">
+      <obj_property name="ElementShortName">result_fmap[0:2][0:23][0:23][22:0]</obj_property>
+      <obj_property name="ObjectShortName">result_fmap[0:2][0:23][0:23][22:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0]">
+         <obj_property name="ElementShortName">[0][0:23][0:23][22:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][0:23][0:23][22:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0]">
+            <obj_property name="ElementShortName">[0][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[0][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][0]">
+               <obj_property name="ElementShortName">[0][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[0][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][1]">
+               <obj_property name="ElementShortName">[1][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[1][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][2]">
+               <obj_property name="ElementShortName">[2][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[2][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][3]">
+               <obj_property name="ElementShortName">[3][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[3][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][4]">
+               <obj_property name="ElementShortName">[4][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[4][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][5]">
+               <obj_property name="ElementShortName">[5][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[5][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][6]">
+               <obj_property name="ElementShortName">[6][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[6][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][7]">
+               <obj_property name="ElementShortName">[7][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[7][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][8]">
+               <obj_property name="ElementShortName">[8][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[8][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][9]">
+               <obj_property name="ElementShortName">[9][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[9][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][10]">
+               <obj_property name="ElementShortName">[10][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[10][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][11]">
+               <obj_property name="ElementShortName">[11][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[11][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][12]">
+               <obj_property name="ElementShortName">[12][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[12][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][13]">
+               <obj_property name="ElementShortName">[13][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[13][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][14]">
+               <obj_property name="ElementShortName">[14][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[14][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][15]">
+               <obj_property name="ElementShortName">[15][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[15][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][16]">
+               <obj_property name="ElementShortName">[16][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[16][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][17]">
+               <obj_property name="ElementShortName">[17][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[17][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][18]">
+               <obj_property name="ElementShortName">[18][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[18][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][19]">
+               <obj_property name="ElementShortName">[19][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[19][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][20]">
+               <obj_property name="ElementShortName">[20][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[20][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][21]">
+               <obj_property name="ElementShortName">[21][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[21][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][22]">
+               <obj_property name="ElementShortName">[22][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[22][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][0][23]">
+               <obj_property name="ElementShortName">[23][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[23][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1]">
+            <obj_property name="ElementShortName">[1][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[1][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][0]">
+               <obj_property name="ElementShortName">[0][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[0][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][1]">
+               <obj_property name="ElementShortName">[1][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[1][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][2]">
+               <obj_property name="ElementShortName">[2][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[2][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][3]">
+               <obj_property name="ElementShortName">[3][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[3][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][4]">
+               <obj_property name="ElementShortName">[4][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[4][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][5]">
+               <obj_property name="ElementShortName">[5][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[5][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][6]">
+               <obj_property name="ElementShortName">[6][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[6][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][7]">
+               <obj_property name="ElementShortName">[7][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[7][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][8]">
+               <obj_property name="ElementShortName">[8][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[8][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][9]">
+               <obj_property name="ElementShortName">[9][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[9][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][10]">
+               <obj_property name="ElementShortName">[10][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[10][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][11]">
+               <obj_property name="ElementShortName">[11][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[11][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][12]">
+               <obj_property name="ElementShortName">[12][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[12][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][13]">
+               <obj_property name="ElementShortName">[13][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[13][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][14]">
+               <obj_property name="ElementShortName">[14][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[14][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][15]">
+               <obj_property name="ElementShortName">[15][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[15][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][16]">
+               <obj_property name="ElementShortName">[16][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[16][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][17]">
+               <obj_property name="ElementShortName">[17][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[17][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][18]">
+               <obj_property name="ElementShortName">[18][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[18][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][19]">
+               <obj_property name="ElementShortName">[19][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[19][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][20]">
+               <obj_property name="ElementShortName">[20][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[20][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][21]">
+               <obj_property name="ElementShortName">[21][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[21][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][22]">
+               <obj_property name="ElementShortName">[22][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[22][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+            <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][1][23]">
+               <obj_property name="ElementShortName">[23][22:0]</obj_property>
+               <obj_property name="ObjectShortName">[23][22:0]</obj_property>
+               <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+            </wvobject>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][2]">
+            <obj_property name="ElementShortName">[2][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[2][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][3]">
+            <obj_property name="ElementShortName">[3][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[3][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][4]">
+            <obj_property name="ElementShortName">[4][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[4][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][5]">
+            <obj_property name="ElementShortName">[5][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[5][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][6]">
+            <obj_property name="ElementShortName">[6][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[6][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][7]">
+            <obj_property name="ElementShortName">[7][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[7][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][8]">
+            <obj_property name="ElementShortName">[8][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[8][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][9]">
+            <obj_property name="ElementShortName">[9][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[9][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][10]">
+            <obj_property name="ElementShortName">[10][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[10][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][11]">
+            <obj_property name="ElementShortName">[11][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[11][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][12]">
+            <obj_property name="ElementShortName">[12][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[12][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][13]">
+            <obj_property name="ElementShortName">[13][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[13][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][14]">
+            <obj_property name="ElementShortName">[14][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[14][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][15]">
+            <obj_property name="ElementShortName">[15][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[15][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][16]">
+            <obj_property name="ElementShortName">[16][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[16][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][17]">
+            <obj_property name="ElementShortName">[17][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[17][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][18]">
+            <obj_property name="ElementShortName">[18][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[18][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][19]">
+            <obj_property name="ElementShortName">[19][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[19][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][20]">
+            <obj_property name="ElementShortName">[20][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[20][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][21]">
+            <obj_property name="ElementShortName">[21][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[21][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][22]">
+            <obj_property name="ElementShortName">[22][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[22][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[0][23]">
+            <obj_property name="ElementShortName">[23][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[23][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1]">
+         <obj_property name="ElementShortName">[1][0:23][0:23][22:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][0:23][0:23][22:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][0]">
+            <obj_property name="ElementShortName">[0][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[0][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][1]">
+            <obj_property name="ElementShortName">[1][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[1][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][2]">
+            <obj_property name="ElementShortName">[2][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[2][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][3]">
+            <obj_property name="ElementShortName">[3][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[3][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][4]">
+            <obj_property name="ElementShortName">[4][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[4][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][5]">
+            <obj_property name="ElementShortName">[5][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[5][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][6]">
+            <obj_property name="ElementShortName">[6][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[6][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][7]">
+            <obj_property name="ElementShortName">[7][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[7][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][8]">
+            <obj_property name="ElementShortName">[8][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[8][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][9]">
+            <obj_property name="ElementShortName">[9][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[9][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][10]">
+            <obj_property name="ElementShortName">[10][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[10][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][11]">
+            <obj_property name="ElementShortName">[11][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[11][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][12]">
+            <obj_property name="ElementShortName">[12][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[12][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][13]">
+            <obj_property name="ElementShortName">[13][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[13][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][14]">
+            <obj_property name="ElementShortName">[14][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[14][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][15]">
+            <obj_property name="ElementShortName">[15][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[15][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][16]">
+            <obj_property name="ElementShortName">[16][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[16][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][17]">
+            <obj_property name="ElementShortName">[17][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[17][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][18]">
+            <obj_property name="ElementShortName">[18][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[18][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][19]">
+            <obj_property name="ElementShortName">[19][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[19][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][20]">
+            <obj_property name="ElementShortName">[20][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[20][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][21]">
+            <obj_property name="ElementShortName">[21][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[21][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][22]">
+            <obj_property name="ElementShortName">[22][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[22][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[1][23]">
+            <obj_property name="ElementShortName">[23][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[23][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2]">
+         <obj_property name="ElementShortName">[2][0:23][0:23][22:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][0:23][0:23][22:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][0]">
+            <obj_property name="ElementShortName">[0][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[0][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][1]">
+            <obj_property name="ElementShortName">[1][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[1][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][2]">
+            <obj_property name="ElementShortName">[2][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[2][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][3]">
+            <obj_property name="ElementShortName">[3][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[3][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][4]">
+            <obj_property name="ElementShortName">[4][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[4][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][5]">
+            <obj_property name="ElementShortName">[5][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[5][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][6]">
+            <obj_property name="ElementShortName">[6][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[6][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][7]">
+            <obj_property name="ElementShortName">[7][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[7][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][8]">
+            <obj_property name="ElementShortName">[8][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[8][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][9]">
+            <obj_property name="ElementShortName">[9][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[9][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][10]">
+            <obj_property name="ElementShortName">[10][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[10][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][11]">
+            <obj_property name="ElementShortName">[11][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[11][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][12]">
+            <obj_property name="ElementShortName">[12][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[12][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][13]">
+            <obj_property name="ElementShortName">[13][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[13][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][14]">
+            <obj_property name="ElementShortName">[14][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[14][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][15]">
+            <obj_property name="ElementShortName">[15][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[15][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][16]">
+            <obj_property name="ElementShortName">[16][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[16][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][17]">
+            <obj_property name="ElementShortName">[17][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[17][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][18]">
+            <obj_property name="ElementShortName">[18][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[18][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][19]">
+            <obj_property name="ElementShortName">[19][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[19][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][20]">
+            <obj_property name="ElementShortName">[20][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[20][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][21]">
+            <obj_property name="ElementShortName">[21][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[21][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][22]">
+            <obj_property name="ElementShortName">[22][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[22][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/cnn_top_tb/dut/result_fmap[2][23]">
+            <obj_property name="ElementShortName">[23][0:23][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[23][0:23][22:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+</wave_config>

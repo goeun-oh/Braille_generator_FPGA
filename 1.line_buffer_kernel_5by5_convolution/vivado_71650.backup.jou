@@ -1,0 +1,230 @@
+#-----------------------------------------------------------
+# Vivado v2022.2 (64-bit)
+# SW Build 3671981 on Fri Oct 14 04:59:54 MDT 2022
+# IP Build 3669848 on Fri Oct 14 08:30:02 MDT 2022
+# Start of session at: Sun Jul 20 21:55:07 2025
+# Process ID: 71650
+# Current directory: /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution
+# Command line: vivado
+# Log file: /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/vivado.log
+# Journal file: /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/vivado.jou
+# Running On: goeun-desktop, OS: Linux, CPU Frequency: 3611.342 MHz, CPU Physical cores: 4, Host memory: 16573 MB
+#-----------------------------------------------------------
+start_gui
+open_project /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/project_1.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+source cnn_top_tb.tcl
+synth_design -rtl -rtl_skip_mlo -name rtl_1
+restart
+run all
+restart
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+add_files -fileset sim_1 -norecurse /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg
+set_property xsim.view /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg [get_filesets sim_1]
+relaunch_sim
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+restart
+run all
+relaunch_sim
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+restart
+run all
+restart
+run all
+run all
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+restart
+run all
+restart
+run all
+run all
+restart
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+relaunch_sim
+run all
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg}
+restart
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+restart
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+restart
+relaunch_sim
+run all
+close_sim
+launch_simulation
+open_wave_config /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg
+source cnn_top_tb.tcl
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+run all
+relaunch_sim
+restart
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav1.wcfg}
+add_files -fileset sim_1 -norecurse /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav1.wcfg
+set_property xsim.view {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav.wcfg /home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav1.wcfg} [get_filesets sim_1]
+restart
+relaunch_sim
+run all
+restart
+run all
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav1.wcfg}
+restart
+run all
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav1.wcfg}
+restart
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+restart
+relaunch_sim
+run all
+relaunch_sim
+run all
+restart
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+restart
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+save_wave_config {/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/project_1/cnn_top_tb_behav1.wcfg}
+restart
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+restart
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all
+relaunch_sim
+run all

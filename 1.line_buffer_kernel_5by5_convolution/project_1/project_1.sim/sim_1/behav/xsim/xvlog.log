@@ -1,0 +1,10 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/cnn_acc_ci.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cnn_acc_ci
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/cnn_core.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cnn_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/cnn_kernel.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cnn_kernel
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/cnn_top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cnn_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/goeun/gitHub/Braille_generator_FPGA/1.line_buffer_kernel_5by5_convolution/line_buffer.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module line_buffer
