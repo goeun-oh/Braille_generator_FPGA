@@ -16,7 +16,7 @@ module line_buffer #(
     output [KX*KY*I_F_BW-1:0] o_window
 );
 
-    parameter LATENCY = 2;
+    parameter LATENCY = 1;
     reg [$clog2(IX)-1:0] x_cnt;
     reg [$clog2(IY)-1:0] y_cnt;
 
@@ -25,9 +25,9 @@ module line_buffer #(
             x_cnt <=0;
             y_cnt <=0;
         end else if (i_in_valid) begin
-            if (x_cnt > IX -1) begin
+            if (x_cnt == IX -1) begin
                 x_cnt <=0;
-                if (y_cnt > IY-1) begin
+                if (y_cnt == IY-1) begin
                     y_cnt <=0;
                 end else begin
                     y_cnt <= y_cnt + 1;
@@ -84,8 +84,8 @@ module line_buffer #(
          if (!reset_n) begin
              r_wait_valid <= {LATENCY{1'b0}};
          end else begin
-             r_wait_valid[LATENCY-2] <= r_window_valid;
-             r_wait_valid[LATENCY-1] <= r_wait_valid[LATENCY-1];
+             r_wait_valid[LATENCY-1] <= r_window_valid;
+            // r_wait_valid[LATENCY-1] <= r_wait_valid[LATENCY-1];
          end
      end
 
