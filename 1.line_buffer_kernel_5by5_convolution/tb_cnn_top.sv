@@ -30,7 +30,7 @@ module cnn_top_tb;
     wire                     o_done;
 
     wire [KX*KY*I_F_BW-1:0] o_window;
-
+    wire [KX*I_F_BW-1:0] o_line_buf;
     cnn_top #(
         .I_F_BW(I_F_BW), .O_F_BW(O_F_BW), .KX(KX), .KY(KY),
         .CI(CI), .CO(CO), .IX(IX), .IY(IY)
@@ -42,7 +42,8 @@ module cnn_top_tb;
         .i_cnn_weight(i_cnn_weight),
         .i_cnn_bias(i_cnn_bias),
         .o_done(o_done),
-        .o_window(o_window)
+        .o_window(o_window),
+        .o_line_buf(o_line_buf)
     );
 
     // === 테스트 시나리오 ===
@@ -50,6 +51,7 @@ module cnn_top_tb;
     integer k;
     integer row, col, idx;
     reg [7:0] image_mem [0:783]; // 28x28
+    reg [$clog2(IX)-1:0]cnt;
     initial begin
         // 초기화
         reset_n = 0;
@@ -57,6 +59,7 @@ module cnn_top_tb;
         i_pixel = 0;
         i_cnn_weight = 0;
         i_cnn_bias = 0;
+        cnt =0;
         #100;
         reset_n = 1;
         // 입력 이미지 초기화 (예: 1~784)
@@ -94,7 +97,7 @@ module cnn_top_tb;
 
 
     always @(*) begin
-        $display("==== line_buffer 5x5 ====");
+        $display("==== o_window 5x5 ====, cnt = %d", cnt);
         for (row = 0; row < KX; row = row + 1) begin
             $display("--- row %0d ---", row);
             for (col = 0; col < KY; col = col + 1) begin
@@ -103,6 +106,7 @@ module cnn_top_tb;
             end
             $write("\n");
         end
+        cnt = cnt + 1;
         $finish;
     end
 endmodule

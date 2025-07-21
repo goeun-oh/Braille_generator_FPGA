@@ -21,7 +21,8 @@ module cnn_top #(
     input  [CO*7-1 : 0]     i_cnn_bias,
     output reg             o_done,
     //디버깅
-    output [KX*KY*I_F_BW-1:0] o_window
+    output [KX*KY*I_F_BW-1:0] o_window,
+    output [KX*I_F_BW-1:0] o_line_buf
 
 );
     // ===============================
@@ -29,8 +30,7 @@ module cnn_top #(
     // ===============================
     wire                  w_core_valid;
     wire [CO*O_F_BW-1:0]  w_core_fmap;
-    //디버깅//
-    wire [KX*KY*I_F_BW-1:0] dbg_window;
+
 
     cnn_core #(
         .I_F_BW(I_F_BW),
@@ -50,7 +50,8 @@ module cnn_top #(
         .i_in_fmap    (i_pixel),
         .o_ot_valid   (w_core_valid),
         .o_ot_fmap    (w_core_fmap),
-        .o_window(o_window)
+        .o_window(o_window),
+        .o_line_buf(o_line_buf)
     );
 
     // ===============================

@@ -4,6 +4,7 @@ module cnn_core #(
     parameter I_F_BW = 8,
     parameter KX = 5,
     parameter KY = 5,
+    parameter IX = 28,
     parameter W_BW = 7,
     parameter B_BW = 7,  //bias
     parameter CI = 1,
@@ -23,8 +24,8 @@ module cnn_core #(
     output                          o_ot_valid,
     output [       CO*O_F_BW-1 : 0] o_ot_fmap,
     //디버깅//
-    output [KX*KY*I_F_BW-1:0] o_window
-
+    output [KX*KY*I_F_BW-1:0] o_window,
+    output [KX*I_F_BW-1:0] o_line_buf
 );
 
     localparam LATENCY = 1;
@@ -53,6 +54,9 @@ module cnn_core #(
     wire [KX*KY*I_F_BW-1 : 0] w_window;
     wire                     w_window_valid;
 
+    //디버깅
+    wire [KX*I_F_BW-1:0] w_line_buf;
+    assign o_line_buf = w_line_buf;
     // CI 채널이므로 line_buffer도 각 채널별로 존재해야 함
     genvar lb_ci;
     generate
@@ -65,12 +69,14 @@ module cnn_core #(
         .i_in_valid    (i_in_valid),
         .i_in_pixel    (i_in_fmap), // 현재는 단일 채널로 가정
         .o_window_valid    (w_window_valid),
-        .o_window   (w_window)
+        .o_window   (w_window),
+        .o_line_buf (w_line_buf)
         );
     end
     endgenerate
     //디버깅//
     assign o_window = w_window;
+    assign o_line_buf = w_line_buf;
     //==============================================================================
     // acc ci instance
     //==============================================================================

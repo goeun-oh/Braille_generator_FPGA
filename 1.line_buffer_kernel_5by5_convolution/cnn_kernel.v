@@ -21,7 +21,7 @@ module cnn_kernel #(
 );
 
 
-    localparam LATENCY = 1;
+    localparam LATENCY = 3;
 
 
     //==============================================================================
@@ -38,8 +38,8 @@ module cnn_kernel #(
         if (!reset_n) begin
             r_valid <= {LATENCY{1'b0}};
         end else begin
-            r_valid[LATENCY-1] <= i_in_valid;
-            //r_valid[LATENCY-1] <= r_valid[LATENCY-2];
+            r_valid[LATENCY-2] <= i_in_valid;
+            r_valid[LATENCY-1] <= r_valid[LATENCY-2];
         end
     end
 
@@ -83,7 +83,7 @@ module cnn_kernel #(
         always @(posedge clk or negedge reset_n) begin
             if (!reset_n) begin
                 r_acc_kernel[0+:AK_BW] <= {AK_BW{1'b0}};
-            end else if (ce[LATENCY-1]) begin
+            end else if (ce[LATENCY-2]) begin
                 r_acc_kernel[0+:AK_BW] <= acc_kernel[0+:AK_BW];
             end
         end
