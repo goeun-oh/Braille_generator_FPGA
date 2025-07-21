@@ -21,7 +21,10 @@ module cnn_core #(
     input                           i_in_valid,
     input  [          I_F_BW-1 : 0] i_in_fmap,
     output                          o_ot_valid,
-    output [       CO*O_F_BW-1 : 0] o_ot_fmap
+    output [       CO*O_F_BW-1 : 0] o_ot_fmap,
+    //디버깅//
+    output [KX*KY*I_F_BW-1:0] o_window
+
 );
 
     localparam LATENCY = 1;
@@ -66,7 +69,8 @@ module cnn_core #(
         );
     end
     endgenerate
-
+    //디버깅//
+    assign o_window = w_window;
     //==============================================================================
     // acc ci instance
     //==============================================================================

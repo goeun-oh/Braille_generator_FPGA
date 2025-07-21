@@ -9,7 +9,7 @@ module cnn_top_tb;
     parameter KY = 5;
     parameter W_BW = 7;
     parameter CI = 1;
-    parameter CO = 3;
+    parameter CO = 1;
     parameter IX = 28;
     parameter IY = 28;
     parameter OUT_W = IX - KX + 1;
@@ -28,11 +28,8 @@ module cnn_top_tb;
 
     // DUT output
     wire                     o_done;
-    wire [4:0] dbg_x;
-    wire [4:0] dbg_y;
-    wire       dbg_valid;
-    wire [CO*O_F_BW-1:0] dbg_fmap;
-    logic [KX*KY*I_F_BW-1:0] dbg_window;
+
+    wire [KX*KY*I_F_BW-1:0] o_window;
 
     cnn_top #(
         .I_F_BW(I_F_BW), .O_F_BW(O_F_BW), .KX(KX), .KY(KY),
@@ -44,12 +41,14 @@ module cnn_top_tb;
         .i_pixel(i_pixel),
         .i_cnn_weight(i_cnn_weight),
         .i_cnn_bias(i_cnn_bias),
-        .o_done(o_done)
+        .o_done(o_done),
+        .o_window(o_window)
     );
 
     // === 테스트 시나리오 ===
     integer i;
     integer k;
+    integer row, col, idx;
     reg [7:0] image_mem [0:783]; // 28x28
     initial begin
         // 초기화
@@ -60,7 +59,6 @@ module cnn_top_tb;
         i_cnn_bias = 0;
         #100;
         reset_n = 1;
-
         // 입력 이미지 초기화 (예: 1~784)
         for (i = 0; i < 784; i = i + 1) begin
             image_mem[i] = i + 1; // 1~784
@@ -78,26 +76,33 @@ module cnn_top_tb;
         // === 이미지 입력 ===
         @(posedge clk);
         for (i = 0; i < 784; i = i + 1) begin
-            @(posedge clk);
             i_valid <= 1;
             i_pixel <= image_mem[i];
+            @(posedge clk);
         end
         @(posedge clk);
         i_valid <= 0;
         // === 결과 기다리기 ===
+
+        
         wait (o_done);
+        //for (ch = 0; ch < 3; ch = ch + 1) begin
+        //end
         $display("✅ All convolution outputs done.");
         $finish;
     end
 
 
-    always @(posedge clk) begin
-        if (dbg_valid && dbg_x == 0 && dbg_y == 0) begin
-            $display("[0,0] Output: CH0=%d CH1=%d CH2=%d",
-                dbg_fmap[0*O_F_BW +: O_F_BW],
-                dbg_fmap[1*O_F_BW +: O_F_BW],
-                dbg_fmap[2*O_F_BW +: O_F_BW]
-            );
+    always @(*) begin
+        $display("==== line_buffer 5x5 ====");
+        for (row = 0; row < KX; row = row + 1) begin
+            $display("--- row %0d ---", row);
+            for (col = 0; col < KY; col = col + 1) begin
+                idx = row*KX + col;
+                $write("(%6d) ", o_window[idx*I_F_BW +: I_F_BW]);
+            end
+            $write("\n");
         end
+        $finish;
     end
 endmodule

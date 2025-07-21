@@ -1,7 +1,0 @@
-Running: xsim.dir/cnn_top_behav/xsimk -simmode gui -wdb cnn_top_behav.wdb -simrunnum 0 -socket 47295
-Design successfully loaded
-Design Loading Memory Usage: 29252 KB (Peak: 29792 KB)
-Design Loading CPU Usage: 20 ms
-Simulation completed
-Simulation Memory Usage: 110988 KB (Peak: 168520 KB)
-Simulation CPU Usage: 30 ms

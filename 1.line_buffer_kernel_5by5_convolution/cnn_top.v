@@ -19,7 +19,10 @@ module cnn_top #(
     input  [I_F_BW-1 : 0]  i_pixel,
     input  [CO*CI*KX*KY*W_BW-1 : 0] i_cnn_weight,
     input  [CO*7-1 : 0]     i_cnn_bias,
-    output reg             o_done
+    output reg             o_done,
+    //디버깅
+    output [KX*KY*I_F_BW-1:0] o_window
+
 );
     // ===============================
     // cnn_core instance
@@ -46,7 +49,8 @@ module cnn_top #(
         .i_in_valid   (i_valid),
         .i_in_fmap    (i_pixel),
         .o_ot_valid   (w_core_valid),
-        .o_ot_fmap    (w_core_fmap)
+        .o_ot_fmap    (w_core_fmap),
+        .o_window(o_window)
     );
 
     // ===============================
