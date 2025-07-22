@@ -87,6 +87,7 @@ module line_buffer #(
         end
     end
 
+
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             window_x_cnt <=0;
@@ -118,7 +119,7 @@ module line_buffer #(
      end
 
     assign o_window = r_window;
-    assign o_window_valid = r_window_valid;
+    assign o_window_valid = window_x_cnt >= KX-1;
     //assign o_window_valid = r_window_valid;
 
 

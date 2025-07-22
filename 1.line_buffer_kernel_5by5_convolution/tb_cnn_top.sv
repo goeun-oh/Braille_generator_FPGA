@@ -92,6 +92,7 @@ module cnn_top_tb;
         //for (ch = 0; ch < 3; ch = ch + 1) begin
         //end
         $display("✅ All convolution outputs done.");
+        $finish;
     end
 
 
@@ -105,7 +106,6 @@ module cnn_top_tb;
             end
             $write("\n");
         end
-        $finish;
         cnt = cnt + 1;
     end
 endmodule
