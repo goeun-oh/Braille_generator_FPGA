@@ -5,19 +5,19 @@ module cnn_kernel #(
     parameter KX = 5,  // Number of Kernel X
     parameter KY = 5,  // Number of Kernel Y
     parameter I_F_BW = 8,  // Bit Width of Input Feature
-    parameter W_BW = 7,  // BW of weight parameter
-    parameter B_BW = 7,  // BW of bias parameter
+    parameter W_BW = 8,  // BW of weight parameter
+    parameter B_BW = 8,  // BW of bias parameter
     parameter AK_BW = 20,  // M_BW + log(KY*KX) Accum Kernel 
-    parameter M_BW = 15 // I_F_BW * W_BW
+    parameter M_BW = 16 // I_F_BW * W_BW
 )(
     // Clock & Reset
     input clk,
     input reset_n,
-    input [KX*KY*W_BW-1 : 0] i_cnn_weight,
+    input signed [KX*KY*W_BW-1 : 0] i_cnn_weight,
     input i_in_valid,
     input [KX*KY*I_F_BW-1 : 0] i_in_fmap,
     output o_ot_valid,
-    output [AK_BW-1 : 0] o_ot_kernel_acc
+    output signed [AK_BW-1 : 0] o_ot_kernel_acc
 );
 
 
@@ -49,8 +49,8 @@ module cnn_kernel #(
     // mul = fmap * weight
     //==============================================================================
 
-    wire [KY*KX*M_BW-1 : 0] mul;
-    reg  [KY*KX*M_BW-1 : 0] r_mul;
+    wire signed [KY*KX*M_BW-1 : 0] mul;
+    reg signed [KY*KX*M_BW-1 : 0] r_mul;
 
     // TODO Multiply each of Kernels
     genvar mul_idx;
@@ -58,19 +58,19 @@ module cnn_kernel #(
         for (
             mul_idx = 0; mul_idx < KY * KX; mul_idx = mul_idx + 1
         ) begin : gen_mul
-            assign  mul[mul_idx * M_BW +: M_BW]	= i_in_fmap[mul_idx * I_F_BW +: I_F_BW] * i_cnn_weight[mul_idx * W_BW +: W_BW];
+            assign  mul[mul_idx * M_BW +: M_BW]	= i_in_fmap[mul_idx * I_F_BW +: I_F_BW] * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
 
             always @(posedge clk or negedge reset_n) begin
                 if (!reset_n) begin
                     r_mul[mul_idx*M_BW+:M_BW] <= {M_BW{1'b0}};
                 end else if (i_in_valid) begin
-                    r_mul[mul_idx*M_BW+:M_BW] <= mul[mul_idx*M_BW+:M_BW];
+                    r_mul[mul_idx*M_BW+:M_BW] <= $signed(mul[mul_idx*M_BW+:M_BW]);
                 end
             end
         end
     endgenerate
-    reg     [AK_BW-1 : 0] acc_kernel;
-    reg     [AK_BW-1 : 0] r_acc_kernel;
+    reg signed [AK_BW-1 : 0] acc_kernel;
+    reg signed [AK_BW-1 : 0] r_acc_kernel;
 
     integer               acc_idx;
     generate

@@ -13,14 +13,12 @@ module line_buffer #(
     input [I_F_BW-1:0] i_in_pixel,
     
     output o_window_valid,
-    output [KX*KY*I_F_BW-1:0] o_window,
-    output [I_F_BW*KX-1:0] o_line_buf
+    output [KX*KY*I_F_BW-1:0] o_window
 );
 
     parameter LATENCY = 2;
     reg [$clog2(IX)-1:0] x_cnt;
     reg [$clog2(IY)-1:0] y_cnt;
-    reg [KX*KY*I_F_BW-1:0] r_window_d1;
 
     //디버깅
     reg [I_F_BW-1:0] r_line_buf;
@@ -67,14 +65,22 @@ module line_buffer #(
     reg [$clog2(IY)-1:0] window_y_cnt;
 
     integer wy, wx;
-    always @(*) begin
-        for (wy =0; wy <KY; wy = wy + 1) begin
-            if(window_x_cnt >= KX-1 ) begin
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin            
+            for (wy =0; wy <KY; wy = wy + 1) begin
                 for (wx =0; wx <KX; wx = wx +1) begin
-                    r_window[(wy*KX + wx)*I_F_BW +: I_F_BW] =line_buf[wy][window_x_cnt-(KX-1- wx)];
-                    //r_line_buf[wx *I_F_BW +: I_F_BW] <= line_buf[wy][x_cnt-1-(KX-1-wx)];       
+                    r_window[(wy*KX + wx)*I_F_BW +: I_F_BW] =0;
                 end
-            end
+            end            
+        end else begin
+            for (wy =0; wy <KY; wy = wy + 1) begin
+                if(window_x_cnt >= KX-1 ) begin
+                    for (wx =0; wx <KX; wx = wx +1) begin
+                        r_window[(wy*KX + wx)*I_F_BW +: I_F_BW] =line_buf[wy][window_x_cnt-(KX-1- wx)];
+                        //r_line_buf[wx *I_F_BW +: I_F_BW] <= line_buf[wy][x_cnt-1-(KX-1-wx)];       
+                    end
+                end
+            end            
         end
     end
     always @(posedge clk or negedge reset_n) begin
@@ -83,7 +89,9 @@ module line_buffer #(
         end else begin
             if(x_cnt >= KX -1 && y_cnt >= KY) begin
                 r_window_valid <= 1;
-            end    
+            end else if (window_x_cnt == IX -1 && window_y_cnt == IY -1) begin
+                r_window_valid <=0;
+            end
         end
     end
 
