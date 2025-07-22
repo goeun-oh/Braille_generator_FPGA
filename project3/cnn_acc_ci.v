@@ -21,6 +21,9 @@
 
 
 module cnn_acc_ci(
+    input clk,
+    input reset_n,
+    input i_in_valid, 
 
     );
 endmodule
