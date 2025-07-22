@@ -107,7 +107,7 @@ module cnn_top #(
             r_valid[LATENCY-1] <= w_core_valid;
         end
     end
-    assign o_core_valid = r_valid[LATENCY-1];
+    assign o_core_valid = w_core_valid;
     // ===============================
     // Output fmap memory: [CO][24][24]
     // ===============================

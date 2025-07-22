@@ -121,13 +121,13 @@ module line_buffer #(
          if (!reset_n) begin
              r_wait_valid <= {LATENCY{1'b0}};
          end else begin
-             r_wait_valid[LATENCY-2] <= i_in_valid;
+             r_wait_valid[LATENCY-2] <= window_x_cnt >= KX-1;
              r_wait_valid[LATENCY-1] <= r_wait_valid[LATENCY-2];
          end
      end
 
     assign o_window = r_window;
-    assign o_window_valid = window_x_cnt >= KX-1;
+    assign o_window_valid = r_wait_valid;
     //assign o_window_valid = r_window_valid;
 
 

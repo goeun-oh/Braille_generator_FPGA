@@ -130,7 +130,7 @@ module cnn_core #(
     //==============================================================================
     // No Activation
     //==============================================================================
-    assign o_ot_valid = &w_ot_valid;
+    assign o_ot_valid = r_valid[LATENCY-1];
     assign o_ot_fmap  = r_add_bias;
 
 endmodule

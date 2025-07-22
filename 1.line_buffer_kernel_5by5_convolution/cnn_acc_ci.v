@@ -76,8 +76,7 @@ module cnn_acc_ci #(
         if (!reset_n) begin
             r_valid <= {LATENCY{1'b0}};
         end else begin
-            r_valid[LATENCY-2] <= &w_ot_valid;  // shift right, insert new at LSB
-            r_valid[LATENCY-1] <=r_valid[LATENCY-2];  // shift right, insert new at LSB
+            r_valid[LATENCY-1] <= &w_ot_valid;  // shift right, insert new at LSB
         end
     end
     assign o_ot_valid  =r_valid[LATENCY-1];
