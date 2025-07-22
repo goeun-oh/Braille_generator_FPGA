@@ -9,7 +9,7 @@ module cnn_top_tb;
     parameter KY = 5;
     parameter W_BW = 7;
     parameter CI = 1;
-    parameter CO = 1;
+    parameter CO = 3;
     parameter IX = 28;
     parameter IY = 28;
     parameter OUT_W = IX - KX + 1;
@@ -92,7 +92,6 @@ module cnn_top_tb;
         //for (ch = 0; ch < 3; ch = ch + 1) begin
         //end
         $display("✅ All convolution outputs done.");
-        $finish;
     end
 
 
@@ -106,7 +105,7 @@ module cnn_top_tb;
             end
             $write("\n");
         end
-        cnt = cnt + 1;
         $finish;
+        cnt = cnt + 1;
     end
 endmodule
