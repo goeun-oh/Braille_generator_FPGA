@@ -32,7 +32,8 @@ module line_buffer (
     output [`POOL_K*`POOL_K*`IF_BW-1:0] o_window
 );
 
-    parameter LATENCY = 2;
+    // parameter LATENCY = 2;
+
     reg [$clog2(`POOL_IN_SIZE)-1:0] x_cnt;
     reg [$clog2(`POOL_IN_SIZE)-1:0] y_cnt;
 
