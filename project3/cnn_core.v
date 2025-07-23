@@ -33,18 +33,20 @@ module cnn_core(
     output [`CO * `OUT_BW -1:0] o_ot_result
     );
     // bias
+    localparam LATENCY = 2;
     reg signed [7:0] bias_mem[0:2];
     reg signed [`CO * `OUT_BW -1:0] w_ot_result;
     reg signed [`CO * `OUT_BW -1:0] r_ot_result;
 
-    reg      	                r_valid;
+    reg     [LATENCY - 1 : 0]         r_valid;
     wire    [`CO-1 : 0]         w_ot_valid;
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             r_valid   <= 0;
         end else begin
-            r_valid  <= i_in_valid;
+            r_valid[LATENCY - 2]  <= i_in_valid;
+            r_valid[LATENCY - 1]  <= r_valid[LATENCY - 2];
         end
     end
 
@@ -60,14 +62,14 @@ module cnn_core(
         end 
     end
 
-    always @(posedge clk, posedge reset_n) begin
+    always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
             r_ot_result <= 0;
         end else begin
             r_ot_result <= w_ot_result;
         end
     end
-    assign o_ot_valid = r_valid;
+    assign o_ot_valid = r_valid[LATENCY - 1];
     assign o_ot_result = r_ot_result;
 
 endmodule

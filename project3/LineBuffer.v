@@ -49,6 +49,8 @@ module line_buffer (
             if (x_cnt == `POOL_IN_SIZE-1) begin
                 x_cnt <=0;
                 if (y_cnt == `POOL_IN_SIZE-1) begin
+                    y_cnt <= 0;
+                end else begin
                     y_cnt <= y_cnt + 1;
                 end
             end else begin
@@ -72,7 +74,7 @@ module line_buffer (
     //디버깅
 
     integer wy, wx;
-    always @(posedge clk, posedge reset_n) begin
+    always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             for (wy =0; wy <`POOL_K; wy = wy + 1) begin
                 for (wx =0; wx <`POOL_K; wx = wx +1) begin

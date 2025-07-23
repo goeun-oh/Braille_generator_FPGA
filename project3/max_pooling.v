@@ -69,7 +69,7 @@ module max_pooling(
 
 
     integer i;
-    always @(posedge clk, posedge reset_n) begin
+    always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
             w_ot_flat <= 0;
             r_pooling_valid <= 0;
