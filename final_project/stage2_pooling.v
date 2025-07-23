@@ -113,6 +113,7 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
                 line_buffer1[i] <= 0;
             end
         end else begin
+            // 한 줄 한번에 올리는 방식
             if((i_in_valid) && (!col)) begin // c가 0되면 line_buffer 1로 shift
                 for (i = 0; i < `ST2_Pool_X; i = i + 1) begin
                     line_buffer1[i] <= line_buffer0[i];

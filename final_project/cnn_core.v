@@ -13,26 +13,155 @@ module cnn_core (
     // Clock & Reset
     clk             ,
     reset_n         ,
-
     i_in_valid      ,
     i_in_fmap       ,
     o_ot_valid      ,
     o_ot_fmap             
     );
-
-
-localparam LATENCY = 2;
 //==============================================================================
 // Input/Output declaration
 //==============================================================================
-input                                                   clk         	;
-input                                                   reset_n     	;
+input                                                       clk         	;
+input                                                       reset_n     	;
+input                                                       i_in_valid  	;
+input     signed [`ST2_Conv_CI * `ST2_Conv_IBW-1 : 0]  	    i_in_fmap    	;//3*(19bit) , 3ch에 대한 1point output
+output                                                      o_ot_valid  	;
+output    signed [`ST2_Conv_CO*(`O_F_BW-1)-1 : 0]  		    o_ot_fmap       ;    
+
+localparam LATENCY = 2;
+localparam COL = `ST2_Conv_X; //12
+localparam ROW = `ST2_Conv_Y; //12
+    
+//==============================================================================
+// row,col_counter
+//==============================================================================
+    reg [$clog2(ROW)-1:0] row;
+    reg [$clog2(COL)-1:0] col;
+    reg frame_flag;
+    reg col_flag;
 
 
-input                                                   i_in_valid  	;
-input     [`ST2_Conv_CI*`KX*`KY*`ST2_Conv_IBW-1 : 0]  	i_in_fmap    	;
-output                                                  o_ot_valid  	;
-output    [`ST2_Conv_CO*(`O_F_BW-1)-1 : 0]  		    o_ot_fmap       ;
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            row <= 0;
+            col <= 0;  
+            frame_flag <= 0;
+            col_flag <= 0;     
+        end else if(i_in_valid) begin
+            if(col == COL-1) begin
+                col <= 0;
+                col_flag <= 1;
+                if (row == ROW -1) begin
+                    row <= 0 ;
+                    frame_flag <= 1;
+                end else begin
+                    row <= row + 1;
+                    frame_flag <= 0;
+                end
+            end else begin
+                col <= col + 1;
+                col_flag <= 0;
+                frame_flag <= 0;
+            end
+        end
+    end
+
+//==============================================================================
+// Line Buffer & 5x5 window register
+//==============================================================================
+
+    //(19bit)  3channel 5x24 line_buffer
+    reg signed [`ST2_Conv_IBW-1:0] line_buffer [0:`ST2_Conv_CI-1][0:`KY-1][0:`ST2_Conv_X-1];
+
+    //(19bit)  3channel 5x5  window
+    reg signed [`ST2_Conv_IBW * `ST2_Conv_CI * `KY*`KX-1:0] window;
+
+    integer i,j,k;
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            for(k = 0; k<`ST2_Conv_CI ; k= k+1) begin
+                for (j = 0; j < `KY; j=j+1) begin
+                    for (i = 0; i < `ST2_Conv_X; i = i + 1) begin
+                        line_buffer[k][j][i] <= 0;
+                    end
+                end
+            end
+        end else begin
+            //col는 매 clk 0~11 증가
+            //한 point씩 올리는 방식
+            if(i_in_valid) begin // c가 0되면 line_buffer 1로 shift
+                for (k = 0; k < `ST2_Conv_CI; k = k+1) begin
+                    for (j = 0; j< `KY-1 ; j= j+1) begin
+                        line_buffer[k][j][col] <= line_buffer[k][j+1][col];
+                    end
+                    // line_buffer[k][1][col] <= line_buffer[k][0][col];
+                    // line_buffer[k][2][col] <= line_buffer[k][1][col];
+                    // line_buffer[k][3][col] <= line_buffer[k][2][col];
+                    // line_buffer[k][4][col] <= line_buffer[k][3][col];
+                end
+            end
+        end
+    end    
+
+//==============================================================================
+// receive 1px data to 3ch Line Buffer
+//==============================================================================
+    always @(posedge clk) begin
+        if (i_in_valid) begin
+            // valid신호가 들어올 때만 data를 받아옴,(col에 따라 위치가 다름)
+            // 맨 첫번째 라인버퍼에만
+            for (k = 0; k < `ST2_Conv_CI; k = k+1) begin  
+                line_buffer[k][4][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW] ;
+            end
+        end
+    end
+
+
+
+    
+//==============================================================================
+// allocate data from line buffer to window, valid signal
+//==============================================================================
+//                   3 * 5 * 5 * (19bit)
+// reg signed [`ST2_Conv_CI * `KY*`KX * `ST2_Conv_IBW-1:0] window;
+
+reg window_valid;
+
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+
+        end else if( row>=4 && col >=5 ) begin
+            for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
+                for (j = 0; j < `KY; j=j+1) begin
+                    for (i = 0; i < `KX; i = i + 1) begin
+                        window[((k*`KY*`KX) + (j*`KX) + i)* `ST2_Conv_IBW +: `ST2_Conv_IBW] 
+                            <= line_buffer[k][j][col-5+i];
+                    end
+                end
+            end
+            window_valid <= 1;
+
+        end else if ( (row>=5 && !col) | frame_flag ) begin
+            for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
+                for (j = 0; j < `KY; j=j+1) begin
+                    for (i = 0; i < `KX; i = i + 1) begin
+                        window[((k*`KY*`KX) + (j*`KX) + i)* `ST2_Conv_IBW +: `ST2_Conv_IBW] 
+                            <= line_buffer[k][j][`ST2_Conv_X-`KX+i];
+                    end
+                end
+            end
+            window_valid <= 1;
+        end else begin
+            window_valid <= 0;
+        end
+    end
+
+
+
+
+
+
+
 
 //==============================================================================
 // Data Enable Signals 
@@ -60,7 +189,7 @@ wire    [`ST2_Conv_CO*(`ACI_BW)-1 : 0]  w_ot_ci_acc;
 genvar ci_inst;
 generate
 	for(ci_inst = 0; ci_inst < `ST2_Conv_CO; ci_inst = ci_inst + 1) begin : gen_ci_inst
-		wire    [`ST2_Conv_CO*`ST2_Conv_CI*  `KX*`KY  *`W_BW -1 : 0] w_cnn_weight; // 3x3x 5x5 x (7bit)
+		wire    [`ST2_Conv_CO*`ST2_Conv_CI*  `KX*`KY  *`W_BW -1 : 0] w_cnn_weight; // 3x(3x5x5) x (7bit)
 		wire    [`ST2_Conv_CI*`KX*`KY*`ST2_Conv_IBW-1 : 0]       w_in_fmap    	=  i_in_fmap[0 +: `ST2_Conv_CI*`KY*`KX*`ST2_Conv_IBW];
 		assign	w_in_valid[ci_inst] = i_in_valid; 
 
@@ -122,7 +251,7 @@ endgenerate
 // bias까지 더하고 나서 output channel 3개에 대한 1point (1point에 대해서 bit width는 = `O_F_BW(=33))
 reg [`ST2_Conv_CO * `O_F_BW-1:0] act_relu;
 reg [`ST2_Conv_CO * (`O_F_BW-1)-1:0] r_act_relu;
-integer i;
+
 	    always @ (*) begin
             for (i = 0; i < `ST2_Conv_CO; i = i + 1) begin
                 if (r_add_bias[i*`O_F_BW +: `O_F_BW] >>> (`O_F_BW-1)) // MSB가 1이면 음수

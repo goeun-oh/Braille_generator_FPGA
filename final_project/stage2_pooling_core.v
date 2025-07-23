@@ -27,7 +27,7 @@ module stage2_pooling_core(
     input                                                                                   i_in_valid  	,
     input         [`ST2_Pool_CI * `ST2_Pool_IBW - 1 : 0]                                    i_in_fmap    	,//3*(19bit) , 3ch에 대한 1point input
     output                                                                                  o_ot_valid  	,
-    output reg    [`ST2_Pool_CI * `ST2_Pool_IBW - 1 : 0]                                    o_ot_fmap        //3*(19bit) , 3ch에 대한 1point output
+    output reg    [`ST2_Pool_CI * `ST2_Conv_IBW - 1 : 0]                                    o_ot_fmap        //3*(19bit) , 3ch에 대한 1point output
     );
 
     localparam LATENCY = 1;

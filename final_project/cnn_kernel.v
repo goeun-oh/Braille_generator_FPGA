@@ -11,20 +11,18 @@ Revision History: February 13, 2020 - initial release
 
 module cnn_kernel (
     // Clock & Reset
-input                               	clk         	,
-input                               	reset_n     	,
+input                               		   clk         	,
+input                               		   reset_n     	,
 
 //5x5x7
-input     [`KX*`KY*`W_BW-1 : 0] 	    i_cnn_weight 	,
-input                                   i_in_valid  	,
-input     [`KX*`KY*`ST2_Conv_IBW-1 : 0] i_in_fmap    	,
-output                                  o_ot_valid  	,
-output    [`AK_BW-1 : 0]  			    o_ot_kernel_acc           
+input     signed [`KX*`KY*`W_BW-1 : 0] 	       i_cnn_weight ,
+input                                          i_in_valid  	,
+input     signed [`KX*`KY*`ST2_Conv_IBW-1 : 0] i_in_fmap    ,
+output                                         o_ot_valid  	,
+output    signed [`AK_BW-1 : 0]  			           o_ot_kernel_acc           
     );
 
 localparam LATENCY = 2;
-
-
 
 
 //==============================================================================
@@ -47,8 +45,8 @@ assign	ce = r_valid;
 // mul = fmap * weight
 //==============================================================================
 
-wire      [`KY*`KX*`M_BW-1 : 0]    mul  ;
-reg       [`KY*`KX*`M_BW-1 : 0]    r_mul;
+wire      signed [`KY*`KX*`M_BW-1 : 0]    mul  ;
+reg       signed [`KY*`KX*`M_BW-1 : 0]    r_mul;
 
 genvar mul_idx;
 generate
@@ -66,8 +64,8 @@ generate
 	end
 endgenerate
 
-reg       [`AK_BW-1 : 0]    acc_kernel 	;
-reg       [`AK_BW-1 : 0]    r_acc_kernel   ;
+reg       signed [`AK_BW-1 : 0]    acc_kernel 	;
+reg       signed [`AK_BW-1 : 0]    r_acc_kernel   ;
 
 integer acc_idx;
 generate
