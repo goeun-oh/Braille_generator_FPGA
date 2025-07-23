@@ -18,9 +18,74 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-
+`include "defines_cnn_core.vh"
 
 module cnn_kernal(
+    input wire clk,
+    input wire reset_n,
 
+    input wire i_pooling_valid,
+    input wire [`CI * `OF_BW-1:0] i_pooling,
+    input wire [`CI * `W_BW - 1 : 0] i_weight,
+
+    output wire o_kernal_valid,
+    output wire [`MUL_BW + $clog2(3) - 1: 0]o_kernel
     );
+
+    localparam LATENCY = 2;
+
+    wire    [LATENCY-1 : 0] 	ce;
+    reg     [LATENCY-1 : 0] 	r_valid;
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            r_valid   <= {LATENCY{1'b0}};
+        end else begin
+            r_valid[LATENCY-2]  <= i_pooling_valid;
+            r_valid[LATENCY-1]  <= r_valid[LATENCY-2];
+        end
+    end
+    assign	ce = r_valid;
+
+    wire      [`CI * `MUL_BW-1 : 0]    mul  ;
+    reg       [`CI * `MUL_BW-1 : 0]    r_mul;
+
+    genvar mul_idx;
+    generate
+        for(mul_idx = 0; mul_idx < `CI; mul_idx = mul_idx + 1) begin : gen_mul
+            assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  i_pooling[mul_idx * `OF_BW +: `OF_BW] * i_weight[mul_idx * `W_BW +: `W_BW ];
+        
+            always @(posedge clk or negedge reset_n) begin
+                if(!reset_n) begin
+                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= {`MUL_BW{1'b0}};
+                end else if(i_pooling_valid)begin
+                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= mul[mul_idx * `MUL_BW +: `MUL_BW];
+                end
+            end
+        end
+    endgenerate 
+
+
+    reg [`MUL_BW + $clog2(3) - 1: 0] acc_kernel 	;
+    reg [`MUL_BW + $clog2(3) - 1: 0] r_acc_kernel   ;
+
+    integer acc_idx;
+    generate
+        always @ (*) begin
+            acc_kernel[0 +: (`MUL_BW + $clog2(3))]= {(`MUL_BW + $clog2(3)){1'b0}};
+            for(acc_idx =0; acc_idx < `CI; acc_idx = acc_idx +1) begin
+                acc_kernel[0 +: (`MUL_BW + $clog2(3))] = acc_kernel[0 +: (`MUL_BW + $clog2(3))] + r_mul[acc_idx*`MUL_BW +: `MUL_BW]; 
+            end
+        end
+        always @(posedge clk or negedge reset_n) begin
+            if(!reset_n) begin
+                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= {(`MUL_BW + $clog2(3)){1'b0}};
+            end else if(ce[LATENCY-2])begin
+                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= acc_kernel[0 +: (`MUL_BW + $clog2(3))];
+            end
+        end
+    endgenerate
+
+    assign o_kernal_valid = r_valid[LATENCY-1];
+    assign o_kernel = r_acc_kernel;
+
 endmodule

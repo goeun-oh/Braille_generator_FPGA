@@ -8,8 +8,8 @@
 //----------------------------------------------------------------------
 `define IF_BW           32  // 입력 Feature Map 픽셀 비트폭 (Max Pool 입력)
 `define OF_BW           32  // 출력 Feature Map 픽셀 비트폭 (Max Pool 출력, FC 입력)
-`define W_BW             7  // FC Layer 가중치(Weight) 비트폭
-`define BIAS_BW          6  // FC Layer 편향(Bias) 비트폭
+`define W_BW             8  // FC Layer 가중치(Weight) 비트폭
+`define BIAS_BW          8  // FC Layer 편향(Bias) 비트폭
 
 // 연산 과정에서의 비트 폭
 `define MUL_BW          (`OF_BW + `W_BW)            // 곱셈 결과 비트폭 (32 + 7 = 39)

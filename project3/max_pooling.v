@@ -28,7 +28,7 @@ module max_pooling(
     input wire [`CI * `IF_BW - 1: 0] i_in_Relu,
 
     output wire o_ot_valid,
-    output wire [`FC_IN_VEC * `OF_BW - 1 : 0] o_ot_pool
+    output wire [`CO * `OF_BW-1:0] o_ot_pool
     );
 
     wire [`CI-1 : 0] w_ot_valid;
@@ -36,8 +36,9 @@ module max_pooling(
     wire [`CI * `POOL_K*`POOL_K*`IF_BW-1:0] w_ot_window;
     // 48 * 32
     wire [`CO * `OF_BW-1:0] w_ot_pool;
-    reg [`FC_IN_VEC * `IF_BW -1 : 0]  w_ot_flat;
-    reg [$clog2(`P_SIZE * `P_SIZE)-1:0] flat_cnt;
+    reg  [`CO * `OF_BW-1:0] w_ot_flat;
+    reg r_pooling_valid;
+
     genvar line_inst;
     generate
         for (line_inst = 0; line_inst < `CI ; line_inst = line_inst + 1) begin
@@ -71,15 +72,17 @@ module max_pooling(
     always @(posedge clk, posedge reset_n) begin
         if (!reset_n) begin
             w_ot_flat <= 0;
+            r_pooling_valid <= 0;
         end else if (&w_ot_valid) begin
-            for(i=0 ; i < `CO; i = i + 1) begin
-                w_ot_flat[((i*`P_SIZE*`P_SIZE)+flat_cnt)*`OF_BW +: `OF_BW] <= w_ot_pool[i * `OF_BW +: `OF_BW];
-            end
-            flat_cnt = flat_cnt + 1;
+            w_ot_flat <= w_ot_pool;
+            r_pooling_valid <= 1;
+        end else begin
+            r_pooling_valid <= 0;
         end
     end
 
-    
+    assign o_ot_pool = w_ot_flat;
+    assign o_ot_valid = r_pooling_valid;
 
 endmodule
 

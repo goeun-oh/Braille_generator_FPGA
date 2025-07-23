@@ -46,7 +46,6 @@ module line_buffer (
             x_cnt <=0;
             y_cnt <=0;
         end else if (i_in_valid) begin
-            
             if (x_cnt == `POOL_IN_SIZE-1) begin
                 x_cnt <=0;
                 if (y_cnt == `POOL_IN_SIZE-1) begin
