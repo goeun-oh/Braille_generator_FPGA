@@ -1,4 +1,4 @@
 # Makefile
 
 clean:
-	rm -f *.jou *.log
+	rm -rf *.jou *.log *vivado* *project* *.Xil
