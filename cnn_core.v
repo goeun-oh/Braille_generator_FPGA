@@ -9,21 +9,21 @@ module cnn_core #(
     parameter B_BW = 8,  //bias
     parameter CI = 1,
     parameter CO = 3,
-    parameter AK_BW = 20,
-    parameter ACI_BW = 20,
-    parameter O_F_BW = 19,
-    parameter AB_BW   = 20,
-    parameter AR_BW = 19
+    parameter AK_BW = 21,
+    parameter ACI_BW = 21,
+    parameter O_F_BW = 20,
+    parameter AB_BW   = 21,
+    parameter AR_BW = 20
 ) (
     // Clock & Reset
     input                           clk,
     input                           reset_n,
-    input signed [CO*CI*KX*KY*W_BW-1 : 0] i_cnn_weight,
-    input signed [         CO*B_BW-1 : 0] i_cnn_bias,
+    input [CO*CI*KX*KY*W_BW-1 : 0] i_cnn_weight,
+    input [         CO*B_BW-1 : 0] i_cnn_bias,
     input                           i_in_valid,
     input  [          I_F_BW-1 : 0] i_in_fmap,
     output                          o_ot_valid,
-    output signed [       CO*O_F_BW-1 : 0] o_ot_fmap
+    output [       CO*O_F_BW-1 : 0] o_ot_fmap
     ////디버깅//
     //output [KX*KY*I_F_BW-1:0] o_window,
     //output [KX*I_F_BW-1:0] o_line_buf
@@ -82,7 +82,7 @@ module cnn_core #(
     //==============================================================================
 
     wire [         CO-1 : 0] w_in_valid;
-    wire signed [CO*(ACI_BW)-1 : 0] w_ot_ci_acc;
+    wire [CO*(ACI_BW)-1 : 0] w_ot_ci_acc;
 
     // TODO Call cnn_acc_ci Instance
     genvar ci_inst;

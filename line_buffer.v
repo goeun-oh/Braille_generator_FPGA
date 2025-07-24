@@ -89,7 +89,7 @@ module line_buffer #(
         end else begin
             if(x_cnt >= KX -1 && y_cnt >= KY) begin
                 r_window_valid <= 1;
-            end else if (window_x_cnt == IX -1 && window_y_cnt == IY -1) begin
+            end else if (window_x_cnt == IX -1 && window_y_cnt == IY -KY) begin
                 r_window_valid <=0;
             end
         end
@@ -116,16 +116,28 @@ module line_buffer #(
         end
     end
 
-     reg  [LATENCY-1 : 0] r_wait_valid;
-     always @(posedge clk or negedge reset_n) begin
-         if (!reset_n) begin
-             r_wait_valid <= {LATENCY{1'b0}};
-         end else begin
-             r_wait_valid[LATENCY-2] <= window_x_cnt >= KX-1;
-             r_wait_valid[LATENCY-1] <= r_wait_valid[LATENCY-2];
-         end
-     end
+    reg  [LATENCY-1 : 0] r_wait_valid;
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            r_wait_valid <= {LATENCY{1'b0}};
+        end else begin
+            r_wait_valid[LATENCY-2] <= window_x_cnt >= KX-1;
+            r_wait_valid[LATENCY-1] <= r_wait_valid[LATENCY-2];
+        end
+    end
 
+    integer j;
+    integer k;
+    reg [I_F_BW-1:0] result_window [0:KY-1][0:KX-1];
+    always @(posedge clk) begin
+        if (o_window_valid) begin
+            for (j= 0; j < KX; j = j + 1) begin
+                for (k= 0; k < KY; k = k + 1) begin
+                    result_window[k][j] <= o_window[j*k*I_F_BW +: I_F_BW];
+                end
+            end
+        end
+    end
     assign o_window = r_window;
     assign o_window_valid = r_wait_valid;
     //assign o_window_valid = r_window_valid;

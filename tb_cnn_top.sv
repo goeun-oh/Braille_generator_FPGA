@@ -1,13 +1,12 @@
 `timescale 1ns / 1ps
 
 module cnn_top_tb;
-
     parameter CLK_PERIOD = 10;
     parameter I_F_BW = 8;
-    parameter O_F_BW = 23;
+    parameter O_F_BW = 20;
     parameter KX = 5;
     parameter KY = 5;
-    parameter W_BW = 7;
+    parameter W_BW = 8;
     parameter CI = 1;
     parameter CO = 3;
     parameter IX = 28;
@@ -25,8 +24,8 @@ module cnn_top_tb;
     reg  [I_F_BW-1:0]        i_pixel;
 
     // DUT output
-    wire [CO*O_F_BW-1:0] w_core_fmap;
-    wire o_core_valid;
+    wire pooling_core_valid;
+    wire [3 * 20-1:0] pooling_core_fmap;
 
     //wire [KX*KY*I_F_BW-1:0] o_window;
     //wire [KX*I_F_BW-1:0] o_line_buf;
@@ -37,8 +36,8 @@ module cnn_top_tb;
         .clk(clk),
         .reset_n(reset_n),
         .i_valid(i_valid),
-        .w_core_fmap(w_core_fmap),
-        .o_core_valid(o_core_valid)
+        .w_pooling_core_valid(pooling_core_valid),
+        .w_pooling_core_fmap(pooling_core_fmap)
     );
 
     // === 테스트 시나리오 ===

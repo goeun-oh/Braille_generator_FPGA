@@ -22,14 +22,14 @@ Revision History: February 13, 2020 - initial release
 // `define    O_F_ACC_BW   27 // for demo, O_F_BW + log (CO)
 
 //pooling interface
-`define    ST2_Pool_IBW    19 // Stage2 Pooling input bitwidth
+`define    ST2_Pool_IBW    20 // Stage2 Pooling input bitwidth
 `define    ST2_Pool_CI     3  // Number of Stage2 Pooling Channel Input
 `define    ST2_Pool_CO     3  // Number of Stage2 Pooling Channel Output
 `define    ST2_Pool_X      24 // Number of X (Input Channel)
 `define    ST2_Pool_Y      24 // Number of y (Input Channel)
 
 //convolution interface
-`define    ST2_Conv_IBW    19 // Conv Input Bitwidth
+`define    ST2_Conv_IBW    20 // Conv Input Bitwidth
 `define    ST2_Conv_CI     3  // Number of Stage2 Conv Channel Input
 `define    ST2_Conv_CO     3  // Number of Stage2 Conv Channel Output
 `define    ST2_Conv_X      12 // Number of X (Conv Input Channel)
