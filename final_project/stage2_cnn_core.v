@@ -1,13 +1,6 @@
-/*******************************************************************************
-Author: joohan.kim (https://blog.naver.`ST2_Conv_COm/chacagea)
-Asso`ST2_Conv_CIated Filename: cnn_core.v
-Purpose: verilog `ST2_Conv_COde to understand the CNN operation
-License : https://github.`ST2_Conv_COm/matbi86/matbi_fpga_season_1/blob/main/LICENSE
-Revision History: February 13, 2020 - initial release
-*******************************************************************************/
 
-`include "timescale.v"
-`include "defines_cnn_core.v"
+`timescale 1ns / 1ps
+`include "stage2_defines_cnn_core.v"
 
 module stage2_cnn_core (
     // Clock & Reset

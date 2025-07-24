@@ -1,12 +1,3 @@
-/*******************************************************************************
-Author: joohan.kim (https://blog.naver.com/chacagea)
-Associated Filename: defines_cnn_core.vh
-Purpose: c code to understand the CNN operation
-License : https://github.com/matbi86/matbi_fpga_season_1/blob/main/LICENSE
-Revision History: February 13, 2020 - initial release
-*******************************************************************************/
-
-
 
 `define    KX			5  // Number of Kernel X
 `define    KY			5  // Number of Kernel Y

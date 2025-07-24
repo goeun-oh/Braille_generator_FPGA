@@ -1,25 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2025/07/20 14:33:53
-// Design Name: 
-// Module Name: stage2_conv
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
 
 // `define    CI           3  // Number of Channel Input 
 // `define    CO           3 // Number of Channel Output
@@ -48,9 +27,7 @@
 // `define    ST2_Conv_CO     3  // Number of Stage2 Conv Channel Output
 // `define    ST2_Conv_X      12 // Number of X (Conv Input Channel)
 // `define    ST2_Conv_Y      12 // Number of y (Con Input Channel)
-
-`include "defines_cnn_core.v"
-
+`include "stage2_defines_cnn_core.v"
 module stage2_conv(
     // Clock & Reset
     clk             ,

@@ -1,26 +1,6 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2025/07/20 10:25:11
-// Design Name: 
-// Module Name: conv2_bias_rom
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
-`include "defines_cnn_core.v"
-
+`include "stage2_defines_cnn_core.v"
 module conv2_bias_rom(
     output reg signed [`ST2_Conv_CO*`B_BW -1  : 0] bias   
     );

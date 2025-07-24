@@ -1,13 +1,6 @@
-/*******************************************************************************
-Author: joohan.kim (https://blog.naver.com/chacagea)
-Associated Filename: cnn_core.v
-Purpose: verilog code to understand the CNN operation
-License : https://github.com/matbi86/matbi_fpga_season_1/blob/main/LICENSE
-Revision History: February 13, 2020 - initial release
-*******************************************************************************/
 
-`include "timescale.v"
-`include "defines_cnn_core.v"
+`timescale 1ns / 1ps
+`include "stage2_defines_cnn_core.v"
 
 module stage2_cnn_kernel (
     // Clock & Reset
