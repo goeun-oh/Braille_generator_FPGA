@@ -19,19 +19,27 @@ module cnn_top #(
     parameter OUT_H        = IY - KY + 1,
     //pooling//
     parameter ST2_Pool_CI  = 3,
+    parameter ST2_Pool_CO  = 3,
+    parameter ST2_Conv_CI  = 3,
+    parameter ST2_Conv_CO  = 3,
+    
     parameter ST2_Conv_IBW = 20,
+    parameter ST2_O_F_BW   = 35,
     parameter POOL_OUT_W = 12,
     parameter POOL_OUT_H = 12
 ) (
-    input                                   clk,
-    input                                   reset_n,
-    input                                   i_valid,
-    output                                  w_pooling_core_valid,
-    output [ST2_Pool_CI * ST2_Conv_IBW-1:0] w_pooling_core_fmap
+    input                                         clk,
+    input                                         reset_n,
+    input                                         i_valid,
+    output                                        w_stage2_core_valid,
+    output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap
 );
 
     wire signed [CO*O_F_BW-1:0] w_core_fmap;
     wire w_core_valid;
+    wire                                  w_pooling_core_valid;
+    wire [ST2_Pool_CI * ST2_Conv_IBW-1:0] w_pooling_core_fmap;
+
     parameter LATENCY = 1;
     // ===============================
     // cnn_core instance
@@ -89,7 +97,7 @@ module cnn_top #(
     );
 
     // ===============================
-    // pooling instance
+    // stage2_pooling instance
     // ===============================
     stage2_pooling_core u_stage2_pooling_core (
         .clk       (clk),
@@ -99,6 +107,18 @@ module cnn_top #(
         .o_ot_valid(w_pooling_core_valid),
         .o_ot_fmap (w_pooling_core_fmap)
     );
+    // ===============================
+    // stage2_convolution instance
+    // ===============================
+    stage2_conv u_stge2_conv(
+        .clk             (clk),
+        .reset_n         (reset_n),
+        .i_in_valid      (w_pooling_core_valid),
+        .i_in_fmap       (w_pooling_core_fmap),
+        .o_ot_valid      (w_stage2_core_valid),
+        .o_ot_fmap       (w_stage2_core_fmap)
+    );
+
 
     // ===============================
     // Output coordinate counters

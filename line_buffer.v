@@ -121,25 +121,26 @@ module line_buffer #(
         if (!reset_n) begin
             r_wait_valid <= {LATENCY{1'b0}};
         end else begin
-            r_wait_valid[LATENCY-2] <= window_x_cnt >= KX-1;
-            r_wait_valid[LATENCY-1] <= r_wait_valid[LATENCY-2];
+            r_wait_valid[LATENCY-1] <= (window_x_cnt >= KX-1);
+            
         end
     end
 
+    //debug
     integer j;
     integer k;
     reg [I_F_BW-1:0] result_window [0:KY-1][0:KX-1];
     always @(posedge clk) begin
-        if (o_window_valid) begin
-            for (j= 0; j < KX; j = j + 1) begin
-                for (k= 0; k < KY; k = k + 1) begin
-                    result_window[k][j] <= o_window[j*k*I_F_BW +: I_F_BW];
+        if (window_x_cnt >= KX-1) begin
+            for (k= 0; k < KY; k = k + 1) begin
+                for (j= 0; j < KX; j = j + 1) begin
+                    result_window[k][j] <= o_window[(k*KX+j)*I_F_BW +: I_F_BW];
                 end
             end
         end
     end
     assign o_window = r_window;
-    assign o_window_valid = r_wait_valid;
+    assign o_window_valid =  r_wait_valid[LATENCY-1] ;
     //assign o_window_valid = r_window_valid;
 
 
