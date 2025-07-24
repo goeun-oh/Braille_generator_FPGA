@@ -75,14 +75,16 @@ module cnn_acc_ci(
     // -- 실제 누적합 연산 : 모든 채널의 valid(&w_ot_valid)이 '1'일 때만 누적!
     
     integer i;
-    reg signed [`ACC_BW-1:0] acc_val;
-    reg signed [`MUL_BW+$clog2(3)-1:0] kernel_val;
+    reg signed [`ACC_BW-1:0] acc_val [0:2];
+    reg signed [`MUL_BW+$clog2(3)-1:0] kernel_val [0:2];
     always @(*) begin
         // 기본적으로 이전 값을 유지
         next_acc = r_acc;
         if (&w_ot_valid) begin
             if (cnt == 0) begin
-                next_acc = w_ot_kernel;
+                for (i = 0; i < `CO; i = i + 1) begin
+                    next_acc[i*`ACC_BW +: `ACC_BW] = w_ot_kernel[i*(`MUL_BW + $clog2(3)) +: (`MUL_BW + $clog2(3))];
+                end
             end else begin
                 for (i = 0; i < `CO; i = i + 1) begin
                     // 슬라이스 값을 명확히 signed로 변수에 저장
@@ -93,11 +95,11 @@ module cnn_acc_ci(
 
                     // 방법1: temp 변수 사용 (SystemVerilog라면 자동, Verilog는 아래 방법 권장)
 
-                    acc_val   = r_acc[i*`ACC_BW +: `ACC_BW];
-                    kernel_val= w_ot_kernel[i*(`MUL_BW+$clog2(3)) +: (`MUL_BW+$clog2(3))];
+                    acc_val[i]   = r_acc[i*`ACC_BW +: `ACC_BW];
+                    kernel_val[i]= w_ot_kernel[i*(`MUL_BW+$clog2(3)) +: (`MUL_BW+$clog2(3))];
 
                     // 사칙연산(덧셈)은 명확한 signed 연산
-                    next_acc[i*`ACC_BW +: `ACC_BW] = acc_val + kernel_val;
+                    next_acc[i*`ACC_BW +: `ACC_BW] = acc_val[i] + kernel_val[i];
 
                     // 또는, 굳이 $signed 캐스팅하고 싶으면 아래처럼 하는 것도 안전
                     // next_acc[i*`ACC_BW +: `ACC_BW] = $signed({r_acc[i*`ACC_BW +: `ACC_BW]}) 

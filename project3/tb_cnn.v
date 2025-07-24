@@ -38,10 +38,10 @@ for (y=0; y<`POOL_IN_SIZE; y=y+1) begin
     for (x=0; x<`POOL_IN_SIZE; x=x+1) begin
         @(negedge clk);
         i_Relu_valid = 1;
-        // ch0, ch1, ch2 모두 (x + y*8), 즉 0~63까지 동일하게 값 지정
-        data_ch0 = x + y*`POOL_IN_SIZE;
-        data_ch1 = x + y*`POOL_IN_SIZE;
-        data_ch2 = x + y*`POOL_IN_SIZE;
+        // 모든 채널 값 1로 통일!
+        data_ch0 = 1;
+        data_ch1 = 1;
+        data_ch2 = 1;
         i_in_Relu = {data_ch2, data_ch1, data_ch0}; 
     end
 end
