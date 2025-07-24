@@ -5,8 +5,8 @@ module cnn_acc_ci #(
     parameter KY = 5,
     parameter W_BW = 8,
     parameter CI = 1,
-    parameter AK_BW = 20,
-    parameter ACI_BW = 20
+    parameter AK_BW = 21,
+    parameter ACI_BW = 21
 ) (
     // Clock & Reset
     input                      clk,
@@ -32,9 +32,9 @@ module cnn_acc_ci #(
     // mul_acc kenel instance
     //==============================================================================
 
-    wire signed [CI*AK_BW-1 : 0] w_ot_kernel_acc;
-    wire signed [  ACI_BW-1 : 0] w_ot_ci_acc;
-    reg signed [  ACI_BW-1 : 0] r_ot_ci_acc;
+    wire [CI*AK_BW-1 : 0] w_ot_kernel_acc;
+    wire [  ACI_BW-1 : 0] w_ot_ci_acc;
+    reg [  ACI_BW-1 : 0] r_ot_ci_acc;
     genvar mul_inst;
     generate
         for (
@@ -53,12 +53,12 @@ module cnn_acc_ci #(
         end
     endgenerate
 
-    reg signed [ACI_BW-1 : 0]    ot_ci_acc;
+    reg [ACI_BW-1 : 0]    ot_ci_acc;
     integer i;
     always @(*) begin
         ot_ci_acc = {ACI_BW{1'b0}};
         for (i = 0; i < CI; i = i + 1) begin
-            ot_ci_acc = ot_ci_acc + $signed(w_ot_kernel_acc[i*AK_BW+:AK_BW]);
+            ot_ci_acc = ot_ci_acc + w_ot_kernel_acc[i*AK_BW+:AK_BW];
         end
     end
 
