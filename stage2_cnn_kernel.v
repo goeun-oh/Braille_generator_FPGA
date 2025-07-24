@@ -62,23 +62,23 @@ generate
 endgenerate
 
     //debug
-//     reg signed [`M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
-// integer j, i;
-// 		always @(posedge clk or negedge reset_n) begin
-// 		    if(!reset_n) begin
-// 				for(j=0;j<`KY;j=j+1)begin
-// 					for(i=0; i<`KX;i=i+1) begin
-// 						d_mul[j][i]<=0;
-// 					end
-// 				end
-// 		    end else if(i_in_valid)begin
-// 				for(j=0;j<`KY;j=j+1)begin
-// 					for(i=0; i<`KX;i=i+1) begin
-// 						d_mul[j][i]<=mul[(j*`KX+i) * `M_BW +: `M_BW];
-// 					end
-// 				end	
-// 		    end
-// 		end
+    reg signed [`M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
+integer j, i;
+		always @(posedge clk or negedge reset_n) begin
+		    if(!reset_n) begin
+				for(j=0;j<`KY;j=j+1)begin
+					for(i=0; i<`KX;i=i+1) begin
+						d_mul[j][i]<=0;
+					end
+				end
+		    end else if(i_in_valid)begin
+				for(j=0;j<`KY;j=j+1)begin
+					for(i=0; i<`KX;i=i+1) begin
+						d_mul[j][i]<=mul[(j*`KX+i) * `M_BW +: `M_BW];
+					end
+				end	
+		    end
+		end
 
 reg       signed [`AK_BW-1 : 0]    acc_kernel 	;
 reg       signed [`AK_BW-1 : 0]    r_acc_kernel   ;

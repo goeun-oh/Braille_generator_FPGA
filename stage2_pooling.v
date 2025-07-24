@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
-
 `include "stage2_defines_cnn_core.v"
+
 module stage2_pooling(
-input                                                           clk         	,
-input                                                           reset_n     	,
-input                                                           i_in_valid  	,
-input     [`ST2_Pool_IBW -1 : 0]  	                            i_in_fmap    	,//1point(20bit)
-output                                                          o_ot_valid  	,
-output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap        //1point(20bit)
+input                                                           clk            ,
+input                                                           reset_n        ,
+input                                                           i_in_valid     ,
+input     [`ST2_Pool_IBW -1 : 0]                                 i_in_fmap       ,//1point(19bit)
+output                                                          o_ot_valid     ,
+output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap        //1point(19bit)
     );
 
     localparam COL = `ST2_Pool_X; //24
@@ -138,7 +138,7 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
 
     localparam V_LATENCY = 1;
 
-    reg [V_LATENCY-1 : 0] 	r_valid;
+    reg [V_LATENCY-1 : 0]    r_valid;
 
     always @(*) begin
         // o_pooling = max_pixel({line_buffer1[col*`ST2_Pool_IBW+:`ST2_Pool_IBW],line_buffer1[(col+1)*`ST2_Pool_IBW+:`ST2_Pool_IBW],    line_buffer0[col*`ST2_Pool_IBW+:`ST2_Pool_IBW],line_buffer0[(col+1)*`ST2_Pool_IBW+:`ST2_Pool_IBW]});        
@@ -153,15 +153,17 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
         if(!reset_n) begin
             r_o_pooling   <= 0;
         end else if( !frame_flag ) begin
-            //row가 홀수
-            if((row[0]) && (!col[0]) && !col_flag) begin  
+            if((row[0]) && (!col[0]) && !col_flag) begin
+                
                 r_o_pooling <= o_pooling;
-
-            //row가 홀수 && col이 증가한 상태
-            end else if (row[0] && col_flag)begin
+            end else if (!row[0] && col_flag)begin
+      
                 r_o_pooling <= max_pixel({line_buffer1[`ST2_Pool_X-2], line_buffer1[`ST2_Pool_X-1], line_buffer0[`ST2_Pool_X-2], line_buffer0[`ST2_Pool_X-1]});      
-            end 
+            end else begin
+
+            end
         end else if (frame_flag && col_flag) begin
+
             r_o_pooling <= max_pixel({line_buffer1[`ST2_Pool_X-2], line_buffer1[`ST2_Pool_X-1], line_buffer0[`ST2_Pool_X-2], line_buffer0[`ST2_Pool_X-1]});      
         end else begin
 

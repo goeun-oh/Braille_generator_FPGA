@@ -66,7 +66,7 @@ endgenerate
 	always @(*) begin
 		ot_ci_acc = 0;
 		for(i = 0; i < `ST2_Conv_CI; i = i+1) begin
-			ot_ci_acc = ot_ci_acc + $signed(w_ot_kernel_acc[i*`AK_BW +: `AK_BW]);
+			ot_ci_acc = $signed(ot_ci_acc) + $signed(w_ot_kernel_acc[i*`AK_BW +: `AK_BW]);
 		end
 	end
 

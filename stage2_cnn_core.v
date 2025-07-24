@@ -136,19 +136,19 @@ reg w_valid;
 reg [V_LATENCY-1 : 0] 	r_w_valid;
 
     //debug
-    // reg signed [`ST2_Conv_IBW-1:0] d_window [0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];    
+    reg signed [`ST2_Conv_IBW-1:0] d_window [0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];    
 
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             window <= 0;
-            // for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
-            //     for (j = 0; j < `KY; j=j+1) begin
-            //         for (i = 0; i < `KX; i = i + 1) begin
-            //             d_window[k][j][i] <= 0;
-            //         end
-            //     end
-            // end
+            for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
+                for (j = 0; j < `KY; j=j+1) begin
+                    for (i = 0; i < `KX; i = i + 1) begin
+                        d_window[k][j][i] <= 0;
+                    end
+                end
+            end
         end else if( row>=4 && col >=5 ) begin
             for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
                 for (j = 0; j < `KY; j=j+1) begin
@@ -156,7 +156,7 @@ reg [V_LATENCY-1 : 0] 	r_w_valid;
                         window[((k*`KY*`KX) + (j*`KX) + i)* `ST2_Conv_IBW +: `ST2_Conv_IBW] 
                             <= line_buffer[k][j][col-5+i];
                         // debug
-                        // d_window[k][j][i] <= line_buffer[k][j][col-5+i];
+                        d_window[k][j][i] <= line_buffer[k][j][col-5+i];
                     end
                 end
             end
@@ -167,7 +167,7 @@ reg [V_LATENCY-1 : 0] 	r_w_valid;
                         window[((k*`KY*`KX) + (j*`KX) + i)* `ST2_Conv_IBW +: `ST2_Conv_IBW] 
                             <= line_buffer[k][j][`ST2_Conv_X-`KX + i]; // col 7,8,9,10,11
                         //debug
-                        // d_window[k][j][i] <= line_buffer[k][j][`ST2_Conv_X-`KX + i];
+                        d_window[k][j][i] <= line_buffer[k][j][`ST2_Conv_X-`KX + i];
                     end
                 end
             end
@@ -223,15 +223,16 @@ wire    signed [`ST2_Conv_CO*(`ACI_BW)-1 : 0]  w_ot_ci_acc;
 wire    signed [`ST2_Conv_CI*`ST2_Conv_CO*  `KX*`KY  *`W_BW -1 : 0] w_cnn_weight;
 assign w_cnn_weight = i_cnn_weight;
         //debug
-// reg     signed [`W_BW-1:0] d_weight [0:`ST2_Conv_CO-1][0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];
-//     integer c,z,y,x;
-//     always @(posedge clk) begin
-//         for (c = 0; c < `ST2_Conv_CO; c = c + 1)
-//             for (z = 0; z < `ST2_Conv_CI; z = z + 1)
-//                 for (y = 0; y < `KY; y = y + 1)
-//                     for (x = 0; x < `KX; x = x + 1)
-//                         d_weight[c][z][y][x] <= w_cnn_weight[(c*`ST2_Conv_CI*`KY*`KX + z*`KY*`KX + y*`KX + x)*`W_BW +: `W_BW];
-//     end
+reg     signed [`W_BW-1:0] d_weight [0:`ST2_Conv_CO-1][0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];
+    integer c,z,y,x;
+
+    always @(posedge clk) begin
+        for (c = 0; c < `ST2_Conv_CO; c = c + 1)
+            for (z = 0; z < `ST2_Conv_CI; z = z + 1)
+                for (y = 0; y < `KY; y = y + 1)
+                    for (x = 0; x < `KX; x = x + 1)
+                        d_weight[c][z][y][x] <= w_cnn_weight[(c*`ST2_Conv_CI*`KY*`KX + z*`KY*`KX + y*`KX + x)*`W_BW +: `W_BW];
+    end
 
 
 genvar ci_inst;
@@ -251,6 +252,23 @@ generate
 	end
 endgenerate
 
+
+
+//debug 
+reg signed [`ACI_BW-1:0] d_ot_ci_acc [0:`ST2_Conv_CO-1];
+genvar ch;
+generate
+        for (ch= 0; ch<`ST2_Conv_CO ; ch= ch+1) begin
+            always @(posedge clk or negedge reset_n) begin
+                if(!reset_n) begin
+                    d_ot_ci_acc[ch] <= 0;
+                end else if(&w_ot_valid)begin
+                    d_ot_ci_acc[ch] <= $signed(w_ot_ci_acc[ch*(`ACI_BW) +: (`ACI_BW)]);
+                end
+            end
+        end
+endgenerate
+
 //==============================================================================
 // add_bias = acc + bias
 //==============================================================================
@@ -261,21 +279,29 @@ reg    signed   [`ST2_Conv_CO*`AB_BW-1 : 0]   r_add_bias;
 wire   signed   [`ST2_Conv_CO*`B_BW-1  : 0]   w_cnn_bias;
 assign  w_cnn_bias = i_cnn_bias;
 
+//debug
+reg signed [`AB_BW-1:0] d_r_add_bias [0:`ST2_Conv_CO-1];
 
 genvar  add_idx;
 generate
     for (add_idx = 0; add_idx < `ST2_Conv_CO; add_idx = add_idx + 1) begin : gen_add_bias
-        assign  add_bias[add_idx*`AB_BW +: `AB_BW] = w_ot_ci_acc[add_idx*(`ACI_BW) +: `ACI_BW] + w_cnn_bias[add_idx*`B_BW +: `B_BW];
+        assign  add_bias[add_idx*`AB_BW +: `AB_BW] = $signed(w_ot_ci_acc[add_idx*(`ACI_BW) +: `ACI_BW]) + $signed(w_cnn_bias[add_idx*`B_BW +: `B_BW]);
 
         always @(posedge clk or negedge reset_n) begin
             if(!reset_n) begin
-            r_add_bias[add_idx*`AB_BW +: `AB_BW]   <= 0;
+                r_add_bias[add_idx*`AB_BW +: `AB_BW]   <= 0;
+                d_r_add_bias[add_idx] <= 0;
             end else if(&w_ot_valid) begin
-                r_add_bias[add_idx*`AB_BW +: `AB_BW]   <= add_bias[add_idx*`AB_BW +: `AB_BW];
+                r_add_bias[add_idx*`AB_BW +: `AB_BW]   <= $signed(add_bias[add_idx*`AB_BW +: `AB_BW]);
+                d_r_add_bias[add_idx] <= $signed(add_bias[add_idx*`AB_BW +: `AB_BW]);
+       
             end
         end
     end
 endgenerate
+
+
+
 
 //==============================================================================
 // Activation
@@ -284,25 +310,39 @@ endgenerate
 // 3ch * 
 reg [`ST2_Conv_CO * `O_F_BW-1:0] act_relu;
 
+//debug
+reg [`O_F_BW-1:0] d_act_relu   [0:`ST2_Conv_CO-1];
+reg [`O_F_BW-2:0] d_r_act_relu [0:`ST2_Conv_CO-1];
+
+
+
 // 3ch * 
 reg [`ST2_Conv_CO * (`O_F_BW-1)-1:0] r_act_relu;
 
 	    always @ (*) begin
             for (i = 0; i < `ST2_Conv_CO; i = i + 1) begin
-                if (r_add_bias[i*`O_F_BW +: `O_F_BW] >>> (`O_F_BW-1)) // MSB가 1이면 음수
+                if (r_add_bias[i*`O_F_BW +: `O_F_BW] >>> (`O_F_BW-1)) begin// MSB가 1이면 음수
                     act_relu[i*`O_F_BW +: `O_F_BW] = 0;
-                else
-                    act_relu[i*`O_F_BW +: `O_F_BW] = r_add_bias[i*`O_F_BW +: `O_F_BW];
+                    //debug
+                    d_act_relu [i] = 0;
+                end else begin
+                    act_relu[i*`O_F_BW +: `O_F_BW] = $signed(r_add_bias[i*`O_F_BW +: `O_F_BW]);
+                    d_act_relu [i] =  $signed(r_add_bias[i*`O_F_BW +: `O_F_BW]);
+                end
             end
 	    end
 
         always @(posedge clk or negedge reset_n) begin
             if(!reset_n) begin
                 r_act_relu <= 0;
+                for (i = 0; i < `ST2_Conv_CO; i = i + 1) begin
+                    d_r_act_relu[i] <= 0;
+                end                
             end else if(r_valid[LATENCY-2]) begin
-                for (i = 0; i < `ST2_Conv_CO; i = i + 1)
-                
-                    r_act_relu[i*(`O_F_BW-1) +: `O_F_BW-1] <= act_relu[i*`O_F_BW +: `O_F_BW-1]; // 하위 32비트만 저장
+                for (i = 0; i < `ST2_Conv_CO; i = i + 1) begin
+                    r_act_relu[i*(`O_F_BW-1) +: `O_F_BW-1] <= $signed(act_relu[i*`O_F_BW +: `O_F_BW-1]); // 하위 32비트만 저장
+                    d_r_act_relu[i] <= $signed(act_relu[i*`O_F_BW +: `O_F_BW-1]);
+                end
             end
         end
 

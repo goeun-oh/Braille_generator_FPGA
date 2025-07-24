@@ -1,6 +1,7 @@
 `timescale 1ns / 1ps
 
 `include "stage2_defines_cnn_core.v"
+
 module stage2_pooling_core(
     input                                                                                   clk         	,
     input                                                                                   reset_n     	,
