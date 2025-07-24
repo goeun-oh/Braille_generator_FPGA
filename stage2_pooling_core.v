@@ -1,26 +1,6 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2025/07/20 18:29:11
-// Design Name: 
-// Module Name: stage2_pooling_core  
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
-`include "defines_cnn_core.v"
-
+`include "stage2_defines_cnn_core.v"
 module stage2_pooling_core(
     input                                                                                   clk         	,
     input                                                                                   reset_n     	,
