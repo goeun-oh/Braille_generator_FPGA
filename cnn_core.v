@@ -106,9 +106,7 @@ module cnn_core #(
     //==============================================================================
     // add_bias = acc + bias
     //==============================================================================
-    wire signed [CO*AB_BW-1 : 0] add_bias;
     reg signed [CO*AR_BW-1 : 0] r_add_bias;
-    wire is_positive;
     // TODO add bias
     genvar add_idx;
     generate

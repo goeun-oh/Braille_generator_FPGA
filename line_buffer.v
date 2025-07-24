@@ -131,7 +131,7 @@ module line_buffer #(
     integer k;
     reg [I_F_BW-1:0] result_window [0:KY-1][0:KX-1];
     always @(posedge clk) begin
-        if (window_x_cnt >= KX-1) begin
+        if (r_wait_valid[LATENCY-1]) begin
             for (k= 0; k < KY; k = k + 1) begin
                 for (j= 0; j < KX; j = j + 1) begin
                     result_window[k][j] <= o_window[(k*KX+j)*I_F_BW +: I_F_BW];
