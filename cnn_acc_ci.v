@@ -67,7 +67,7 @@ module cnn_acc_ci #(
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            r_ot_ci_acc[0+:ACI_BW] <= {ACI_BW{1'b0}};
+            r_ot_ci_acc[0+:ACI_BW] <= 0;
         end else if (&w_ot_valid) begin
             r_ot_ci_acc[0+:ACI_BW] <= w_ot_ci_acc[0+:ACI_BW];
         end

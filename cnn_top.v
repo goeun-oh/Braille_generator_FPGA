@@ -174,7 +174,7 @@ module cnn_top #(
     reg [ST2_Conv_IBW-1:0] result_pooling_fmap[0:CO-1][0:POOL_OUT_H-1][0:POOL_OUT_W-1];
 
     integer ch;
-    always @(posedge clk) begin
+    always @(*) begin
         if (w_core_valid) begin
             for (ch = 0; ch < CO; ch = ch + 1) begin
                 result_fmap[ch][y_cnt][x_cnt] <= w_core_fmap[ch*O_F_BW+:O_F_BW];

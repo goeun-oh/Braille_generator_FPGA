@@ -42,15 +42,15 @@ module line_buffer #(
         end
     end
 
-    reg [I_F_BW-1:0] line_buf[0:KY][0:IX-1];  // 4줄만 저장. 최신 줄은 현재 pixel로 채움
+    reg [I_F_BW-1:0] line_buf[0:KY-1][0:IX-1];  // 4줄만 저장. 최신 줄은 현재 pixel로 채움
     
     integer i;
     always @(posedge clk) begin
         if(i_in_valid) begin
-            for (i=0; i < KY; i = i+1) begin
+            for (i=0; i < KY-1; i = i+1) begin
                 line_buf[i][x_cnt] <= line_buf[i+1][x_cnt];
             end
-            line_buf[KY][x_cnt] <= i_in_pixel;
+            line_buf[KY-1][x_cnt] <= i_in_pixel;
         end
     end
 
@@ -87,7 +87,7 @@ module line_buffer #(
         if(!reset_n) begin
             r_window_valid <=0;
         end else begin
-            if(x_cnt >= KX -1 && y_cnt >= KY) begin
+            if(x_cnt >= KX -1 && y_cnt >= KY-1) begin
                 r_window_valid <= 1;
             end else if (window_x_cnt == IX -1 && window_y_cnt == IY -KY) begin
                 r_window_valid <=0;
