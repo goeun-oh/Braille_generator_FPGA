@@ -21,19 +21,23 @@
 
 `include "defines_cnn_core.v"
 
-module conv2_bias_rom#(
-    parameter CHANNEL_ID = 0
-)(
-    output reg signed[`B_BW-1:0] bias_out
-);
+module conv2_bias_rom(
+    output reg signed [`ST2_Conv_CO*`B_BW -1  : 0] bias   
+    );
 
-always @(*) begin
-    case (CHANNEL_ID)
-        0: bias_out = 6'sd2;
-        1: bias_out = -6'sd23;
-        2: bias_out = 6'sd1;
-        default: bias_out = 30'd0;
-    endcase
-end
+    localparam TOTAL_BIAS = `ST2_Conv_CO; 
+
+    reg signed [`B_BW-1:0] bias_mem [0:TOTAL_BIAS-1];              
+
+    initial begin
+        $readmemh("conv2_bias.mem", bias_mem);
+    end
+
+    integer i;
+    always @(*) begin
+        for (i = 0; i < TOTAL_BIAS; i = i + 1) begin
+            bias[i*`B_BW +: `B_BW] = bias_mem[i];
+        end
+    end
 
 endmodule

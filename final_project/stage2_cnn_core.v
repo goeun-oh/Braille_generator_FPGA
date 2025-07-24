@@ -9,10 +9,12 @@ Revision History: February 13, 2020 - initial release
 `include "timescale.v"
 `include "defines_cnn_core.v"
 
-module cnn_core (
+module stage2_cnn_core (
     // Clock & Reset
     clk             ,
     reset_n         ,
+    i_cnn_weight    ,
+    i_cnn_bias      ,
     i_in_valid      ,
     i_in_fmap       ,
     o_ot_valid      ,
@@ -21,12 +23,14 @@ module cnn_core (
 //==============================================================================
 // Input/Output declaration
 //==============================================================================
-input                                                       clk         	;
-input                                                       reset_n     	;
-input                                                       i_in_valid  	;
-input     signed [`ST2_Conv_CI * `ST2_Conv_IBW-1 : 0]  	    i_in_fmap    	;//3*(19bit) , 3ch에 대한 1point output
-output                                                      o_ot_valid  	;
-output    signed [`ST2_Conv_CO*(`O_F_BW-1)-1 : 0]  		    o_ot_fmap       ;    
+input                                                                   clk         	;
+input                                                                   reset_n     	;
+input     signed [`ST2_Conv_CI* `ST2_Conv_CO*  `KX*`KY  *`W_BW -1 : 0]  i_cnn_weight    ; // 3 * (3 * 5 * 5) * (bitwidth)
+input     signed [`ST2_Conv_CI*`B_BW - 1  : 0]                          i_cnn_bias;
+input                                                                   i_in_valid  	; 
+input     signed [`ST2_Conv_CI * `ST2_Conv_IBW-1 : 0]  	                i_in_fmap    	;//3*( bitwidh) , 3ch에 대한 1point output
+output                                                                  o_ot_valid  	;
+output    signed [`ST2_Conv_CO * (`O_F_BW-1)-1 : 0]  		            o_ot_fmap       ;//3*( bitwidh)    
 
 localparam LATENCY = 2;
 localparam COL = `ST2_Conv_X; //12
@@ -45,21 +49,34 @@ localparam ROW = `ST2_Conv_Y; //12
         if(!reset_n) begin
             row <= 0;
             col <= 0;  
-            frame_flag <= 0;
-            col_flag <= 0;     
         end else if(i_in_valid) begin
             if(col == COL-1) begin
                 col <= 0;
-                col_flag <= 1;
                 if (row == ROW -1) begin
                     row <= 0 ;
-                    frame_flag <= 1;
                 end else begin
                     row <= row + 1;
-                    frame_flag <= 0;
                 end
             end else begin
                 col <= col + 1;
+            end
+        end 
+    end
+
+
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            col_flag <=0;
+            frame_flag <=0;
+        end else begin
+            if(col == COL-1 && i_in_valid) begin
+                col_flag <= 1;
+                if (row == ROW -1) begin
+                    frame_flag <= 1;
+                end else begin
+                    frame_flag <= 0;
+                end
+            end else begin
                 col_flag <= 0;
                 frame_flag <= 0;
             end
@@ -70,10 +87,10 @@ localparam ROW = `ST2_Conv_Y; //12
 // Line Buffer & 5x5 window register
 //==============================================================================
 
-    //(19bit)  3channel 5x24 line_buffer
+    //(20bit)  3channel 5x24 line_buffer
     reg signed [`ST2_Conv_IBW-1:0] line_buffer [0:`ST2_Conv_CI-1][0:`KY-1][0:`ST2_Conv_X-1];
 
-    //(19bit)  3channel 5x5  window
+    //(20bit)  3channel 5x5  window
     reg signed [`ST2_Conv_IBW * `ST2_Conv_CI * `KY*`KX-1:0] window;
 
     integer i,j,k;
@@ -94,10 +111,6 @@ localparam ROW = `ST2_Conv_Y; //12
                     for (j = 0; j< `KY-1 ; j= j+1) begin
                         line_buffer[k][j][col] <= line_buffer[k][j+1][col];
                     end
-                    // line_buffer[k][1][col] <= line_buffer[k][0][col];
-                    // line_buffer[k][2][col] <= line_buffer[k][1][col];
-                    // line_buffer[k][3][col] <= line_buffer[k][2][col];
-                    // line_buffer[k][4][col] <= line_buffer[k][3][col];
                 end
             end
         end
@@ -120,58 +133,83 @@ localparam ROW = `ST2_Conv_Y; //12
 
     
 //==============================================================================
-// allocate data from line buffer to window, valid signal
+// allocate data from line buffer to window, send valid signal
 //==============================================================================
 //                   3 * 5 * 5 * (19bit)
 // reg signed [`ST2_Conv_CI * `KY*`KX * `ST2_Conv_IBW-1:0] window;
 
-reg window_valid;
+localparam V_LATENCY = 1;
+reg w_valid;
+reg [V_LATENCY-1 : 0] 	r_w_valid;
+
+    //debug
+    // reg signed [`ST2_Conv_IBW-1:0] d_window [0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];    
+
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
-
+            window <= 0;
+            // for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
+            //     for (j = 0; j < `KY; j=j+1) begin
+            //         for (i = 0; i < `KX; i = i + 1) begin
+            //             d_window[k][j][i] <= 0;
+            //         end
+            //     end
+            // end
         end else if( row>=4 && col >=5 ) begin
             for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
                 for (j = 0; j < `KY; j=j+1) begin
                     for (i = 0; i < `KX; i = i + 1) begin
                         window[((k*`KY*`KX) + (j*`KX) + i)* `ST2_Conv_IBW +: `ST2_Conv_IBW] 
                             <= line_buffer[k][j][col-5+i];
+                        // debug
+                        // d_window[k][j][i] <= line_buffer[k][j][col-5+i];
                     end
                 end
             end
-            window_valid <= 1;
-
         end else if ( (row>=5 && !col) | frame_flag ) begin
             for (k = 0; k < `ST2_Conv_CI; k=k+1) begin
                 for (j = 0; j < `KY; j=j+1) begin
                     for (i = 0; i < `KX; i = i + 1) begin
                         window[((k*`KY*`KX) + (j*`KX) + i)* `ST2_Conv_IBW +: `ST2_Conv_IBW] 
-                            <= line_buffer[k][j][`ST2_Conv_X-`KX+i];
+                            <= line_buffer[k][j][`ST2_Conv_X-`KX + i]; // col 7,8,9,10,11
+                        //debug
+                        // d_window[k][j][i] <= line_buffer[k][j][`ST2_Conv_X-`KX + i];
                     end
                 end
             end
-            window_valid <= 1;
-        end else begin
-            window_valid <= 0;
-        end
+        end 
     end
 
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            w_valid <= 0;
+        end else if((row>=4) && (col>=4)) begin
+            w_valid <= 1; 
+        end else begin
+            w_valid <= 0;
+        end
+    end    
 
-
-
-
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            r_w_valid <= 0;
+        end else begin
+            r_w_valid <= w_valid;
+        end
+    end    
 
 
 
 //==============================================================================
 // Data Enable Signals 
 //==============================================================================
-wire    [LATENCY-1 : 0] 	ce;
-reg     [LATENCY-1 : 0] 	r_valid;
+wire    [LATENCY-1 : 0] 	          ce;
+reg     [LATENCY-1 : 0] 	          r_valid;
 wire    [`ST2_Conv_CO-1 : 0]          w_ot_valid;
 always @(posedge clk or negedge reset_n) begin
     if(!reset_n) begin
-        r_valid   <= {LATENCY{1'b0}};
+        r_valid   <= 0;
     end else begin
         r_valid[LATENCY-2]  <= &w_ot_valid;
         r_valid[LATENCY-1]  <= r_valid[LATENCY-2];
@@ -184,32 +222,36 @@ assign	ce = r_valid;
 // acc instance
 //==============================================================================
 
+        //valid신호 3개(3bit)
 wire    [`ST2_Conv_CO-1 : 0]             w_in_valid;
-wire    [`ST2_Conv_CO*(`ACI_BW)-1 : 0]  w_ot_ci_acc;
+        //channel 3개, 33bit
+wire    signed [`ST2_Conv_CO*(`ACI_BW)-1 : 0]  w_ot_ci_acc;
+
+wire    signed [`ST2_Conv_CI*`ST2_Conv_CO*  `KX*`KY  *`W_BW -1 : 0] w_cnn_weight;
+assign w_cnn_weight = i_cnn_weight;
+        //debug
+// reg     signed [`W_BW-1:0] d_weight [0:`ST2_Conv_CO-1][0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];
+//     integer c,z,y,x;
+//     always @(posedge clk) begin
+//         for (c = 0; c < `ST2_Conv_CO; c = c + 1)
+//             for (z = 0; z < `ST2_Conv_CI; z = z + 1)
+//                 for (y = 0; y < `KY; y = y + 1)
+//                     for (x = 0; x < `KX; x = x + 1)
+//                         d_weight[c][z][y][x] <= w_cnn_weight[(c*`ST2_Conv_CI*`KY*`KX + z*`KY*`KX + y*`KX + x)*`W_BW +: `W_BW];
+//     end
+
+
 genvar ci_inst;
 generate
 	for(ci_inst = 0; ci_inst < `ST2_Conv_CO; ci_inst = ci_inst + 1) begin : gen_ci_inst
-		wire    [`ST2_Conv_CO*`ST2_Conv_CI*  `KX*`KY  *`W_BW -1 : 0] w_cnn_weight; // 3x(3x5x5) x (7bit)
-		wire    [`ST2_Conv_CI*`KX*`KY*`ST2_Conv_IBW-1 : 0]       w_in_fmap    	=  i_in_fmap[0 +: `ST2_Conv_CI*`KY*`KX*`ST2_Conv_IBW];
-		assign	w_in_valid[ci_inst] = i_in_valid; 
-
-        conv2_weight_rom #(
-            .CHANNEL_ID(ci_inst)
-        ) u_rom (
-            //wire    [`ST2_Conv_CI*`KX*`KY*`W_BW-1 : 0]  	w_cnn_weight;에 ROM에 있는 CI개의 weight묶음을 넣어줌
-            // Conv_CI = 3, KX =3, KY=3, W_BW=7
-
-            .weight(w_cnn_weight[ci_inst*`ST2_Conv_CI*`KX*`KY*`W_BW +: `ST2_Conv_CI*`KX*`KY*`W_BW]) // 3x5x5
-
-        );
-
-
-		cnn_acc_ci u_cnn_acc_ci(
+        
+		assign	w_in_valid[ci_inst] = r_w_valid; 
+		stage2_cnn_acc_ci u_stage2_cnn_acc_ci(
 	    .clk             (clk         ),
 	    .reset_n         (reset_n     ),
 	    .i_cnn_weight    (w_cnn_weight[ci_inst*`ST2_Conv_CI*`KX*`KY*`W_BW +: `ST2_Conv_CI*`KX*`KY*`W_BW]),
 	    .i_in_valid      (w_in_valid[ci_inst]),
-	    .i_in_fmap       (w_in_fmap),
+	    .i_in_fmap       (window),
 	    .o_ot_valid      (w_ot_valid[ci_inst]),
 	    .o_ot_ci_acc     (w_ot_ci_acc[ci_inst*(`ACI_BW) +: (`ACI_BW)])         
 	    );
@@ -220,24 +262,21 @@ endgenerate
 // add_bias = acc + bias
 //==============================================================================
 
-wire      [`ST2_Conv_CO*`AB_BW-1 : 0]   add_bias  ;
-reg       [`ST2_Conv_CO*`AB_BW-1 : 0]   r_add_bias;
+wire   signed   [`ST2_Conv_CO*`AB_BW-1 : 0]   add_bias  ;
+reg    signed   [`ST2_Conv_CO*`AB_BW-1 : 0]   r_add_bias;
+
+wire   signed   [`ST2_Conv_CO*`B_BW-1  : 0]   w_cnn_bias;
+assign  w_cnn_bias = i_cnn_bias;
+
+
 genvar  add_idx;
 generate
     for (add_idx = 0; add_idx < `ST2_Conv_CO; add_idx = add_idx + 1) begin : gen_add_bias
-            wire      [`ST2_Conv_CO*`B_BW-1  : 0]   w_cnn_bias;
-            conv2_bias_rom #(
-                .CHANNEL_ID(add_idx)
-            ) u_rom (
-                //wire    [`ST2_Conv_CI*`KX*`KY*`W_BW-1 : 0]  	w_cnn_weight;에 ROM에 있는 CI개의 weight묶음을 넣어줌
-                .bias_out(w_cnn_bias[add_idx*`B_BW +: `B_BW])
-            );
-  
         assign  add_bias[add_idx*`AB_BW +: `AB_BW] = w_ot_ci_acc[add_idx*(`ACI_BW) +: `ACI_BW] + w_cnn_bias[add_idx*`B_BW +: `B_BW];
 
         always @(posedge clk or negedge reset_n) begin
             if(!reset_n) begin
-                r_add_bias[add_idx*`AB_BW +: `AB_BW]   <= {`AB_BW{1'b0}};
+            r_add_bias[add_idx*`AB_BW +: `AB_BW]   <= 0;
             end else if(&w_ot_valid) begin
                 r_add_bias[add_idx*`AB_BW +: `AB_BW]   <= add_bias[add_idx*`AB_BW +: `AB_BW];
             end
@@ -249,13 +288,16 @@ endgenerate
 // Activation
 //==============================================================================
 // bias까지 더하고 나서 output channel 3개에 대한 1point (1point에 대해서 bit width는 = `O_F_BW(=33))
+// 3ch * 
 reg [`ST2_Conv_CO * `O_F_BW-1:0] act_relu;
+
+// 3ch * 
 reg [`ST2_Conv_CO * (`O_F_BW-1)-1:0] r_act_relu;
 
 	    always @ (*) begin
             for (i = 0; i < `ST2_Conv_CO; i = i + 1) begin
                 if (r_add_bias[i*`O_F_BW +: `O_F_BW] >>> (`O_F_BW-1)) // MSB가 1이면 음수
-                    act_relu[i*`O_F_BW +: `O_F_BW] = {`O_F_BW{1'b0}};
+                    act_relu[i*`O_F_BW +: `O_F_BW] = 0;
                 else
                     act_relu[i*`O_F_BW +: `O_F_BW] = r_add_bias[i*`O_F_BW +: `O_F_BW];
             end

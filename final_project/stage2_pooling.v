@@ -26,14 +26,14 @@ module stage2_pooling(
 input                                                           clk         	,
 input                                                           reset_n     	,
 input                                                           i_in_valid  	,
-input     [`ST2_Pool_IBW -1 : 0]  	                            i_in_fmap    	,//1point(19bit)
-output    reg                                                   o_ot_valid  	,
-output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap        //1point(19bit)
+input     [`ST2_Pool_IBW -1 : 0]  	                            i_in_fmap    	,//1point(20bit)
+output                                                          o_ot_valid  	,
+output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap        //1point(20bit)
     );
 
     localparam COL = `ST2_Pool_X; //24
     localparam ROW = `ST2_Pool_Y; //24
-    
+
 //==============================================================================
 // define max pooling function
 //==============================================================================
@@ -67,26 +67,40 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
         if(!reset_n) begin
             row <= 0;
             col <= 0;  
-            frame_flag <= 0;
-            col_flag <= 0;     
         end else if(i_in_valid) begin
             if(col == COL-1) begin
                 col <= 0;
-                col_flag <= 1;
                 if (row == ROW -1) begin
                     row <= 0 ;
-                    frame_flag <= 1;
                 end else begin
                     row <= row + 1;
-                    frame_flag <= 0;
                 end
             end else begin
                 col <= col + 1;
+            end
+        end 
+    end
+
+
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            col_flag <=0;
+            frame_flag <=0;
+        end else begin
+            if(col == COL-1 && i_in_valid) begin
+                col_flag <= 1;
+                if (row == ROW -1) begin
+                    frame_flag <= 1;
+                end else begin
+                    frame_flag <= 0;
+                end
+            end else begin
                 col_flag <= 0;
                 frame_flag <= 0;
             end
         end
     end
+
 
 
 //==============================================================================
@@ -140,6 +154,11 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
    
     reg [`ST2_Pool_IBW-1:0] o_pooling;
     reg [`ST2_Pool_IBW-1:0] r_o_pooling;
+    reg w_ot_valid;
+
+    localparam V_LATENCY = 1;
+
+    reg [V_LATENCY-1 : 0] 	r_valid;
 
     always @(*) begin
         // o_pooling = max_pixel({line_buffer1[col*`ST2_Pool_IBW+:`ST2_Pool_IBW],line_buffer1[(col+1)*`ST2_Pool_IBW+:`ST2_Pool_IBW],    line_buffer0[col*`ST2_Pool_IBW+:`ST2_Pool_IBW],line_buffer0[(col+1)*`ST2_Pool_IBW+:`ST2_Pool_IBW]});        
@@ -152,27 +171,42 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
-            o_ot_valid <= 0;
             r_o_pooling   <= 0;
         end else if( !frame_flag ) begin
-            if((row[0]) && (!col[0]) && !col_flag) begin
-                o_ot_valid <= 1;
+            //row가 홀수
+            if((row[0]) && (!col[0]) && !col_flag) begin  
                 r_o_pooling <= o_pooling;
-            end else if (!row[0] && col_flag)begin
-                o_ot_valid <= 1;
+
+            //row가 홀수 && col이 증가한 상태
+            end else if (row[0] && col_flag)begin
                 r_o_pooling <= max_pixel({line_buffer1[`ST2_Pool_X-2], line_buffer1[`ST2_Pool_X-1], line_buffer0[`ST2_Pool_X-2], line_buffer0[`ST2_Pool_X-1]});      
-            end else begin
-                o_ot_valid <= 0;
-            end
+            end 
         end else if (frame_flag && col_flag) begin
-            o_ot_valid <= 1;
             r_o_pooling <= max_pixel({line_buffer1[`ST2_Pool_X-2], line_buffer1[`ST2_Pool_X-1], line_buffer0[`ST2_Pool_X-2], line_buffer0[`ST2_Pool_X-1]});      
         end else begin
-            o_ot_valid <= 0;
+
         end
     end
-assign o_ot_fmap = r_o_pooling;
 
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            w_ot_valid <= 0;
+        end else if((row[0]) && (col[0])) begin
+            w_ot_valid <= 1; 
+        end else begin
+            w_ot_valid <= 0;
+        end
+    end    
+
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            r_valid <= 0;
+        end else begin
+            r_valid <= w_ot_valid;
+        end
+    end    
+assign o_ot_fmap = r_o_pooling;
+assign o_ot_valid =  r_valid;
 
 
 endmodule
