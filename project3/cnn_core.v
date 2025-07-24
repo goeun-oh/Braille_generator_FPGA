@@ -58,7 +58,7 @@ module cnn_core(
     always @(*) begin
         w_ot_result = 0;
         for(i=0; i< `CO;i = i + 1) begin
-            w_ot_result[i*`OUT_BW+:`OUT_BW] = o_ot_ci_acc[i*`OF_BW+:`OF_BW] + bias_mem[i];
+            w_ot_result[i*`OUT_BW+:`OUT_BW] = $signed(o_ot_ci_acc[i*`ACC_BW+:`ACC_BW]) + $signed(bias_mem[i]);
         end 
     end
 

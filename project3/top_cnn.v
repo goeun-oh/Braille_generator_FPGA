@@ -63,4 +63,5 @@ module top_cnn(
     .o_ot_valid(o_ot_valid),
     .o_ot_result(o_ot_result)
     );
+    
 endmodule

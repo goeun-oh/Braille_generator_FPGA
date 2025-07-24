@@ -52,7 +52,7 @@ module cnn_kernal(
     genvar mul_idx;
     generate
         for(mul_idx = 0; mul_idx < `CI; mul_idx = mul_idx + 1) begin : gen_mul
-            assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  i_pooling[mul_idx * `OF_BW +: `OF_BW] * i_weight[mul_idx * `W_BW +: `W_BW ];
+            assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  i_pooling[mul_idx * `OF_BW +: `OF_BW] * $signed(i_weight[mul_idx * `W_BW +: `W_BW ]);
         
             always @(posedge clk or negedge reset_n) begin
                 if(!reset_n) begin
@@ -71,14 +71,14 @@ module cnn_kernal(
     integer acc_idx;
     generate
         always @ (*) begin
-            acc_kernel[0 +: (`MUL_BW + $clog2(3))]= {(`MUL_BW + $clog2(3)){1'b0}};
+            acc_kernel[0 +: (`MUL_BW + $clog2(3))]= 0;
             for(acc_idx =0; acc_idx < `CI; acc_idx = acc_idx +1) begin
-                acc_kernel[0 +: (`MUL_BW + $clog2(3))] = acc_kernel[0 +: (`MUL_BW + $clog2(3))] + r_mul[acc_idx*`MUL_BW +: `MUL_BW]; 
+                acc_kernel[0 +: (`MUL_BW + $clog2(3))] = $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]) + $signed(r_mul[acc_idx*`MUL_BW +: `MUL_BW]); 
             end
         end
         always @(posedge clk or negedge reset_n) begin
             if(!reset_n) begin
-                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= {(`MUL_BW + $clog2(3)){1'b0}};
+                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= 0;
             end else if(ce[LATENCY-2])begin
                 r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= acc_kernel[0 +: (`MUL_BW + $clog2(3))];
             end

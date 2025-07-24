@@ -6,15 +6,15 @@
 //----------------------------------------------------------------------
 // 1. 데이터 비트 폭 (Bit-Widths)
 //----------------------------------------------------------------------
-`define IF_BW           32  // 입력 Feature Map 픽셀 비트폭 (Max Pool 입력)
-`define OF_BW           32  // 출력 Feature Map 픽셀 비트폭 (Max Pool 출력, FC 입력)
+`define IF_BW           34  // 입력 Feature Map 픽셀 비트폭 (Max Pool 입력)
+`define OF_BW           34  // 출력 Feature Map 픽셀 비트폭 (Max Pool 출력, FC 입력)
 `define W_BW             8  // FC Layer 가중치(Weight) 비트폭
 `define BIAS_BW          8  // FC Layer 편향(Bias) 비트폭
 
 // 연산 과정에서의 비트 폭
-`define MUL_BW          (`OF_BW + `W_BW)            // 곱셈 결과 비트폭 (32 + 7 = 39)
-`define ACC_BW          (`MUL_BW + $clog2(`FC_IN_VEC)) // 내적 누산기 비트폭 (39 + log2(48) -> 39 + 6 = 45)
-`define OUT_BW          (`ACC_BW + 1)               // 최종 출력 뉴런 비트폭 (누산기 + Bias 덧셈 후: 45 + 1 = 46)
+`define MUL_BW          (`OF_BW + `W_BW)            // 곱셈 결과 비트폭 (34 + 8 = 42)
+`define ACC_BW          (`MUL_BW + $clog2(`FC_IN_VEC)) // 내적 누산기 비트폭 (42 + log2(48) -> 44 + 6 = 48)
+`define OUT_BW          (`ACC_BW + 1)               // 최종 출력 뉴런 비트폭 (누산기 + Bias 덧셈 후: 48 + 1 = 49)
 
 //----------------------------------------------------------------------
 // 2. 레이어 차원 (Layer Dimensions)

@@ -66,7 +66,8 @@ module max_pooling(
             );
         end
     endgenerate
-
+    // 디버깅용
+    reg [`OF_BW -1 : 0]r_o_ot_flat [0:2];
 
     integer i;
     always @(posedge clk, negedge reset_n) begin
@@ -75,6 +76,11 @@ module max_pooling(
             r_pooling_valid <= 0;
         end else if (&w_ot_valid) begin
             w_ot_flat <= w_ot_pool;
+            // 디버깅용 시작
+            for(i = 0; i< 3 ; i = i + 1) begin
+                r_o_ot_flat[i] <= w_ot_pool[i * `OF_BW +: `OF_BW];
+            end
+            // 디버깅용 끝
             r_pooling_valid <= 1;
         end else begin
             r_pooling_valid <= 0;
