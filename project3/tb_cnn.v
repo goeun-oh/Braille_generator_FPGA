@@ -52,7 +52,7 @@ end
 
     // 출력 대기
     wait(o_ot_valid);
-    $display("o_ot_result = %h", o_ot_result);
+    $display("o_ot_result = %d", o_ot_result);
 
     repeat(5) @(posedge clk);
     $finish;
@@ -61,7 +61,7 @@ end
 // 출력 발생시마다 결과 디스플레이
 always @(posedge clk) begin
     if (o_ot_valid) begin
-        $display("At time %t, o_ot_result = %h", $time, o_ot_result);
+        $display("At time %t, o_ot_result = %d", $time, o_ot_result);
     end
 end
 
