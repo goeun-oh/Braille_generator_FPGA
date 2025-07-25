@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-`include "defines_cnn_core.vh"
+`include "stage3_defines_cnn_core.vh"
 
 // 3채널 fully-connected 누적합(with valid chain)
 module cnn_acc_ci(
@@ -21,27 +21,26 @@ module cnn_acc_ci(
 
     // 누적 레지스터(결과 저장)
     reg  [`CO * `ACC_BW-1:0] r_acc;
+    reg  [`CO * `ACC_BW-1:0] acc_kernel;
     reg  [`CO * `ACC_BW-1:0] next_acc;
     reg  [`CO * `ACC_BW-1:0] r_out;
     reg  r_valid;
 
     wire [`CO-1:0] w_ot_valid;
-    wire signed [`CO * (`MUL_BW + $clog2(3)) - 1:0] w_ot_kernel;
+    wire signed [`CO * (`MUL_BW + $clog2(`CI)) - 1:0] w_ot_kernel;
 
     // -- 가중치 메모리 로딩
-    initial $readmemh("fc1_weights.mem", rom);
+    initial $readmemh("stage3_fc1_weights.mem", rom);
 
     // -- pooling index 카운터
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             cnt <= 0;
-
         end
         else if (&w_ot_valid) begin
             cnt <= (cnt == 15) ? 0 : cnt + 1;
         end
-
     end
 
     always @(posedge clk or negedge reset_n) begin
@@ -68,67 +67,61 @@ module cnn_acc_ci(
                 .i_pooling(i_in_pooling),
                 .i_weight(w_cnn_weight),
                 .o_kernal_valid(w_ot_valid[mul_inst]),
-                .o_kernel(w_ot_kernel[mul_inst * (`MUL_BW + $clog2(3)) +: (`MUL_BW + $clog2(3))])
+                .o_kernel(w_ot_kernel[mul_inst * `KER_BW +: `KER_BW])
             );
         end
     endgenerate
 
-    // -- 실제 누적합 연산 : 모든 채널의 valid(&w_ot_valid)이 '1'일 때만 누적!
-    
     integer i;
-    reg signed [`ACC_BW-1:0] acc_val [0:2];
-    reg signed [`MUL_BW+$clog2(3)-1:0] kernel_val [0:2];
-    always @(*) begin
-        // 기본적으로 이전 값을 유지
-        next_acc = r_acc;
-        if (&w_ot_valid) begin
-            if (cnt == 0) begin
-                for (i = 0; i < `CO; i = i + 1) begin
-                    next_acc[i*`ACC_BW +: `ACC_BW] = $signed(w_ot_kernel[i*(`MUL_BW + $clog2(3)) +: (`MUL_BW + $clog2(3))]);
-                end
-            end else begin
-                for (i = 0; i < `CO; i = i + 1) begin
-                    // 슬라이스 값을 명확히 signed로 변수에 저장
-                    // 1. 누적값 부분
-                    // 2. 곱셈(커널) 부분
-                    //    (꼭 wire 대신 reg여도 무방, always @* 내부이기 때문)
-                    // (아래 둘 중 하나만 채택하면 됨)
-
-                    // 방법1: temp 변수 사용 (SystemVerilog라면 자동, Verilog는 아래 방법 권장)
-
-                    acc_val[i]   = $signed(r_acc[i*`ACC_BW +: `ACC_BW]);
-                    kernel_val[i]= $signed(w_ot_kernel[i*(`MUL_BW+$clog2(3)) +: (`MUL_BW+$clog2(3))]);
-
-                    // 사칙연산(덧셈)은 명확한 signed 연산
-                    next_acc[i*`ACC_BW +: `ACC_BW] = $signed(acc_val[i]) + $signed(kernel_val[i]);
-
-                    // 또는, 굳이 $signed 캐스팅하고 싶으면 아래처럼 하는 것도 안전
-                    // next_acc[i*`ACC_BW +: `ACC_BW] = $signed({r_acc[i*`ACC_BW +: `ACC_BW]}) 
-                    //                                  + $signed({w_ot_kernel[i*(`MUL_BW+$clog2(3)) +: (`MUL_BW+$clog2(3))]});
+    generate
+        always @ (posedge clk or negedge reset_n) begin
+            if (!reset_n) begin
+                acc_kernel <= 0;
+            end else if(r_valid) begin
+                acc_kernel <= 0;
+            end else if (&w_ot_valid) begin
+                for (i=0; i< `CO; i = i+1) begin
+                    acc_kernel[i * `ACC_BW +: `ACC_BW] = $signed(acc_kernel[i * `ACC_BW +: `ACC_BW]) + $signed(w_ot_kernel[i * `KER_BW +: `KER_BW]); 
                 end
             end
         end
-    end
+    endgenerate
 
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n)
-            r_acc <= 0;
-        else
-            r_acc <= next_acc;
+    // reg  [`CO * `ACC_BW-1:0] r_acc;
+    // reg  [`CO * `ACC_BW-1:0] next_acc;
+    // reg  [`CO * `ACC_BW-1:0] r_out;
+
+    reg [`ACC_BW-1:0] d_acc [0 : `CO -1];
+
+    integer ch;
+    always @(posedge clk) begin
+        if (&w_ot_valid) begin
+            for (ch = 0; ch < `CO; ch = ch + 1) begin
+                d_acc [ch] = acc_kernel [ch * `ACC_BW +: `ACC_BW ];
+            end
+        end
     end
+    ////////////////////////////////////////////////////////////////////////
 
     // -- 최종 valid/latch: 16번째 pooling 입력 + valid 발생 시 결과 출력
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             r_out <= 0;
+        end else if (&w_ot_valid && (cnt == 15)) begin
+            r_out <= acc_kernel;   // 최종 누산값
+        end
+    end
+
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
             r_valid <= 0;
         end else if (&w_ot_valid && (cnt == 15)) begin
-            r_out <= r_acc;   // 최종 누산값
             r_valid <= 1;     // 1클럭 valid
         end else begin
             r_valid <= 0;
         end
-    end
+    end    
+    
 
     assign o_ot_valid = r_valid;
     assign o_ot_ci_acc = r_out;

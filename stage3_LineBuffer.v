@@ -19,7 +19,7 @@
 // // 
 // //////////////////////////////////////////////////////////////////////////////////
 // // 현재 목표 4라인 buffer 구현
- `include "defines_cnn_core.vh"
+ `include "stage3_defines_cnn_core.vh"
 
 module line_buffer (
     input clk,

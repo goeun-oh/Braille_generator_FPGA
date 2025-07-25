@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-`include "defines_cnn_core.vh"
+`include "stage3_defines_cnn_core.vh"
 
 module tb_top_cnn();
 
@@ -8,21 +8,18 @@ reg clk;
 reg reset_n;
 reg i_Relu_valid;
 reg [`CI * `IF_BW - 1:0] i_in_Relu;
-reg signed [`OUT_BW -1:0] o_ot_result0;
-reg signed [`OUT_BW -1:0] o_ot_result1;
-reg signed [`OUT_BW -1:0] o_ot_result2;
 
 wire o_ot_valid;
 reg  o_p_ot_valid;
-wire [`CO * `OUT_BW -1:0] o_ot_result;
+wire [8 -1:0] o_ot_result;
 
 top_cnn DUT(
     .clk(clk),
     .reset_n(reset_n),
     .i_Relu_valid(i_Relu_valid),
     .i_in_Relu(i_in_Relu),
-    .o_ot_valid(o_ot_valid),
-    .o_ot_result(o_ot_result)
+    .o_valid(o_ot_valid),
+    .alpha(o_ot_result)
 );
 
 initial clk = 0;
@@ -65,20 +62,8 @@ end
 // 출력 발생시마다 결과 디스플레이
 always @(posedge clk) begin
     o_p_ot_valid <= o_ot_valid;
-    if (o_ot_valid) begin
-        o_ot_result0 <= o_ot_result[0 +:`OUT_BW];
-        o_ot_result1 <= o_ot_result[`OUT_BW +:`OUT_BW];
-        o_ot_result2 <= o_ot_result[2*`OUT_BW +:`OUT_BW];
-    end 
     if (o_p_ot_valid) begin
-        $display("At time %t, o_ot_result = %b", $time, o_ot_result);
-
-        $display("o_ot_result0 = %d", o_ot_result0);
-        $display("o_ot_result0 = %b", o_ot_result0);
-        $display("o_ot_result1 = %d", o_ot_result1);
-        $display("o_ot_result1 = %b", o_ot_result1);
-        $display("o_ot_result2 = %d", o_ot_result2);
-        $display("o_ot_result2 = %b", o_ot_result2);
+        $display("At time %t, o_ot_result = %h", $time, o_ot_result);
     end
 end
 

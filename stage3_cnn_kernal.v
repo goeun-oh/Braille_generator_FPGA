@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-`include "defines_cnn_core.vh"
+`include "stage3_efines_cnn_core.vh"
 
 module cnn_kernal(
     input wire clk,

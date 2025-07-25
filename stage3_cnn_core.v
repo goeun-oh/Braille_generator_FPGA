@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-`include "defines_cnn_core.vh"
+`include "stage3_defines_cnn_core.vh"
 
 module cnn_core(
     input clk,
@@ -33,7 +33,7 @@ module cnn_core(
     output [`CO * `OUT_BW -1:0] o_ot_result
     );
     // bias
-    localparam LATENCY = 2;
+    localparam LATENCY = 1;
     reg signed [7:0] bias_mem[0:2];
     
     //reg signed [`CO * `OUT_BW -1:0] w_ot_result;
@@ -44,19 +44,19 @@ module cnn_core(
     reg signed [`CO * `OUT_BW -1:0] r_ot_result;
 
     reg  signed   [LATENCY - 1 : 0]         r_valid;
-    wire  signed  [`CO-1 : 0]         w_ot_valid;
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             r_valid   <= 0;
         end else begin
-            r_valid[LATENCY - 2]  <= i_in_valid;
-            r_valid[LATENCY - 1]  <= r_valid[LATENCY - 2];
+            r_valid[LATENCY - 1]  <= i_in_valid;
+            // r_valid[LATENCY - 2]  <= i_in_valid;
+            // r_valid[LATENCY - 1]  <= r_valid[LATENCY - 2];
         end
     end
 
     initial begin
-       $readmemh("fc1_bias.mem", bias_mem);
+       $readmemh("stage3_fc1_bias.mem", bias_mem);
     end
 
     integer i;
@@ -67,13 +67,27 @@ module cnn_core(
         end
     end
 
+    integer j;
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
             r_ot_result <= 0;
-        end else begin
-            r_ot_result <= {$signed(w_ot_result[0]), $signed(w_ot_result[1]), $signed(w_ot_result[2])};
+        end else if (i_in_valid) begin
+            for (j = 0;j < `CO ; j = j + 1) begin
+                r_ot_result[j * `OUT_BW +: `OUT_BW] <= $signed(w_ot_result[j]);
+            end
         end
     end
+
+    reg signed [`OUT_BW -1:0] d_ot_result [0:`CO-1];
+    integer ch;
+    always @(posedge clk) begin
+        if (r_valid[LATENCY - 1]) begin
+            for (ch = 0; ch < `CO; ch = ch + 1) begin
+                d_ot_result [ch] = r_ot_result[ch * `OUT_BW +: `OUT_BW];
+            end
+        end
+    end
+
     assign o_ot_valid = r_valid[LATENCY - 1];
     assign o_ot_result = r_ot_result;
 

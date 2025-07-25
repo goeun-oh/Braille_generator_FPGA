@@ -18,7 +18,7 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-`include "defines_cnn_core.vh"
+`include "stage3_defines_cnn_core.vh"
 
 module max_pooling(
     input wire clk,
