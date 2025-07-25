@@ -82,7 +82,7 @@ module cnn_core #(
     //==============================================================================
 
     wire [         CO-1 : 0] w_in_valid;
-    wire [CO*(ACI_BW)-1 : 0] w_ot_kernel_acc;
+    wire signed [CO*(ACI_BW)-1 : 0] w_ot_kernel_acc;
 
     // TODO Call cnn_acc_ci Instance
     genvar co_inst;
@@ -90,7 +90,7 @@ module cnn_core #(
         for (
             co_inst = 0; co_inst < CO; co_inst = co_inst + 1
         ) begin : gen_co_kernel
-            wire    [KX*KY*W_BW-1 : 0]  	w_cnn_weight 	= i_cnn_weight[co_inst*KY*KX*W_BW +: KY*KX*W_BW];
+            wire signed   [KX*KY*W_BW-1 : 0]  	w_cnn_weight 	= i_cnn_weight[co_inst*KY*KX*W_BW +: KY*KX*W_BW];
             cnn_kernel u_cnn_kernel (
                 .clk         (clk),
                 .reset_n     (reset_n),
@@ -133,10 +133,10 @@ module cnn_core #(
     integer ch;
     integer j;
     integer k;
-    reg [ACI_BW-1:0] reg_ex_bias[0:CO-1];
+    reg signed [ACI_BW-1:0] reg_ex_bias[0:CO-1];
     always @(posedge clk) begin
         for (ch=0; ch<CO; ch=ch+1)begin
-            reg_ex_bias[ch] <= w_ot_kernel_acc[ch*ACI_BW +: ACI_BW];
+            reg_ex_bias[ch] <= $signed(w_ot_kernel_acc[ch*ACI_BW +: ACI_BW]);
         end
     end
 endmodule

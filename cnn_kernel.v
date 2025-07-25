@@ -17,7 +17,7 @@ module cnn_kernel #(
     input i_in_valid,
     input [KX*KY*I_F_BW-1 : 0] i_in_fmap,
     output o_ot_valid,
-    output [AK_BW-1 : 0] o_ot_kernel_acc
+    output signed [AK_BW-1 : 0] o_ot_kernel_acc
     
 );
 
@@ -50,8 +50,8 @@ module cnn_kernel #(
     // mul = fmap * weight
     //==============================================================================
 
-    wire signed  [KY*KX*M_BW-1 : 0] mul;
-    reg signed [KY*KX*M_BW-1 : 0] r_mul;
+    wire [KY*KX*M_BW-1 : 0] mul;
+    reg [KY*KX*M_BW-1 : 0] r_mul;
 
     // TODO Multiply each of Kernels
     genvar mul_idx;
@@ -59,8 +59,7 @@ module cnn_kernel #(
         for (
             mul_idx = 0; mul_idx < KY * KX; mul_idx = mul_idx + 1
         ) begin : gen_mul
-            assign  mul[mul_idx * M_BW +: M_BW]	=$signed(i_in_fmap[mul_idx * I_F_BW +: I_F_BW]) * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
-
+            assign  mul[mul_idx * M_BW +: M_BW]	=$signed({1'b0, i_in_fmap[mul_idx * I_F_BW +: I_F_BW]}) * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
             always @(posedge clk or negedge reset_n) begin
                 if (!reset_n) begin
                     r_mul[mul_idx*M_BW+:M_BW] <= 0;
@@ -70,13 +69,23 @@ module cnn_kernel #(
             end
         end
     endgenerate
+    reg signed [M_BW-1:0] reg_r_mul [0:KY-1][0:KX-1];
+    always @(posedge clk) begin
+        if(i_in_valid)begin
+            for (k= 0; k < KY; k = k + 1) begin
+                for (j= 0; j < KX; j = j + 1) begin
+                    reg_r_mul[k][j] <= $signed(r_mul[(k*KY+j)*M_BW +: M_BW]);
+                end
+            end
+        end
+    end
     reg signed [AK_BW-1 : 0] acc_kernel;
     reg signed [AK_BW-1 : 0] r_acc_kernel;
 
     integer               acc_idx;
     generate
         always @(*) begin
-            acc_kernel[0+:AK_BW] = {AK_BW{1'b0}};
+            acc_kernel[0+:AK_BW] = 0;
             for (acc_idx = 0; acc_idx < KY * KX; acc_idx = acc_idx + 1) begin
                 acc_kernel[0 +: AK_BW] = $signed(acc_kernel[0 +: AK_BW]) + $signed(r_mul[acc_idx*M_BW +: M_BW]);
             end
@@ -86,7 +95,7 @@ module cnn_kernel #(
         if (!reset_n) begin
             r_acc_kernel[0+:AK_BW] <= 0;
         end else if (ce[LATENCY-2]) begin
-            r_acc_kernel[0+:AK_BW] <= acc_kernel[0+:AK_BW];
+            r_acc_kernel[0+:AK_BW] <= $signed(acc_kernel[0+:AK_BW]);
         end
     end
     integer j;
