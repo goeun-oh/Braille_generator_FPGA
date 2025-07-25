@@ -32,6 +32,7 @@ module cnn_acc_ci(
     initial $readmemh("fc1_weights.mem", rom);
 
     // -- pooling index 카운터
+    
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             cnt <= 0;
