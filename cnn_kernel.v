@@ -18,6 +18,7 @@ module cnn_kernel #(
     input [KX*KY*I_F_BW-1 : 0] i_in_fmap,
     output o_ot_valid,
     output [AK_BW-1 : 0] o_ot_kernel_acc
+    
 );
 
 
@@ -49,8 +50,8 @@ module cnn_kernel #(
     // mul = fmap * weight
     //==============================================================================
 
-    wire [KY*KX*M_BW-1 : 0] mul;
-    reg [KY*KX*M_BW-1 : 0] r_mul;
+    wire signed  [KY*KX*M_BW-1 : 0] mul;
+    reg signed [KY*KX*M_BW-1 : 0] r_mul;
 
     // TODO Multiply each of Kernels
     genvar mul_idx;
@@ -58,7 +59,7 @@ module cnn_kernel #(
         for (
             mul_idx = 0; mul_idx < KY * KX; mul_idx = mul_idx + 1
         ) begin : gen_mul
-            assign  mul[mul_idx * M_BW +: M_BW]	= $signed(i_in_fmap[mul_idx * I_F_BW +: I_F_BW]) * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
+            assign  mul[mul_idx * M_BW +: M_BW]	=$signed(i_in_fmap[mul_idx * I_F_BW +: I_F_BW]) * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
 
             always @(posedge clk or negedge reset_n) begin
                 if (!reset_n) begin
@@ -83,7 +84,7 @@ module cnn_kernel #(
     endgenerate
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            r_acc_kernel[0+:AK_BW] <= {AK_BW{1'b0}};
+            r_acc_kernel[0+:AK_BW] <= 0;
         end else if (ce[LATENCY-2]) begin
             r_acc_kernel[0+:AK_BW] <= acc_kernel[0+:AK_BW];
         end
@@ -98,7 +99,18 @@ module cnn_kernel #(
             end
         end
     end
+    reg [I_F_BW-1:0] reg_i_fmap [0:KY-1][0:KX-1];
+    always @(posedge clk) begin
+        if(i_in_valid)begin
+            for (k= 0; k < KY; k = k + 1) begin
+                for (j= 0; j < KX; j = j + 1) begin
+                    reg_i_fmap[k][j] <= i_in_fmap[(k*KY+j)*I_F_BW +: I_F_BW];
+                end
+            end
+        end
+    end
     assign o_ot_valid = r_valid[LATENCY-1];
     assign o_ot_kernel_acc = r_acc_kernel;
 
+    
 endmodule

@@ -44,6 +44,7 @@ module fmap_feeder #(
             is_done <=0;
         end else begin
             if (is_sending) begin
+                pixel_reg <=0;
                 if (addr < TOTAL_PIXELS) begin
                     pixel_reg <= fmap_rom[addr];
                     valid_reg <= 1;

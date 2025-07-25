@@ -82,23 +82,23 @@ module cnn_core #(
     //==============================================================================
 
     wire [         CO-1 : 0] w_in_valid;
-    wire [CO*(ACI_BW)-1 : 0] w_ot_ci_acc;
+    wire [CO*(ACI_BW)-1 : 0] w_ot_kernel_acc;
 
     // TODO Call cnn_acc_ci Instance
-    genvar ci_inst;
+    genvar co_inst;
     generate
         for (
-            ci_inst = 0; ci_inst < CO; ci_inst = ci_inst + 1
-        ) begin : gen_ci_inst
-            wire    [CI*KX*KY*W_BW-1 : 0]  	w_cnn_weight 	= i_cnn_weight[ci_inst*CI*KY*KX*W_BW +: CI*KY*KX*W_BW];
-            cnn_acc_ci u_cnn_acc_ci (
+            co_inst = 0; co_inst < CO; co_inst = co_inst + 1
+        ) begin : gen_co_kernel
+            wire    [KX*KY*W_BW-1 : 0]  	w_cnn_weight 	= i_cnn_weight[co_inst*KY*KX*W_BW +: KY*KX*W_BW];
+            cnn_kernel u_cnn_kernel (
                 .clk         (clk),
                 .reset_n     (reset_n),
                 .i_cnn_weight(w_cnn_weight),
                 .i_in_valid  (w_window_valid),
-                .i_window (w_window),
-                .o_ot_valid  (w_ot_valid[ci_inst]),
-                .o_ot_ci_acc (w_ot_ci_acc[ci_inst*(ACI_BW)+:(ACI_BW)])
+                .i_in_fmap (w_window),
+                .o_ot_valid  (w_ot_valid[co_inst]),
+                .o_ot_kernel_acc (w_ot_kernel_acc[co_inst*(ACI_BW)+:(ACI_BW)])
             );
         end
     endgenerate
@@ -106,9 +106,7 @@ module cnn_core #(
     //==============================================================================
     // add_bias = acc + bias
     //==============================================================================
-    wire signed [CO*AB_BW-1 : 0] add_bias;
     reg signed [CO*AR_BW-1 : 0] r_add_bias;
-    wire is_positive;
     // TODO add bias
     genvar add_idx;
     generate
@@ -116,12 +114,12 @@ module cnn_core #(
             add_idx = 0; add_idx < CO; add_idx = add_idx + 1
         ) begin : gen_add_bias
             wire signed [AB_BW-1:0] bias_sum;
-            assign bias_sum = $signed(w_ot_ci_acc[add_idx*(ACI_BW) +: ACI_BW]) + $signed(i_cnn_bias[add_idx*B_BW +: B_BW]);
+            assign bias_sum = $signed(w_ot_kernel_acc[add_idx*(ACI_BW) +: ACI_BW]) + $signed(i_cnn_bias[add_idx*B_BW +: B_BW]);
             always @(posedge clk or negedge reset_n) begin
                 if (!reset_n) begin
-                    r_add_bias[add_idx*AR_BW+:AR_BW] <= {AR_BW{1'b0}};
+                    r_add_bias[add_idx*AR_BW+:AR_BW] <= 0;
                 end else if (&w_ot_valid) begin
-                    r_add_bias[add_idx*AR_BW +: AR_BW] <= (bias_sum >=0)? bias_sum[AR_BW:0] : {AR_BW{1'b0}};
+                    r_add_bias[add_idx*AR_BW +: AR_BW] <= (bias_sum >=0)? bias_sum[AR_BW:0] : 0;
                 end
             end
         end
@@ -132,6 +130,14 @@ module cnn_core #(
     //==============================================================================
     assign o_ot_valid = r_valid[LATENCY-1];
     assign o_ot_fmap  = r_add_bias;
-
+    integer ch;
+    integer j;
+    integer k;
+    reg [ACI_BW-1:0] reg_ex_bias[0:CO-1];
+    always @(posedge clk) begin
+        for (ch=0; ch<CO; ch=ch+1)begin
+            reg_ex_bias[ch] <= w_ot_kernel_acc[ch*ACI_BW +: ACI_BW];
+        end
+    end
 endmodule
 

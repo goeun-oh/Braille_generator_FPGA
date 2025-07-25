@@ -32,11 +32,17 @@ module cnn_top #(
     input                                         reset_n,
     input                                         i_valid,
     output                                        w_stage2_core_valid,
-    output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap
+    output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap,
+    output o_core_valid,
+    //output [CO*O_F_BW-1:0] o_core_fmap,
+    output o_core_done
 );
 
     wire signed [CO*O_F_BW-1:0] w_core_fmap;
     wire w_core_valid;
+    assign o_core_valid = w_core_valid;
+    assign o_core_fmap = w_core_fmap;
+
     wire                                  w_pooling_core_valid;
     wire [ST2_Pool_CI * ST2_Conv_IBW-1:0] w_pooling_core_fmap;
 
@@ -124,6 +130,7 @@ module cnn_top #(
     // Output coordinate counters
     // ===============================
     reg [4:0] x_cnt, y_cnt;
+    reg core_done;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             x_cnt <= 0;
@@ -141,6 +148,16 @@ module cnn_top #(
             end
         end
     end
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            core_done <=0;
+        end else if (x_cnt == OUT_W-1 && y_cnt == OUT_H -1) begin
+            core_done <=1;
+        end else begin
+            core_done <=0;
+        end
+    end
+    assign o_core_done = core_done;   
     reg [4:0] x_pool_cnt, y_pool_cnt;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
@@ -174,7 +191,7 @@ module cnn_top #(
     reg [ST2_Conv_IBW-1:0] result_pooling_fmap[0:CO-1][0:POOL_OUT_H-1][0:POOL_OUT_W-1];
 
     integer ch;
-    always @(posedge clk) begin
+    always @(*) begin
         if (w_core_valid) begin
             for (ch = 0; ch < CO; ch = ch + 1) begin
                 result_fmap[ch][y_cnt][x_cnt] <= w_core_fmap[ch*O_F_BW+:O_F_BW];
