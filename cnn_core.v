@@ -119,7 +119,7 @@ module cnn_core #(
                 if (!reset_n) begin
                     r_add_bias[add_idx*AR_BW+:AR_BW] <= 0;
                 end else if (&w_ot_valid) begin
-                    r_add_bias[add_idx*AR_BW +: AR_BW] <= (bias_sum >=0)? bias_sum[AR_BW:0] : {AR_BW{1'b0}};
+                    r_add_bias[add_idx*AR_BW +: AR_BW] <= (bias_sum >=0)? bias_sum[AR_BW:0] : 0;
                 end
             end
         end

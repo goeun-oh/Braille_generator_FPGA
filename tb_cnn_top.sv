@@ -14,15 +14,15 @@ module cnn_top_tb;
     parameter OUT_W = IX - KX + 1;
     parameter OUT_H = IY - KY + 1;
 
-    parameter ST2_Pool_CI  = 3;
-    parameter ST2_Pool_CO  = 3;
-    parameter ST2_Conv_CI  = 3;
-    parameter ST2_Conv_CO  = 3;
+    //parameter ST2_Pool_CI  = 3;
+    //parameter ST2_Pool_CO  = 3;
+    //parameter ST2_Conv_CI  = 3;
+    //parameter ST2_Conv_CO  = 3;
     
-    parameter ST2_Conv_IBW = 20;
-    parameter ST2_O_F_BW   = 35;
-    parameter POOL_OUT_W = 12;
-    parameter POOL_OUT_H = 12;
+    //parameter ST2_Conv_IBW = 20;
+    //parameter ST2_O_F_BW   = 35;
+    //parameter POOL_OUT_W = 12;
+    //parameter POOL_OUT_H = 12;
     // Clock & Reset
     reg clk = 0;
     reg reset_n = 0;
@@ -33,16 +33,19 @@ module cnn_top_tb;
     reg  [I_F_BW-1:0]        i_pixel;
 
     // DUT output
-    wire                                        w_stage2_core_valid;
-    wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
+    wire w_core_valid;
+    wire [CO*O_F_BW-1:0] w_core_fmap;
+
+    //wire                                        w_stage2_core_valid;
+    //wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
     //wire [KX*KY*I_F_BW-1:0] o_window;
     //wire [KX*I_F_BW-1:0] o_line_buf;
     cnn_top dut (
         .clk(clk),
         .reset_n(reset_n),
         .i_valid(i_valid),
-        .w_stage2_core_valid(w_stage2_core_valid),
-        .w_stage2_core_fmap(w_stage2_core_fmap)
+        .o_core_valid(w_core_valid),
+        .o_core_fmap(w_core_fmap)
     );
 
     // === 테스트 시나리오 ===
