@@ -8,8 +8,12 @@ reg clk;
 reg reset_n;
 reg i_Relu_valid;
 reg [`CI * `IF_BW - 1:0] i_in_Relu;
+reg signed [`OUT_BW -1:0] o_ot_result0;
+reg signed [`OUT_BW -1:0] o_ot_result1;
+reg signed [`OUT_BW -1:0] o_ot_result2;
 
 wire o_ot_valid;
+reg  o_p_ot_valid;
 wire [`CO * `OUT_BW -1:0] o_ot_result;
 
 top_cnn DUT(
@@ -39,9 +43,9 @@ for (y=0; y<`POOL_IN_SIZE; y=y+1) begin
         @(negedge clk);
         i_Relu_valid = 1;
         // 모든 채널 값 1로 통일!
-        data_ch0 = 1;
-        data_ch1 = 1;
-        data_ch2 = 1;
+        data_ch0 = 100008;
+        data_ch1 = 162271;
+        data_ch2 = 0;
         i_in_Relu = {data_ch2, data_ch1, data_ch0}; 
     end
 end
@@ -52,7 +56,7 @@ end
 
     // 출력 대기
     wait(o_ot_valid);
-    $display("o_ot_result = %d", o_ot_result);
+    $display("o_ot_result = %b", o_ot_result);
 
     repeat(5) @(posedge clk);
     $finish;
@@ -60,8 +64,21 @@ end
 
 // 출력 발생시마다 결과 디스플레이
 always @(posedge clk) begin
+    o_p_ot_valid <= o_ot_valid;
     if (o_ot_valid) begin
-        $display("At time %t, o_ot_result = %d", $time, o_ot_result);
+        o_ot_result0 <= o_ot_result[0 +:`OUT_BW];
+        o_ot_result1 <= o_ot_result[`OUT_BW +:`OUT_BW];
+        o_ot_result2 <= o_ot_result[2*`OUT_BW +:`OUT_BW];
+    end 
+    if (o_p_ot_valid) begin
+        $display("At time %t, o_ot_result = %b", $time, o_ot_result);
+
+        $display("o_ot_result0 = %d", o_ot_result0);
+        $display("o_ot_result0 = %b", o_ot_result0);
+        $display("o_ot_result1 = %d", o_ot_result1);
+        $display("o_ot_result1 = %b", o_ot_result1);
+        $display("o_ot_result2 = %d", o_ot_result2);
+        $display("o_ot_result2 = %b", o_ot_result2);
     end
 end
 

@@ -30,12 +30,14 @@ module cnn_kernal(
 
     output wire o_kernal_valid,
     output wire [`MUL_BW + $clog2(3) - 1: 0]o_kernel
+    // 값 확인용
+
     );
 
     localparam LATENCY = 2;
 
-    wire    [LATENCY-1 : 0] 	ce;
-    reg     [LATENCY-1 : 0] 	r_valid;
+    wire   [LATENCY-1 : 0] 	ce;
+    reg    [LATENCY-1 : 0] 	r_valid;
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             r_valid   <= {LATENCY{1'b0}};
@@ -46,27 +48,26 @@ module cnn_kernal(
     end
     assign	ce = r_valid;
 
-    wire      [`CI * `MUL_BW-1 : 0]    mul  ;
-    reg       [`CI * `MUL_BW-1 : 0]    r_mul;
+    wire  signed    [`CI * `MUL_BW-1 : 0]    mul  ;
+    reg   signed    [`CI * `MUL_BW-1 : 0]    r_mul;
 
     genvar mul_idx;
     generate
         for(mul_idx = 0; mul_idx < `CI; mul_idx = mul_idx + 1) begin : gen_mul
-            assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  i_pooling[mul_idx * `OF_BW +: `OF_BW] * $signed(i_weight[mul_idx * `W_BW +: `W_BW ]);
+            assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  $signed(i_pooling[mul_idx * `OF_BW +: `OF_BW]) * $signed(i_weight[mul_idx * `W_BW +: `W_BW ]);
         
             always @(posedge clk or negedge reset_n) begin
                 if(!reset_n) begin
-                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= {`MUL_BW{1'b0}};
+                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= 0;
                 end else if(i_pooling_valid)begin
-                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= mul[mul_idx * `MUL_BW +: `MUL_BW];
+                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= $signed(mul[mul_idx * `MUL_BW +: `MUL_BW]);
                 end
             end
         end
     endgenerate 
-
-
-    reg [`MUL_BW + $clog2(3) - 1: 0] acc_kernel 	;
-    reg [`MUL_BW + $clog2(3) - 1: 0] r_acc_kernel   ;
+    
+    reg signed [`MUL_BW + $clog2(3) - 1: 0] acc_kernel 	;
+    reg signed [`MUL_BW + $clog2(3) - 1: 0] r_acc_kernel   ;
 
     integer acc_idx;
     generate
@@ -80,10 +81,12 @@ module cnn_kernal(
             if(!reset_n) begin
                 r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= 0;
             end else if(ce[LATENCY-2])begin
-                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= acc_kernel[0 +: (`MUL_BW + $clog2(3))];
+                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]);
             end
         end
     endgenerate
+
+
 
     assign o_kernal_valid = r_valid[LATENCY-1];
     assign o_kernel = r_acc_kernel;

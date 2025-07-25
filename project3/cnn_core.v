@@ -35,11 +35,16 @@ module cnn_core(
     // bias
     localparam LATENCY = 2;
     reg signed [7:0] bias_mem[0:2];
-    reg signed [`CO * `OUT_BW -1:0] w_ot_result;
+    
+    //reg signed [`CO * `OUT_BW -1:0] w_ot_result;
+    reg signed [`OUT_BW -1:0] w_ot_result[0:2];
+    // reg signed [`OUT_BW -1:0] w_ot_result1;
+    // reg signed [`OUT_BW -1:0] w_ot_result2;
+
     reg signed [`CO * `OUT_BW -1:0] r_ot_result;
 
-    reg     [LATENCY - 1 : 0]         r_valid;
-    wire    [`CO-1 : 0]         w_ot_valid;
+    reg  signed   [LATENCY - 1 : 0]         r_valid;
+    wire  signed  [`CO-1 : 0]         w_ot_valid;
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
@@ -56,17 +61,17 @@ module cnn_core(
 
     integer i;
     always @(*) begin
-        w_ot_result = 0;
-        for(i=0; i< `CO;i = i + 1) begin
-            w_ot_result[i*`OUT_BW+:`OUT_BW] = $signed(o_ot_ci_acc[i*`ACC_BW+:`ACC_BW]) + $signed(bias_mem[i]);
-        end 
+        for (i = 0;i<`CI ;i = i + 1 ) begin
+            w_ot_result[i] = 0;
+            w_ot_result[i] = $signed(o_ot_ci_acc[i * `ACC_BW+:`ACC_BW]) + $signed(bias_mem[i]);
+        end
     end
 
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
             r_ot_result <= 0;
         end else begin
-            r_ot_result <= w_ot_result;
+            r_ot_result <= {$signed(w_ot_result[0]), $signed(w_ot_result[1]), $signed(w_ot_result[2])};
         end
     end
     assign o_ot_valid = r_valid[LATENCY - 1];
