@@ -31,15 +31,15 @@ module cnn_top #(
     input                                         clk,
     input                                         reset_n,
     input                                         i_valid,
-    //output                                        w_stage2_core_valid,
-    //output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap
+    output                                        w_stage2_core_valid,
+    output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap,
     output o_core_valid,
-    output [CO*O_F_BW-1:0] o_core_fmap
+    //output [CO*O_F_BW-1:0] o_core_fmap,
+    output o_core_done
 );
 
     wire signed [CO*O_F_BW-1:0] w_core_fmap;
     wire w_core_valid;
-    
     assign o_core_valid = w_core_valid;
     assign o_core_fmap = w_core_fmap;
 
@@ -105,31 +105,32 @@ module cnn_top #(
     // ===============================
     // stage2_pooling instance
     // ===============================
-    //stage2_pooling_core u_stage2_pooling_core (
-    //    .clk       (clk),
-    //    .reset_n   (reset_n),
-    //    .i_in_valid(w_core_valid),
-    //    .i_in_fmap (w_core_fmap),
-    //    .o_ot_valid(w_pooling_core_valid),
-    //    .o_ot_fmap (w_pooling_core_fmap)
-    //);
-    //// ===============================
-    //// stage2_convolution instance
-    //// ===============================
-    //stage2_conv u_stge2_conv(
-    //    .clk             (clk),
-    //    .reset_n         (reset_n),
-    //    .i_in_valid      (w_pooling_core_valid),
-    //    .i_in_fmap       (w_pooling_core_fmap),
-    //    .o_ot_valid      (w_stage2_core_valid),
-    //    .o_ot_fmap       (w_stage2_core_fmap)
-    //);
+    stage2_pooling_core u_stage2_pooling_core (
+        .clk       (clk),
+        .reset_n   (reset_n),
+        .i_in_valid(w_core_valid),
+        .i_in_fmap (w_core_fmap),
+        .o_ot_valid(w_pooling_core_valid),
+        .o_ot_fmap (w_pooling_core_fmap)
+    );
+    // ===============================
+    // stage2_convolution instance
+    // ===============================
+    stage2_conv u_stge2_conv(
+        .clk             (clk),
+        .reset_n         (reset_n),
+        .i_in_valid      (w_pooling_core_valid),
+        .i_in_fmap       (w_pooling_core_fmap),
+        .o_ot_valid      (w_stage2_core_valid),
+        .o_ot_fmap       (w_stage2_core_fmap)
+    );
 
 
     // ===============================
     // Output coordinate counters
     // ===============================
     reg [4:0] x_cnt, y_cnt;
+    reg core_done;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             x_cnt <= 0;
@@ -147,6 +148,16 @@ module cnn_top #(
             end
         end
     end
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            core_done <=0;
+        end else if (x_cnt == OUT_W-1 && y_cnt == OUT_H -1) begin
+            core_done <=1;
+        end else begin
+            core_done <=0;
+        end
+    end
+    assign o_core_done = core_done;   
     reg [4:0] x_pool_cnt, y_pool_cnt;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
@@ -187,13 +198,13 @@ module cnn_top #(
             end
         end
     end
-    //always @(posedge clk) begin
-    //    if (w_pooling_core_valid) begin
-    //        for (ch = 0; ch < CO; ch = ch + 1) begin
-    //            result_pooling_fmap[ch][y_pool_cnt][x_pool_cnt] <= w_pooling_core_fmap[ch*ST2_Conv_IBW+:ST2_Conv_IBW];
-    //        end
-    //    end
-    //end
+    always @(posedge clk) begin
+        if (w_pooling_core_valid) begin
+            for (ch = 0; ch < CO; ch = ch + 1) begin
+                result_pooling_fmap[ch][y_pool_cnt][x_pool_cnt] <= w_pooling_core_fmap[ch*ST2_Conv_IBW+:ST2_Conv_IBW];
+            end
+        end
+    end
 
     integer j;
     integer k;

@@ -177,7 +177,7 @@ reg [V_LATENCY-1 : 0] 	r_w_valid;
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             w_valid <= 0;
-        end else if((row>=4) && (col>=4)) begin
+        end else if(i_in_valid &&(row>=4) && (col>=4)) begin
             w_valid <= 1; 
         end else begin
             w_valid <= 0;
@@ -188,7 +188,7 @@ reg [V_LATENCY-1 : 0] 	r_w_valid;
         if(!reset_n) begin
             r_w_valid <= 0;
         end else begin
-            r_w_valid <= w_valid;
+            r_w_valid [V_LATENCY-1 : 0] <= w_valid;
         end
     end    
 
@@ -239,7 +239,7 @@ genvar ci_inst;
 generate
 	for(ci_inst = 0; ci_inst < `ST2_Conv_CO; ci_inst = ci_inst + 1) begin : gen_ci_inst
         
-		assign	w_in_valid[ci_inst] = r_w_valid; 
+		assign	w_in_valid[ci_inst] = r_w_valid  [V_LATENCY-1 : 0] ; 
 		stage2_cnn_acc_ci u_stage2_cnn_acc_ci(
 	    .clk             (clk         ),
 	    .reset_n         (reset_n     ),

@@ -18,6 +18,7 @@ module cnn_kernel #(
     input [KX*KY*I_F_BW-1 : 0] i_in_fmap,
     output o_ot_valid,
     output [AK_BW-1 : 0] o_ot_kernel_acc
+    
 );
 
 
@@ -111,4 +112,5 @@ module cnn_kernel #(
     assign o_ot_valid = r_valid[LATENCY-1];
     assign o_ot_kernel_acc = r_acc_kernel;
 
+    
 endmodule
