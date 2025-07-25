@@ -2,7 +2,7 @@
 `include "stage3_defines_cnn_core.vh"
 
 // 3채널 fully-connected 누적합(with valid chain)
-module cnn_acc_ci(
+module stage3_cnn_acc_ci(
     input clk,
     input reset_n,
 
@@ -60,7 +60,7 @@ module cnn_acc_ci(
             wire [7:0] weight1 = rom[mul_inst*`ACC_BW + 16 + w_cnt];
             wire [7:0] weight2 = rom[mul_inst*`ACC_BW + 32 + w_cnt];
             wire [`CO*`W_BW-1:0] w_cnn_weight = {weight2, weight1, weight0};
-            cnn_kernal U_cnn_kernal(
+            stage3_cnn_kernal U_cnn_kernal(
                 .clk(clk),
                 .reset_n(reset_n),
                 .i_pooling_valid(i_in_valid),

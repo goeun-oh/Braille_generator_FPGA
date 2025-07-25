@@ -21,7 +21,7 @@
 // // 현재 목표 4라인 buffer 구현
  `include "stage3_defines_cnn_core.vh"
 
-module line_buffer (
+module stage3_line_buffer (
     input clk,
     input reset_n,
 
@@ -113,12 +113,12 @@ module line_buffer (
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             r_window_valid <= 0;
-        end else if (i_in_valid
-            && x_cnt_d >= (`POOL_K-1) && y_cnt_d >= (`POOL_K-1)
-            && (((x_cnt_d - (`POOL_K-1)) % `STRIDE) == 0)
-            && (((y_cnt_d - (`POOL_K-1)) % `STRIDE) == 0)
-        ) begin
-            r_window_valid <= 1;
+        // end else if (i_in_valid
+        //     && x_cnt_d >= (`POOL_K-1) && y_cnt_d >= (`POOL_K-1)
+        //     && (((x_cnt_d - (`POOL_K-1)) % `STRIDE) == 0)
+        //     && (((y_cnt_d - (`POOL_K-1)) % `STRIDE) == 0)
+        // ) begin
+        //     r_window_valid <= 1;
         end else if (w_in_valid
             && x_cnt_d >= (`POOL_K-1) && y_cnt_d >= (`POOL_K-1)
             && (((x_cnt_d - (`POOL_K-1)) % `STRIDE) == 0)
@@ -127,6 +127,21 @@ module line_buffer (
             r_window_valid <= 1;
         end else begin
             r_window_valid <= 0;
+        end
+    end
+
+
+    reg [`IF_BW-1:0] d_window [0:`POOL_K*`POOL_K-1];
+    integer i;
+    always @(posedge clk or negedge reset_n) begin
+        if (!reset_n) begin
+            for (i=0;i<`POOL_K * `POOL_K;i = i+1) begin
+                d_window[i] = 0;
+            end
+        end else if (r_window) begin
+            for (i=0;i<`POOL_K * `POOL_K;i = i+1) begin
+                d_window[i] = r_window[i*`IF_BW +: `IF_BW];
+            end
         end
     end
 

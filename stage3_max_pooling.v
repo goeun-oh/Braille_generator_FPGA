@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 `include "stage3_defines_cnn_core.vh"
 
-module max_pooling(
+module stage3_max_pooling(
     input wire clk,
     input wire reset_n,
 
@@ -43,7 +43,7 @@ module max_pooling(
     generate
         for (line_inst = 0; line_inst < `CI ; line_inst = line_inst + 1) begin
             wire [`IF_BW - 1: 0] w_in_pixel = i_in_Relu[line_inst * `IF_BW +: `IF_BW];
-            line_buffer U_line_buffer(
+            stage3_line_buffer U_line_buffer(
                 .clk(clk),
                 .reset_n(reset_n),
                 .i_in_valid(i_Relu_valid),
@@ -57,7 +57,7 @@ module max_pooling(
     genvar pool_inst;
     generate
         for (pool_inst = 0; pool_inst < `CI ; pool_inst = pool_inst + 1) begin
-            max_pool_2x2 U_max_pool (
+            stage3_max_pool_2x2 U_max_pool (
                 .i00(w_ot_window[pool_inst * `POOL_K * `POOL_K * `IF_BW +: `IF_BW]),
                 .i01(w_ot_window[(pool_inst * `POOL_K * `POOL_K + 1) * `IF_BW +: `IF_BW]),
                 .i10(w_ot_window[(pool_inst * `POOL_K * `POOL_K + 2) * `IF_BW +: `IF_BW]),
@@ -92,7 +92,7 @@ module max_pooling(
 
 endmodule
 
-module max_pool_2x2 (
+module stage3_max_pool_2x2 (
     input  [`OF_BW-1:0] i00, i01, i10, i11,
     output [`OF_BW-1:0] o_max
 );
@@ -100,3 +100,8 @@ module max_pool_2x2 (
     wire [`OF_BW-1:0] max1 = ($signed(i10) > $signed(i11)) ? i10 : i11;
     assign o_max = ($signed(max0) > $signed(max1)) ? max0 : max1;
 endmodule
+// 넌 왜 일 안하냐
+// 팀들 일하잖아
+// 너도 일 해야지
+// 혼자 수다 떨고 있네
+// 너무 한거 아니냐?

@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 `include "stage3_defines_cnn_core.vh"
 
-module cnn_core(
+module stage3_cnn_core(
     input clk,
     input reset_n,
 

@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 `include "stage3_defines_cnn_core.vh"
-module top_cnn(
+module stage3_top_cnn(
     input wire clk,
     input wire reset_n,
 
@@ -37,7 +37,7 @@ module top_cnn(
     wire core_valid;
     wire [`CO * `OUT_BW -1:0] w_core;
 
-    max_pooling U_max_pooling(
+    stage3_max_pooling U_stage3_max_pooling(
     .clk(clk),
     .reset_n(reset_n),
     .i_Relu_valid(i_Relu_valid),
@@ -46,7 +46,7 @@ module top_cnn(
     .o_ot_pool(w_pool)
     );
 
-    cnn_acc_ci U_cnn_acc_ci(
+    stage3_cnn_acc_ci U_stage3_cnn_acc_ci(
     .clk(clk),
     .reset_n(reset_n),
     .i_in_valid(pool_valid),
@@ -55,7 +55,7 @@ module top_cnn(
     .o_ot_ci_acc(w_acc)
     );
 
-    cnn_core U_cnn_core(
+    stage3_cnn_core U_stage3_cnn_core(
     .clk(clk),
     .reset_n(reset_n),
     .i_in_valid(acc_valid),
@@ -64,7 +64,7 @@ module top_cnn(
     .o_ot_result(w_core)
     );
     
-    compare_alpha U_compare_alpha(
+    stage3_compare_alpha U_stage3_compare_alpha(
         .clk(clk),
         .reset_n(reset_n),
         .i_in_valid(core_valid),
@@ -77,7 +77,7 @@ endmodule
 
 // a = 0x61 b = 0x62, c = 0x63
 
-module compare_alpha (
+module stage3_compare_alpha (
     input clk,
     input reset_n,
     input i_in_valid,
