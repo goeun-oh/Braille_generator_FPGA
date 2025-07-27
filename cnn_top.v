@@ -10,7 +10,11 @@ module cnn_top #(
     parameter CO           = 3,
     parameter IX           = 28,
     parameter IY           = 28,
+<<<<<<< HEAD
     parameter B_BW         = 16,
+=======
+    parameter B_BW         = 8,
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
     parameter AK_BW        = 21,
     parameter ACI_BW       = 21,
     parameter AB_BW        = 21,
@@ -31,6 +35,7 @@ module cnn_top #(
     input                                         clk,
     input                                         reset_n,
     input                                         i_valid,
+<<<<<<< HEAD
     // output                                        w_stage2_core_valid,
     // output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap,
     // output o_core_valid,
@@ -39,6 +44,15 @@ module cnn_top #(
     output out_valid,
     output [7:0] alpha
 );
+=======
+    output                                        w_stage2_core_valid,
+    output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap,
+    output o_core_valid,
+    //output [CO*O_F_BW-1:0] o_core_fmap,
+    output o_core_done
+);
+
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
     wire signed [CO*O_F_BW-1:0] w_core_fmap;
     wire w_core_valid;
     assign o_core_valid = w_core_valid;
@@ -58,10 +72,13 @@ module cnn_top #(
     reg signed [                   7:0] rom          [  0:74];
     reg signed [              B_BW-1:0] bias_mem     [0:CO-1];
 
+<<<<<<< HEAD
     // 동은형 출력단
     wire                                        w_stage2_core_valid;
     wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
     ////////
+=======
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
     integer                             i;
     initial begin
         $readmemh("conv1_weights.mem", rom);
@@ -130,6 +147,7 @@ module cnn_top #(
         .o_ot_fmap       (w_stage2_core_fmap)
     );
 
+<<<<<<< HEAD
     stage3_top_cnn U_stage3_top_cnn(
     .clk(clk),
     .reset_n(reset_n),
@@ -138,6 +156,8 @@ module cnn_top #(
     .o_valid(out_valid),
     .alpha(alpha)
     );
+=======
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
 
     // ===============================
     // Output coordinate counters
@@ -170,7 +190,11 @@ module cnn_top #(
             core_done <=0;
         end
     end
+<<<<<<< HEAD
     // assign o_core_done = core_done;   
+=======
+    assign o_core_done = core_done;   
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
     reg [4:0] x_pool_cnt, y_pool_cnt;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin

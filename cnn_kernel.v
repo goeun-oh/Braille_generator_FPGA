@@ -6,7 +6,7 @@ module cnn_kernel #(
     parameter KY = 5,  // Number of Kernel Y
     parameter I_F_BW = 8,  // Bit Width of Input Feature
     parameter W_BW = 8,  // BW of weight parameter
-    parameter B_BW = 8,  // BW of bias parameter
+    parameter B_BW = 16,  // BW of bias parameter
     parameter AK_BW = 21,  // M_BW + log(KY*KX) Accum Kernel 
     parameter M_BW = 16 // I_F_BW * W_BW
 )(
