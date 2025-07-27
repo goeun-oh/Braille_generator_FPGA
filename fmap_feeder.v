@@ -34,6 +34,8 @@ module fmap_feeder #(
             is_sending <=1;
         end else if (is_done) begin
             is_sending <=0;
+        end else begin
+            is_sending <=0;
         end
     end
 

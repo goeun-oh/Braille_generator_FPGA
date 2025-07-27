@@ -43,7 +43,7 @@ assign	ce = r_valid;
             stage2_pooling u_stage2_pooling(
                 .clk         	(clk),
                 .reset_n     	(reset_n),
-                .i_in_valid  	(w_in_valid),
+                .i_in_valid  	(w_in_valid[ci_inst]),
                 .i_in_fmap    	(w_in_fmap),
 
                 //w_ot_valid 3비트 중 LSB부터 MSB로 하나씩 생성된 인스턴스 3개로부터 valid신호를 받음
@@ -66,19 +66,19 @@ assign	ce = r_valid;
     assign o_ot_valid = r_valid[LATENCY-1];
   
 //debug
-reg signed [`ST2_Pool_IBW - 1 : 0] d_i_in_fmap [0 : `ST2_Pool_CI - 1];
-integer ch;
-    always @(posedge clk or negedge reset_n) begin
-        if(!reset_n) begin
-            for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
-                d_i_in_fmap [ch] <= 0;
-            end
-        end else if(i_in_valid) begin
-            for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
-                d_i_in_fmap [ch] <= $signed(i_in_fmap[ch*`ST2_Pool_IBW+:`ST2_Pool_IBW]);
-            end
-        end
-    end
+//reg signed [`ST2_Pool_IBW - 1 : 0] d_i_in_fmap [0 : `ST2_Pool_CI - 1];
+//integer ch;
+//    always @(posedge clk or negedge reset_n) begin
+//        if(!reset_n) begin
+//            for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
+//                d_i_in_fmap [ch] <= 0;
+//            end
+//        end else if(i_in_valid) begin
+//            for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
+//                d_i_in_fmap [ch] <= $signed(i_in_fmap[ch*`ST2_Pool_IBW+:`ST2_Pool_IBW]);
+//            end
+//        end
+//    end
     
 
 
