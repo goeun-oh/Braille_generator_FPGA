@@ -97,24 +97,24 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
     reg [`ST2_Pool_IBW-1:0] line_buffer1 [0:`ST2_Pool_X-1];    
 
 
-    integer i;
-    always @(posedge clk or negedge reset_n) begin
-        if(!reset_n) begin
-            // line_buffer0   <= 0;
-            // line_buffer1   <= 0;
-            for (i = 0; i < `ST2_Pool_X; i = i + 1) begin
-                line_buffer0[i] <= 0;
-                line_buffer1[i] <= 0;
-            end
-        end else begin
-            // 한 줄 한번에 올리는 방식
-            if((i_in_valid) && (!col)) begin // c가 0되면 line_buffer 1로 shift
-                for (i = 0; i < `ST2_Pool_X; i = i + 1) begin
-                    line_buffer1[i] <= line_buffer0[i];
-                end
-            end
-        end
-    end    
+    //integer i;
+    //always @(posedge clk or negedge reset_n) begin
+    //    if(!reset_n) begin
+    //        // line_buffer0   <= 0;
+    //        // line_buffer1   <= 0;
+    //        for (i = 0; i < `ST2_Pool_X; i = i + 1) begin
+    //            line_buffer0[i] <= 0;
+    //            line_buffer1[i] <= 0;
+    //        end
+    //    end else begin
+    //        // 한 줄 한번에 올리는 방식
+    //        if((i_in_valid) && (!col)) begin // c가 0되면 line_buffer 1로 shift
+    //            for (i = 0; i < `ST2_Pool_X; i = i + 1) begin
+    //                line_buffer1[i] <= line_buffer0[i];
+    //            end
+    //        end
+    //    end
+    //end    
 
 //==============================================================================
 // receive 1px data to Line Buffer
