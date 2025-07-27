@@ -86,19 +86,23 @@ localparam ROW = `ST2_Conv_Y; //12
     //(20bit)  3channel 5x5  window
     reg signed [`ST2_Conv_IBW * `ST2_Conv_CI * `KY*`KX-1:0] window;
 
-    reg signed [`ST2_Conv_IBW-1:0] temp_line [`ST2_Conv_CI-1:0][`KY-2:0];
-
     integer k;
     integer j;
+    integer i;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             for (k = 0; k < `ST2_Conv_CI; k = k + 1)
                 for (j = 0; j < `KY; j = j + 1)
-                    line_buffer[k][j][col] <= 0;  // 명확한 Reset
+                    for (i = 0; i < `ST2_Conv_X; i = i + 1)
+                        line_buffer[k][j][i] <= 0;
         end else if (i_in_valid) begin
-            for (k = 0; k < `ST2_Conv_CI; k = k + 1)
-                for (j = 0; j < `KY - 1; j = j + 1)
+            for (k = 0; k < `ST2_Conv_CI; k = k + 1) begin
+                for (j = 0; j < `KY - 1; j = j + 1) begin
                     line_buffer[k][j][col] <= line_buffer[k][j + 1][col];
+                end
+                // 마지막 라인 (최상단)에 새로운 입력 넣기
+                line_buffer[k][`KY-1][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW];
+            end
         end
     end
 
@@ -106,16 +110,6 @@ localparam ROW = `ST2_Conv_Y; //12
 //==============================================================================
 // receive 1px data to 3ch Line Buffer
 //==============================================================================
-    always @(posedge clk) begin
-        if (i_in_valid) begin
-            // valid신호가 들어올 때만 data를 받아옴,(col에 따라 위치가 다름)
-            // 맨 첫번째 라인버퍼에만
-            for (k = 0; k < `ST2_Conv_CI; k = k+1) begin  
-                line_buffer[k][4][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW] ;
-            end
-        end
-    end
-
 
 
     
@@ -132,7 +126,6 @@ reg [V_LATENCY-1 : 0] 	r_w_valid;
     //debug
     reg signed [`ST2_Conv_IBW-1:0] d_window [0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];    
 
-    integer i;
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             window <= 0;

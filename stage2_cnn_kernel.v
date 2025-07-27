@@ -89,8 +89,17 @@ reg       signed [`AK_BW-1 : 0]    r_acc_kernel   ;
 // integer acc_idx;
 //=== [누산 단계 분할: partial sum 5개 생성] ===//
 wire signed [`AK_BW-1:0] partial_sum[0:4];
-
-// genvar psum_idx;
+genvar psum_idx;
+generate
+    for (psum_idx = 0; psum_idx < 5; psum_idx = psum_idx + 1) begin : gen_partial_sum
+      assign partial_sum[psum_idx] =
+        $signed(r_mul[(psum_idx*5 + 0)*`M_BW +: `M_BW]) +
+        $signed(r_mul[(psum_idx*5 + 1)*`M_BW +: `M_BW]) +
+        $signed(r_mul[(psum_idx*5 + 2)*`M_BW +: `M_BW]) +
+        $signed(r_mul[(psum_idx*5 + 3)*`M_BW +: `M_BW]) +
+        $signed(r_mul[(psum_idx*5 + 4)*`M_BW +: `M_BW]);
+    end	
+endgenerate
 integer acc_idx;
 generate
 	always @ (*) begin
