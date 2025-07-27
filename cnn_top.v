@@ -31,7 +31,7 @@ module cnn_top #(
     input                                         clk,
     input                                         reset_n,
     input                                         i_valid,
-    input [3:0] sw,
+    // input [3:0] sw,
     // output                                        w_stage2_core_valid,
     // output [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap,
     // output o_core_valid,
@@ -80,7 +80,7 @@ module cnn_top #(
         .clk        (clk),
         .reset_n    (reset_n),
         .i_valid    (i_valid),  // 1클럭만 high!
-        .sw    (sw),  // 1클럭만 high!
+        // .sw    (sw),  // 1클럭만 high!
         .o_pixel    (w_pixel),
         .o_out_valid(o_valid)
     );

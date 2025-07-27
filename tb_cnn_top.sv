@@ -38,6 +38,7 @@ module cnn_top_tb;
 
     wire core_done;
     wire [7:0] alpha;
+    wire [2:0] led;
     // wire                                        w_stage2_core_valid;
     // wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
     //wire [KX*KY*I_F_BW-1:0] o_window;
@@ -46,12 +47,13 @@ module cnn_top_tb;
         .clk(clk),
         .reset_n(reset_n),
         .i_valid(i_valid),
-        .sw(4'd2),
+        // .sw(4'd4),
         // .w_stage2_core_valid(w_stage2_core_valid),
         // .w_stage2_core_fmap(w_stage2_core_fmap),
         // .o_core_done(core_done)
         .out_valid(core_done),
-        .alpha(alpha)
+        .alpha(alpha),
+        .led(led)
     );
 
     // === 테스트 시나리오 ===

@@ -106,45 +106,25 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
                 line_buffer0[i] <= 0;
                 line_buffer1[i] <= 0;
             end
-        end else begin
-            // 한 줄 한번에 올리는 방식
-            if((i_in_valid) && (!col)) begin // c가 0되면 line_buffer 1로 shift
-                for (i = 0; i < `ST2_Pool_X; i = i + 1) begin
-                    line_buffer1[i] <= line_buffer0[i];
-                end
+        end else if((i_in_valid) && (!col)) begin // c가 0되면 line_buffer 1로 shift
+            for (i = 0; i < `ST2_Pool_X; i = i + 1) begin
+                line_buffer1[i] <= line_buffer0[i];
             end
-        end
-    end    
-
-//==============================================================================
-// receive 1px data to Line Buffer
-//==============================================================================
-   reg o_in_valid1;
-   reg o_in_valid2;
-   always @(posedge clk, negedge reset_n) begin
-      if (!reset_n) begin
-         o_in_valid1 <= 0;
-      end else begin
-         o_in_valid1 <= i_in_fmap;
-      end
-   end
-
-   always @(posedge clk, negedge reset_n) begin
-      if (!reset_n) begin
-         o_in_valid2 <= 0;
-      end else begin
-         o_in_valid2 <= o_in_valid1;
-      end
-   end
-
-    always @(posedge clk) begin
-        if (o_in_valid2) begin
-            // line_buffer0[col*`ST2_Pool_IBW+:`ST2_Pool_IBW] <= i_in_fmap;
-            // valid신호가 들어올 때만 data를 받아옴 
+        end else if (i_in_valid && col !=0) begin
             line_buffer0[col] <= i_in_fmap;
         end
     end
 
+//==============================================================================
+// receive 1px data to Line Buffer
+//==============================================================================
+    // always @(posedge clk) begin
+    //     if (i_in_valid) begin
+    //         // line_buffer0[col*`ST2_Pool_IBW+:`ST2_Pool_IBW] <= i_in_fmap;
+    //         // valid신호가 들어올 때만 data를 받아옴 
+    //         line_buffer0[col] <= i_in_fmap;
+    //     end
+    // end
 //==============================================================================
 // apply max pooling function
 //==============================================================================

@@ -116,18 +116,31 @@ module stage3_compare_alpha (
         end
     end
 
-    always @(*) begin
-        if ((c_ot_result[0] >= c_ot_result[1]) && (c_ot_result[0] >= c_ot_result[2])) begin
-            o_alpha = 8'h61;
-            led = 3'b100;
-        end else if ((c_ot_result[1] >= c_ot_result[0]) && (c_ot_result[1] >= c_ot_result[2])) begin
-            o_alpha = 8'h62;
-            led = 3'b010;
-        end else begin
-            o_alpha = 8'h63;
-            led = 3'b001;
+reg [1:0] max_idx;
+
+always @(*) begin
+    if ((c_ot_result[0] >= c_ot_result[1]) && (c_ot_result[0] >= c_ot_result[2]))
+        max_idx = 2'd0;
+    else if (c_ot_result[1] >= c_ot_result[2])
+        max_idx = 2'd1;
+    else
+        max_idx = 2'd2;
+
+    case (max_idx)
+        2'd0: begin
+            o_alpha = 8'h61;  // 'a'
+            led     = 3'b100;
         end
-    end
+        2'd1: begin
+            o_alpha = 8'h62;  // 'b'
+            led     = 3'b010;
+        end
+        2'd2: begin
+            o_alpha = 8'h63;  // 'c'
+            led     = 3'b001;
+        end
+    endcase
+end
 
     assign o_valid = r_valid[LATENCY - 1];
 
