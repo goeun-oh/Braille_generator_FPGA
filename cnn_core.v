@@ -1,20 +1,12 @@
 `timescale 1ns / 1ps
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
 module cnn_core #(
     parameter I_F_BW = 8,
     parameter KX = 5,
     parameter KY = 5,
     parameter IX = 28,
     parameter W_BW = 8,
-<<<<<<< HEAD
     parameter B_BW = 16,  //bias
-=======
-    parameter B_BW = 8,  //bias
->>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
     parameter CI = 1,
     parameter CO = 3,
     parameter AK_BW = 21,
