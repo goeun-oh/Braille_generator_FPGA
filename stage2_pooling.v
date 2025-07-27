@@ -119,14 +119,31 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
 //==============================================================================
 // receive 1px data to Line Buffer
 //==============================================================================
+   reg o_in_valid1;
+   reg o_in_valid2;
+   always @(posedge clk, negedge reset_n) begin
+      if (!reset_n) begin
+         o_in_valid1 <= 0;
+      end else begin
+         o_in_valid1 <= i_in_fmap;
+      end
+   end
+
+   always @(posedge clk, negedge reset_n) begin
+      if (!reset_n) begin
+         o_in_valid2 <= 0;
+      end else begin
+         o_in_valid2 <= o_in_valid1;
+      end
+   end
+
     always @(posedge clk) begin
-        if (i_in_valid) begin
+        if (o_in_valid2) begin
             // line_buffer0[col*`ST2_Pool_IBW+:`ST2_Pool_IBW] <= i_in_fmap;
             // valid신호가 들어올 때만 data를 받아옴 
             line_buffer0[col] <= i_in_fmap;
         end
     end
-
 
 //==============================================================================
 // apply max pooling function
@@ -154,20 +171,13 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
             r_o_pooling   <= 0;
         end else if( !frame_flag ) begin
             if((row[0]) && (!col[0]) && !col_flag) begin
-                
                 r_o_pooling <= o_pooling;
             end else if (!row[0] && col_flag)begin
-      
                 r_o_pooling <= max_pixel({line_buffer1[`ST2_Pool_X-2], line_buffer1[`ST2_Pool_X-1], line_buffer0[`ST2_Pool_X-2], line_buffer0[`ST2_Pool_X-1]});      
-            end else begin
-
             end
         end else if (frame_flag && col_flag) begin
-
             r_o_pooling <= max_pixel({line_buffer1[`ST2_Pool_X-2], line_buffer1[`ST2_Pool_X-1], line_buffer0[`ST2_Pool_X-2], line_buffer0[`ST2_Pool_X-1]});      
-        end else begin
-
-        end
+        end 
     end
 
     always @(posedge clk or negedge reset_n) begin
