@@ -37,7 +37,8 @@ module cnn_top #(
     //output [CO*O_F_BW-1:0] o_core_fmap,
     // output o_core_done
     output out_valid,
-    output [7:0] alpha
+    output [7:0] alpha,
+    output [2:0] led
 );
     wire signed [CO*O_F_BW-1:0] w_core_fmap;
     wire w_core_valid;
@@ -72,7 +73,7 @@ module cnn_top #(
         for (i = 0; i < CO; i = i + 1) begin
             w_cnn_bias[i*B_BW+:B_BW] = bias_mem[i];
         end
-    end
+    end  
     wire o_valid;
     fmap_feeder feeder (
         .clk        (clk),
@@ -131,12 +132,13 @@ module cnn_top #(
     );
 
     stage3_top_cnn U_stage3_top_cnn(
-    .clk(clk),
-    .reset_n(reset_n),
-    .i_Relu_valid(w_stage2_core_valid),
-    .i_in_Relu(w_stage2_core_fmap),
-    .o_valid(out_valid),
-    .alpha(alpha)
+        .clk(clk),
+        .reset_n(reset_n),
+        .i_Relu_valid(w_stage2_core_valid),
+        .i_in_Relu(w_stage2_core_fmap),
+        .o_valid(out_valid),
+        .alpha(alpha),
+        .led(led)
     );
 
     // ===============================

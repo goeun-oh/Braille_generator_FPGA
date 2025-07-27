@@ -54,6 +54,7 @@ module stage3_cnn_kernal(
     genvar mul_idx;
     generate
         for(mul_idx = 0; mul_idx < `pool_CI; mul_idx = mul_idx + 1) begin : gen_mul
+            (* use_dsp = "yes" *) 
             assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  $signed(i_pooling[mul_idx * `OF_BW +: `OF_BW]) * $signed(i_weight[mul_idx * `W_BW +: `W_BW ]);
         
             always @(posedge clk or negedge reset_n) begin

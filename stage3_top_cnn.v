@@ -27,7 +27,8 @@ module stage3_top_cnn(
     input wire [`stage2_CI * `IF_BW - 1: 0] i_in_Relu,
 
     output o_valid,
-    output [7:0] alpha
+    output [7:0] alpha,
+    output [2:0] led
     );
 
     wire pool_valid;
@@ -70,6 +71,7 @@ module stage3_top_cnn(
         .i_in_valid(core_valid),
         .i_in_core(w_core),
         .o_alpha(alpha),
+        .led(led),
         .o_valid(o_valid)
     );
 
@@ -83,6 +85,7 @@ module stage3_compare_alpha (
     input i_in_valid,
     input [`core_CO * `OUT_BW -1:0] i_in_core,
     output reg [7:0] o_alpha,
+    output reg [2:0] led,
     output o_valid
 );
     localparam LATENCY = 1;
@@ -116,10 +119,13 @@ module stage3_compare_alpha (
     always @(*) begin
         if ((c_ot_result[0] >= c_ot_result[1]) && (c_ot_result[0] >= c_ot_result[2])) begin
             o_alpha = 8'h61;
+            led = 3'b100;
         end else if ((c_ot_result[1] >= c_ot_result[0]) && (c_ot_result[1] >= c_ot_result[2])) begin
             o_alpha = 8'h62;
+            led = 3'b010;
         end else begin
             o_alpha = 8'h63;
+            led = 3'b001;
         end
     end
 
