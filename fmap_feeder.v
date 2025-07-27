@@ -65,23 +65,50 @@ module fmap_feeder #(
                 for(i=0; i<TOTAL_PIXELS; i=i+1)
                     fmap_rom[i] = fmap_rom_a_1[i];
             end
-            4'd0: begin
+            4'd2: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_a_2[i];
+            end
+            4'd3: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_a_3[i];
+            end
+            4'd4: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_b_0[i];
+            end
+            4'd5: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_b_1[i];
+            end
+            4'd6: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_b_2[i];
+            end
+            4'd7: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_b_3[i];
+            end
+            4'd8: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_c_0[i];
+            end
+            4'd9: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_c_1[i];
+            end
+            4'd10: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_c_2[i];
+            end
+            4'd11: begin
+                for(i=0; i<TOTAL_PIXELS; i=i+1)
+                    fmap_rom[i] = fmap_rom_c_3[i];
+            end
+            default: begin
                 for(i=0; i<TOTAL_PIXELS; i=i+1)
                     fmap_rom[i] = fmap_rom_a_0[i];
             end
-            4'd0: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_0[i];
-            end
-            4'd0: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_0[i];
-            end
-            4'd0: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_0[i];
-            end
-
         endcase    
     end
 

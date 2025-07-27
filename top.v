@@ -5,6 +5,7 @@ module top(
     input clk,
     input i_btn,
     input reset,
+    input [3:0] sw,
     output [2:0] led
 );
     parameter I_F_BW       = 8;
@@ -71,6 +72,7 @@ module top(
         .clk(clk),
         .reset_n(!reset),
         .i_valid(w_btn),
+        .sw(sw),
         .out_valid(),
         .alpha(),
         .led(led)
