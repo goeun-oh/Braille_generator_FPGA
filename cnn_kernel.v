@@ -71,6 +71,7 @@ module cnn_kernel #(
     endgenerate
     reg signed [M_BW-1:0] reg_r_mul [0:KY-1][0:KX-1];
     integer k;
+    integer j;
     always @(posedge clk) begin
         if(i_in_valid)begin
             for (k= 0; k < KY; k = k + 1) begin
@@ -100,7 +101,6 @@ module cnn_kernel #(
         end
     end
     integer j;
-    integer k;
     reg [W_BW-1:0] reg_weight [0:KY-1][0:KX-1];
     always @(posedge clk) begin
         for (k= 0; k < KY; k = k + 1) begin

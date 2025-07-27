@@ -1,4 +1,3 @@
-
 #데이터 불러오기
 import torch
 
@@ -101,24 +100,14 @@ class CNN(nn.Module):
 
 model = CNN()
 
-import numpy as np
-import matplotlib.pyplot as plt
 
-# .mem 데이터 불러오기
-values = [int(line.strip(), 16) for line in open("./mem_outputs/b_4.mem") if line.strip().startswith("0x")]
-img_array = np.array(values, dtype=np.uint8).reshape(28, 28)
-
-plt.imshow(img_array, cmap='gray')  # 밝을수록 흰색
-plt.title("Loaded .mem Image")
-plt.axis('off')
-plt.show()
 # Conv1 weights and bias
 model.conv1.weight.data = torch.tensor([
     [[[12,13,33,20,42],[11,24,54,33,28],[45,51,19,8,22],[-14,14,-22,-20,-8],[-37,-21,-22,-42,-50]]],
     [[[23,21,-11,25,26],[27,4,16,-1,26],[2,20,-3,9,61],[44,8,35,31,15],[34,47,43,31,46]]],
     [[[1,0,-4,39,23],[0,9,33,47,51],[4,-15,20,41,-1],[-49,-37,17,-16,-7],[-52,-16,-48,-32,-19]]]
 ], dtype=torch.float32)
-model.conv1.bias.data = torch.tensor([25, -41, 43], dtype=torch.float32)
+model.conv1.bias.data = torch.tensor([6400, -10496, 11008], dtype=torch.float32)
 
 
 model.conv2.weight.data = torch.tensor([
@@ -184,7 +173,7 @@ model.conv2.weight.data = torch.tensor([
 ], dtype=torch.float32)
 
 # bias도 넣고 싶다면 예시:
-model.conv2.bias.data = torch.tensor([2, -23, 1], dtype=torch.float32)  # 또는 정수 bias
+model.conv2.bias.data = torch.tensor([512, -5888, 256], dtype=torch.float32)  # 또는 정수 bias
 
 model.fc1.weight.data = torch.tensor([
     [5, -11, -15, 26, 31, 3, -18, 1, 28, -16, -20, 5, 15, -18, -32, 3, 1, -10, 10, 6, 1, 20, -19, -12, -18, 3, -10, -27, 37, 11, 27, -12, 13, -2, -4, 5, -14, 13, -15, -6, 2, 2, -14, -17, 5, -6, 5, 12],
@@ -192,7 +181,7 @@ model.fc1.weight.data = torch.tensor([
     [20, -3, -14, -10, -20, -8, -10, -18, -7, 21, 17, 13, -24, -18, -10, 5, 0, -3, 11, -1, -33, 13, 29, 22, -3, 1, 16, 23, -5, -18, 11, -14, 6, -3, -12, 7, -8, -2, 3, -13, 15, 2, -6, -14, -10, -17, -5, 16],
 ], dtype=torch.float32)
 
-model.fc1.bias.data = torch.tensor([11, -7, -15], dtype=torch.float32)  # 또는 정수 bias
+model.fc1.bias.data = torch.tensor([2560, -1536, -3584], dtype=torch.float32)  # 또는 정수 bias
 
 # 3. Conv1 연산 결과 보기
 import torch
@@ -257,7 +246,7 @@ def load_mem_file_to_tensor(mem_file_path, height=28, width=28):
 
 # ✅ 새로운 input tensor 생성
 # input_tensor = create_cyclic_input(28, 28)
-input_tensor = load_mem_file_to_tensor('../PythonProject2/mem_outputs/b_4.mem', 28, 28)
+input_tensor = load_mem_file_to_tensor('./input_fmap.mem', 28, 28)
 
 print("🔹 새로운 Input Feature Map 정보:")
 print(f"Shape: {input_tensor.shape}")
