@@ -3,7 +3,7 @@
 `define    KY			5  // Number of Kernel Y
 
 `define    W_BW         8  // BW of weight parameter
-`define    B_BW         8  // BW of bias parameter
+`define    B_BW         16  // BW of bias parameter
 `define    M_BW         28 // I_F_BW * W_BW
 `define    AK_BW        33 // M_BW + log(KY*KX) Accum Kernel 
 

@@ -34,7 +34,8 @@ module stage3_cnn_core(
     );
     // bias
     localparam LATENCY = 1;
-    reg signed [7:0] bias_mem[0:2];
+    reg signed [`BIAS_BW-1:0] bias_mem[0:2];
+    
     
     //reg signed [`CO * `OUT_BW -1:0] w_ot_result;
     reg signed [`OUT_BW -1:0] w_ot_result[0:2];

@@ -10,7 +10,7 @@ module cnn_top #(
     parameter CO           = 3,
     parameter IX           = 28,
     parameter IY           = 28,
-    parameter B_BW         = 8,
+    parameter B_BW         = 16,
     parameter AK_BW        = 21,
     parameter ACI_BW       = 21,
     parameter AB_BW        = 21,

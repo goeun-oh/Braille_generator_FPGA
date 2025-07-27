@@ -68,7 +68,7 @@ module stage3_top_cnn(
         .clk(clk),
         .reset_n(reset_n),
         .i_in_valid(core_valid),
-        .i_in_bias(w_core),
+        .i_in_core(w_core),
         .o_alpha(alpha),
         .o_valid(o_valid)
     );
@@ -81,7 +81,7 @@ module stage3_compare_alpha (
     input clk,
     input reset_n,
     input i_in_valid,
-    input [`CI * `OUT_BW -1:0] i_in_bias,
+    input [`CI * `OUT_BW -1:0] i_in_core,
     output reg [7:0] o_alpha,
     output o_valid
 );
@@ -108,7 +108,7 @@ module stage3_compare_alpha (
             end
         end else if (i_in_valid) begin
             for (i=0;i<`CO;i=i+1) begin
-                c_ot_result[i] <= $signed(i_in_bias [i*`OUT_BW+:`OUT_BW]);
+                c_ot_result[i] <= $signed(i_in_core [i*`OUT_BW+:`OUT_BW]);
             end
         end
     end

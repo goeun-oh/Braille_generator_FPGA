@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 
+
 module cnn_core #(
     parameter I_F_BW = 8,
     parameter KX = 5,
     parameter KY = 5,
     parameter IX = 28,
     parameter W_BW = 8,
-    parameter B_BW = 8,  //bias
+    parameter B_BW = 16,  //bias
     parameter CI = 1,
     parameter CO = 3,
     parameter AK_BW = 21,
