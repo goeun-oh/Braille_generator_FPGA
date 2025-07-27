@@ -1,6 +1,4 @@
 `timescale 1ns / 1ps
-
-
 module cnn_kernel #(
     parameter KX = 5,  // Number of Kernel X
     parameter KY = 5,  // Number of Kernel Y
@@ -100,7 +98,6 @@ module cnn_kernel #(
             r_acc_kernel[0+:AK_BW] <= $signed(acc_kernel[0+:AK_BW]);
         end
     end
-    integer j;
     reg [W_BW-1:0] reg_weight [0:KY-1][0:KX-1];
     always @(posedge clk) begin
         for (k= 0; k < KY; k = k + 1) begin
