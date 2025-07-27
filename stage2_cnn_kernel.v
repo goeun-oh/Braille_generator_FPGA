@@ -38,29 +38,27 @@ assign	ce = r_valid;
 // mul = fmap * weight
 //==============================================================================
 
-wire      signed [`KY*`KX*`M_BW-1 : 0]    mul  ;
-//5x5 28bit
-reg       signed [`KY*`KX*`M_BW-1 : 0]    r_mul;
-
-
+// === 곱셈 결과 ===
+wire signed [`KY*`KX*`M_BW-1 : 0]    mul;
+reg  signed [`KY*`KX*`M_BW-1 : 0]    r_mul;
 
 genvar mul_idx;
 generate
-	//커널사이즈(5x5만큼 한번의 곱셈하기 위함)
-	for(mul_idx = 0; mul_idx < `KY*`KX; mul_idx = mul_idx + 1) begin : gen_mul
-		(* use_dsp = "yes" *) 
-		assign  mul[mul_idx * `M_BW +: `M_BW]	=  $signed(i_in_fmap[mul_idx * `ST2_Conv_IBW +: `ST2_Conv_IBW]) *  $signed(i_cnn_weight[mul_idx * `W_BW +: `W_BW]);
-	
-		always @(posedge clk or negedge reset_n) begin
-		    if(!reset_n) begin
-		        r_mul[mul_idx * `M_BW +: `M_BW] <= 0;
-		    end else if(i_in_valid)begin
-		        r_mul[mul_idx * `M_BW +: `M_BW] <= $signed(mul[mul_idx * `M_BW +: `M_BW]);
-				
-		    end
-		end
-	end
+    for (mul_idx = 0; mul_idx < `KY*`KX; mul_idx = mul_idx + 1) begin : gen_mul
+        (* use_dsp = "yes" *)
+        assign mul[mul_idx * `M_BW +: `M_BW] =
+            $signed(i_in_fmap[mul_idx * `ST2_Conv_IBW +: `ST2_Conv_IBW]) *
+            $signed(i_cnn_weight[mul_idx * `W_BW +: `W_BW]);
+
+        always @(posedge clk or negedge reset_n) begin
+            if (!reset_n)
+                r_mul[mul_idx * `M_BW +: `M_BW] <= 0;
+            else if (i_in_valid)
+                r_mul[mul_idx * `M_BW +: `M_BW] <= mul[mul_idx * `M_BW +: `M_BW];
+        end
+    end
 endgenerate
+
 
     //debug
     reg signed [`M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
@@ -88,34 +86,37 @@ reg       signed [`AK_BW-1 : 0]    r_acc_kernel   ;
 //25개 accumulate
 // integer acc_idx;
 //=== [누산 단계 분할: partial sum 5개 생성] ===//
-wire signed [`AK_BW-1:0] partial_sum[0:4];
+// === Partial Sum (5개) ===
+wire signed [`AK_BW-1:0] partial_sum [0:4];
+reg  signed [`AK_BW-1:0] r_partial_sum [0:4];
+
 genvar psum_idx;
 generate
     for (psum_idx = 0; psum_idx < 5; psum_idx = psum_idx + 1) begin : gen_partial_sum
-      assign partial_sum[psum_idx] =
-        $signed(r_mul[(psum_idx*5 + 0)*`M_BW +: `M_BW]) +
-        $signed(r_mul[(psum_idx*5 + 1)*`M_BW +: `M_BW]) +
-        $signed(r_mul[(psum_idx*5 + 2)*`M_BW +: `M_BW]) +
-        $signed(r_mul[(psum_idx*5 + 3)*`M_BW +: `M_BW]) +
-        $signed(r_mul[(psum_idx*5 + 4)*`M_BW +: `M_BW]);
-    end	
+        assign partial_sum[psum_idx] =
+              $signed(r_mul[(psum_idx*5 + 0)*`M_BW +: `M_BW])
+            + $signed(r_mul[(psum_idx*5 + 1)*`M_BW +: `M_BW])
+            + $signed(r_mul[(psum_idx*5 + 2)*`M_BW +: `M_BW])
+            + $signed(r_mul[(psum_idx*5 + 3)*`M_BW +: `M_BW])
+            + $signed(r_mul[(psum_idx*5 + 4)*`M_BW +: `M_BW]);
+
+        always @(posedge clk or negedge reset_n) begin
+            if (!reset_n)
+                r_partial_sum[psum_idx] <= 0;
+            else if (i_in_valid)
+                r_partial_sum[psum_idx] <= partial_sum[psum_idx];
+        end
+    end
 endgenerate
-integer acc_idx;
-generate
-	always @ (*) begin
-		acc_kernel[0 +: `AK_BW]= 0;
-		for(acc_idx =0; acc_idx < `KY*`KX; acc_idx = acc_idx +1) begin
-			acc_kernel[0 +: `AK_BW] = $signed(acc_kernel[0 +: `AK_BW]) + $signed(r_mul[acc_idx*`M_BW +: `M_BW]); 
-		end
-	end
-	always @(posedge clk or negedge reset_n) begin
-	    if(!reset_n) begin
-	        r_acc_kernel[0 +: `AK_BW] <= 0;
-	    end else if(ce[LATENCY-2])begin
-	        r_acc_kernel[0 +: `AK_BW] <= $signed(acc_kernel[0 +: `AK_BW]);
-	    end
-	end
-endgenerate
+
+always @(posedge clk or negedge reset_n) begin
+    if (!reset_n)
+        r_acc_kernel <= 0;
+    else if (i_in_valid)
+        r_acc_kernel <= r_partial_sum[0] + r_partial_sum[1]
+                      + r_partial_sum[2] + r_partial_sum[3]
+                      + r_partial_sum[4];
+end
 
 
 assign o_ot_valid = r_valid[LATENCY-1];
