@@ -1,12 +1,20 @@
 `timescale 1ns / 1ps
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
 module cnn_core #(
     parameter I_F_BW = 8,
     parameter KX = 5,
     parameter KY = 5,
     parameter IX = 28,
     parameter W_BW = 8,
+<<<<<<< HEAD
+    parameter B_BW = 16,  //bias
+=======
     parameter B_BW = 8,  //bias
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
     parameter CI = 1,
     parameter CO = 3,
     parameter AK_BW = 21,
@@ -82,7 +90,11 @@ module cnn_core #(
     //==============================================================================
 
     wire [         CO-1 : 0] w_in_valid;
+<<<<<<< HEAD
+    wire signed [CO*(ACI_BW)-1 : 0] w_ot_kernel_acc;
+=======
     wire [CO*(ACI_BW)-1 : 0] w_ot_kernel_acc;
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
 
     // TODO Call cnn_acc_ci Instance
     genvar co_inst;
@@ -90,7 +102,11 @@ module cnn_core #(
         for (
             co_inst = 0; co_inst < CO; co_inst = co_inst + 1
         ) begin : gen_co_kernel
+<<<<<<< HEAD
+            wire signed   [KX*KY*W_BW-1 : 0]  	w_cnn_weight 	= i_cnn_weight[co_inst*KY*KX*W_BW +: KY*KX*W_BW];
+=======
             wire    [KX*KY*W_BW-1 : 0]  	w_cnn_weight 	= i_cnn_weight[co_inst*KY*KX*W_BW +: KY*KX*W_BW];
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
             cnn_kernel u_cnn_kernel (
                 .clk         (clk),
                 .reset_n     (reset_n),
@@ -133,10 +149,17 @@ module cnn_core #(
     integer ch;
     integer j;
     integer k;
+<<<<<<< HEAD
+    reg signed [ACI_BW-1:0] reg_ex_bias[0:CO-1];
+    always @(posedge clk) begin
+        for (ch=0; ch<CO; ch=ch+1)begin
+            reg_ex_bias[ch] <= $signed(w_ot_kernel_acc[ch*ACI_BW +: ACI_BW]);
+=======
     reg [ACI_BW-1:0] reg_ex_bias[0:CO-1];
     always @(posedge clk) begin
         for (ch=0; ch<CO; ch=ch+1)begin
             reg_ex_bias[ch] <= w_ot_kernel_acc[ch*ACI_BW +: ACI_BW];
+>>>>>>> 725885e4738adaeae8bba1b6f5cd8330d3157e3f
         end
     end
 endmodule

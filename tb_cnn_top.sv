@@ -37,17 +37,20 @@ module cnn_top_tb;
     wire [CO*O_F_BW-1:0] w_core_fmap;
 
     wire core_done;
-    wire                                        w_stage2_core_valid;
-    wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
+    wire [7:0] alpha;
+    // wire                                        w_stage2_core_valid;
+    // wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
     //wire [KX*KY*I_F_BW-1:0] o_window;
     //wire [KX*I_F_BW-1:0] o_line_buf;
     cnn_top dut (
         .clk(clk),
         .reset_n(reset_n),
         .i_valid(i_valid),
-        .w_stage2_core_valid(w_stage2_core_valid),
-        .w_stage2_core_fmap(w_stage2_core_fmap),
-        .o_core_done(core_done)
+        // .w_stage2_core_valid(w_stage2_core_valid),
+        // .w_stage2_core_fmap(w_stage2_core_fmap),
+        // .o_core_done(core_done)
+        .out_valid(core_done),
+        .alpha(alpha)
     );
 
     // === 테스트 시나리오 ===
@@ -104,8 +107,9 @@ module cnn_top_tb;
     end
     always @(posedge clk) begin
         if (core_done) begin
-            $display(">>> [SIMULATION] Writing result_fmap to conv1_output.mem");
-            $writememh("conv1_output.mem", result_fmap);  // 가능함
+            // $display(">>> [SIMULATION] Writing result_fmap to conv1_output.mem");
+            // $writememh("conv1_output.mem", result_fmap);  // 가능함
+            $display("알파벳은: %s", alpha);
         end
     end
 
