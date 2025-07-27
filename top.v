@@ -38,7 +38,7 @@ module top(
     
     btn_debounce_one_pulse U_BTN(
         .clk(clk),
-        .reset(reset),
+        .reset_n(!reset),
         .i_btn(i_btn),
         .o_btn(w_btn)
     );

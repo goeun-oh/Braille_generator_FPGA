@@ -46,6 +46,7 @@ module cnn_top_tb;
         .clk(clk),
         .reset_n(reset_n),
         .i_valid(i_valid),
+        .sw(4'b0000),
         // .w_stage2_core_valid(w_stage2_core_valid),
         // .w_stage2_core_fmap(w_stage2_core_fmap),
         // .o_core_done(core_done)

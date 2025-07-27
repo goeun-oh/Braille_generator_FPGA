@@ -48,7 +48,6 @@ genvar mul_idx;
 generate
 	//커널사이즈(5x5만큼 한번의 곱셈하기 위함)
 	for(mul_idx = 0; mul_idx < `KY*`KX; mul_idx = mul_idx + 1) begin : gen_mul
-		(* use_dsp = "yes" *) 
 		assign  mul[mul_idx * `M_BW +: `M_BW]	=  $signed(i_in_fmap[mul_idx * `ST2_Conv_IBW +: `ST2_Conv_IBW]) *  $signed(i_cnn_weight[mul_idx * `W_BW +: `W_BW]);
 	
 		always @(posedge clk or negedge reset_n) begin

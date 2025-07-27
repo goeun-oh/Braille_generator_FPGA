@@ -27,7 +27,6 @@ module fmap_feeder #(
     reg [I_F_BW-1:0] fmap_rom_c_1 [0:TOTAL_PIXELS-1];
     reg [I_F_BW-1:0] fmap_rom_c_2 [0:TOTAL_PIXELS-1];
     reg [I_F_BW-1:0] fmap_rom_c_3 [0:TOTAL_PIXELS-1];
-    reg [I_F_BW-1:0] fmap_rom [0:TOTAL_PIXELS-1];
 
     reg [$clog2(TOTAL_PIXELS)-1:0] addr;
 
@@ -54,70 +53,30 @@ module fmap_feeder #(
         $readmemh("c_4.mem", fmap_rom_c_3);
     end
     
-    integer i;
-    always @(*) begin
-        case(sw)
-            4'd0: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_0[i];
-            end
-            4'd1: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_1[i];
-            end
-            4'd2: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_2[i];
-            end
-            4'd3: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_3[i];
-            end
-            4'd4: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_b_0[i];
-            end
-            4'd5: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_b_1[i];
-            end
-            4'd6: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_b_2[i];
-            end
-            4'd7: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_b_3[i];
-            end
-            4'd8: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_c_0[i];
-            end
-            4'd9: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_c_1[i];
-            end
-            4'd10: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_c_2[i];
-            end
-            4'd11: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_c_3[i];
-            end
-            default: begin
-                for(i=0; i<TOTAL_PIXELS; i=i+1)
-                    fmap_rom[i] = fmap_rom_a_0[i];
-            end
-        endcase    
-    end
+    reg [I_F_BW-1:0] selected_pixel;
 
     always @(*) begin
-        if(i_valid) begin
-            is_sending <=1;
-        end else if (is_done) begin
-            is_sending <=0;
-        end
+        case(sw)
+            4'd0: selected_pixel = fmap_rom_a_0[addr];
+            4'd1: selected_pixel = fmap_rom_a_1[addr];
+            4'd2: selected_pixel = fmap_rom_a_2[addr];
+            4'd3: selected_pixel = fmap_rom_a_3[addr];
+            4'd4: selected_pixel = fmap_rom_b_0[addr];
+            4'd5: selected_pixel = fmap_rom_b_1[addr];
+            4'd6: selected_pixel = fmap_rom_b_2[addr];
+            4'd7: selected_pixel = fmap_rom_b_3[addr];
+            4'd8: selected_pixel = fmap_rom_c_0[addr];
+            4'd9: selected_pixel = fmap_rom_c_1[addr];
+            4'd10: selected_pixel = fmap_rom_c_2[addr];
+            4'd11: selected_pixel = fmap_rom_c_3[addr];
+            default: selected_pixel = 8'd0;
+        endcase
+    end
+    always @(*) begin
+        if (i_valid)
+            is_sending <= 1;
+        else if (is_done)
+            is_sending <= 0;
     end
 
     always @(posedge clk or negedge reset_n) begin
@@ -130,7 +89,7 @@ module fmap_feeder #(
             if (is_sending) begin
                 pixel_reg <=0;
                 if (addr < TOTAL_PIXELS) begin
-                    pixel_reg <= fmap_rom[addr];
+                    pixel_reg <= selected_pixel;
                     valid_reg <= 1;
                     addr <= addr + 1;
                     is_done <=0;
