@@ -71,21 +71,19 @@ module stage3_cnn_kernal(
     reg signed [`MUL_BW + $clog2(3) - 1: 0] r_acc_kernel   ;
 
     integer acc_idx;
-    generate
-        always @ (*) begin
-            acc_kernel[0 +: (`MUL_BW + $clog2(3))]= 0;
-            for(acc_idx =0; acc_idx < `pool_CI; acc_idx = acc_idx +1) begin
-                acc_kernel[0 +: (`MUL_BW + $clog2(3))] = $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]) + $signed(r_mul[acc_idx*`MUL_BW +: `MUL_BW]); 
-            end
+    always @ (*) begin
+        acc_kernel[0 +: (`MUL_BW + $clog2(3))]= 0;
+        for(acc_idx =0; acc_idx < `pool_CI; acc_idx = acc_idx +1) begin
+            acc_kernel[0 +: (`MUL_BW + $clog2(3))] = $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]) + $signed(r_mul[acc_idx*`MUL_BW +: `MUL_BW]); 
         end
-        always @(posedge clk or negedge reset_n) begin
-            if(!reset_n) begin
-                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= 0;
-            end else if(ce[LATENCY-2])begin
-                r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]);
-            end
+    end
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= 0;
+        end else if(ce[LATENCY-2])begin
+            r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]);
         end
-    endgenerate
+    end
 
 
 
