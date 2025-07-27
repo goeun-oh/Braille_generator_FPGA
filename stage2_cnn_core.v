@@ -86,19 +86,22 @@ localparam ROW = `ST2_Conv_Y; //12
     //(20bit)  3channel 5x5  window
     reg signed [`ST2_Conv_IBW * `ST2_Conv_CI * `KY*`KX-1:0] window;
 
-    integer i,j,k;
+    reg signed [`ST2_Conv_IBW-1:0] temp_line [`ST2_Conv_CI-1:0][`KY-2:0];
+
+    integer k;
+    integer j;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             for (k = 0; k < `ST2_Conv_CI; k = k + 1)
                 for (j = 0; j < `KY; j = j + 1)
-                    for (i = 0; i < `ST2_Conv_X; i = i + 1)
-                        line_buffer[k][j][i] <= 0;
+                    line_buffer[k][j][col] <= 0;  // 명확한 Reset
         end else if (i_in_valid) begin
             for (k = 0; k < `ST2_Conv_CI; k = k + 1)
                 for (j = 0; j < `KY - 1; j = j + 1)
                     line_buffer[k][j][col] <= line_buffer[k][j + 1][col];
         end
     end
+
 
 //==============================================================================
 // receive 1px data to 3ch Line Buffer
@@ -129,7 +132,7 @@ reg [V_LATENCY-1 : 0] 	r_w_valid;
     //debug
     reg signed [`ST2_Conv_IBW-1:0] d_window [0:`ST2_Conv_CI-1][0:`KY-1][0:`KX-1];    
 
-
+    integer i;
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
             window <= 0;
