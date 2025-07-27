@@ -7,27 +7,26 @@ module stage3_cnn_acc_ci(
     input reset_n,
 
     input i_in_valid,
-    input [`CO * `OF_BW-1:0] i_in_pooling,  // 3채널, 34비트씩 flatten
+    input [`pool_CO * `OF_BW-1:0] i_in_pooling,  // 3채널, 34비트씩 flatten
 
     output o_ot_valid,
-    output [`CO * `ACC_BW -1:0] o_ot_ci_acc
+    output [`acc_CO * `ACC_BW -1:0] o_ot_ci_acc
 );
     // ---------------------
     // 파라미터/신호 정의
     // ---------------------
+
     reg [$clog2(16)-1:0] cnt;    // 16회 풀링 인덱스(4x4 maxpool)
     reg [$clog2(16)-1:0] w_cnt;    // 16회 풀링 인덱스(4x4 maxpool)
     reg signed [7:0] rom[0:143]; // 3*48
 
     // 누적 레지스터(결과 저장)
-    reg  [`CO * `ACC_BW-1:0] r_acc;
-    reg  [`CO * `ACC_BW-1:0] acc_kernel;
-    reg  [`CO * `ACC_BW-1:0] next_acc;
-    reg  [`CO * `ACC_BW-1:0] r_out;
+    reg  [`acc_CO * `ACC_BW-1:0] acc_kernel;
+    reg  [`acc_CO * `ACC_BW-1:0] r_out;
     reg  r_valid;
 
-    wire [`CO-1:0] w_ot_valid;
-    wire signed [`CO * (`MUL_BW + $clog2(`CI)) - 1:0] w_ot_kernel;
+    wire [`pool_CO-1:0] w_ot_valid;
+    wire signed [`acc_CO * (`KER_BW) - 1:0] w_ot_kernel;
 
     // -- 가중치 메모리 로딩
     initial $readmemh("stage3_fc1_weights.mem", rom);
@@ -55,11 +54,11 @@ module stage3_cnn_acc_ci(
     // -- cnn_kernal 인스턴스 생성 및 각 채널 w_ot_valid 연결
     genvar mul_inst;
     generate
-        for (mul_inst = 0; mul_inst < `CO; mul_inst = mul_inst + 1) begin: gen_mul
+        for (mul_inst = 0; mul_inst < `pool_CO; mul_inst = mul_inst + 1) begin: gen_mul
             wire [7:0] weight0 = rom[mul_inst*`ACC_BW + w_cnt];
             wire [7:0] weight1 = rom[mul_inst*`ACC_BW + 16 + w_cnt];
             wire [7:0] weight2 = rom[mul_inst*`ACC_BW + 32 + w_cnt];
-            wire [`CO*`W_BW-1:0] w_cnn_weight = {weight2, weight1, weight0};
+            wire [`pool_CO*`W_BW-1:0] w_cnn_weight = {weight2, weight1, weight0};
             stage3_cnn_kernal U_cnn_kernal(
                 .clk(clk),
                 .reset_n(reset_n),
@@ -80,23 +79,22 @@ module stage3_cnn_acc_ci(
             end else if(r_valid) begin
                 acc_kernel <= 0;
             end else if (&w_ot_valid) begin
-                for (i=0; i< `CO; i = i+1) begin
+                for (i=0; i< `acc_CO; i = i+1) begin
                     acc_kernel[i * `ACC_BW +: `ACC_BW] = $signed(acc_kernel[i * `ACC_BW +: `ACC_BW]) + $signed(w_ot_kernel[i * `KER_BW +: `KER_BW]); 
                 end
             end
         end
     endgenerate
 
-    // reg  [`CO * `ACC_BW-1:0] r_acc;
     // reg  [`CO * `ACC_BW-1:0] next_acc;
     // reg  [`CO * `ACC_BW-1:0] r_out;
 
-    reg [`ACC_BW-1:0] d_acc [0 : `CO -1];
+    reg [`ACC_BW-1:0] d_acc [0 : `acc_CO -1];
 
     integer ch;
     always @(posedge clk) begin
         if (&w_ot_valid) begin
-            for (ch = 0; ch < `CO; ch = ch + 1) begin
+            for (ch = 0; ch < `acc_CO; ch = ch + 1) begin
                 d_acc [ch] = acc_kernel [ch * `ACC_BW +: `ACC_BW ];
             end
         end

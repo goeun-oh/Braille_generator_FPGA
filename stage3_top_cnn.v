@@ -24,18 +24,18 @@ module stage3_top_cnn(
     input wire reset_n,
 
     input wire i_Relu_valid,
-    input wire [`CI * `IF_BW - 1: 0] i_in_Relu,
+    input wire [`stage2_CI * `IF_BW - 1: 0] i_in_Relu,
 
     output o_valid,
     output [7:0] alpha
     );
 
     wire pool_valid;
-    wire [`CO * `OF_BW-1:0] w_pool;
+    wire [`pool_CO * `OF_BW-1:0] w_pool;
     wire acc_valid;
-    wire [`CO * `ACC_BW-1:0] w_acc;
+    wire [`acc_CO * `ACC_BW-1:0] w_acc;
     wire core_valid;
-    wire [`CO * `OUT_BW -1:0] w_core;
+    wire [`core_CO * `OUT_BW -1:0] w_core;
 
     stage3_max_pooling U_stage3_max_pooling(
     .clk(clk),
@@ -81,12 +81,12 @@ module stage3_compare_alpha (
     input clk,
     input reset_n,
     input i_in_valid,
-    input [`CI * `OUT_BW -1:0] i_in_core,
+    input [`core_CO * `OUT_BW -1:0] i_in_core,
     output reg [7:0] o_alpha,
     output o_valid
 );
     localparam LATENCY = 1;
-    reg signed [`OUT_BW - 1:0] c_ot_result [0 : `CO-1];
+    reg signed [`OUT_BW - 1:0] c_ot_result [0 : `core_CO-1];
 
     reg  signed   [LATENCY - 1 : 0]         r_valid;
 
@@ -103,11 +103,11 @@ module stage3_compare_alpha (
     integer i;
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
-            for (i=0;i<`CO;i=i+1) begin
+            for (i=0;i<`core_CO;i=i+1) begin
                 c_ot_result[i] <= 0;
             end
         end else if (i_in_valid) begin
-            for (i=0;i<`CO;i=i+1) begin
+            for (i=0;i<`core_CO;i=i+1) begin
                 c_ot_result[i] <= $signed(i_in_core [i*`OUT_BW+:`OUT_BW]);
             end
         end

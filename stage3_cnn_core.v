@@ -27,22 +27,22 @@ module stage3_cnn_core(
     // pooling valid
     input i_in_valid,
     // 48 개 중 0, 16, 32
-    input [`CO * `ACC_BW-1:0] o_ot_ci_acc,
+    input [`acc_CO * `ACC_BW-1:0] o_ot_ci_acc,
     
     output o_ot_valid,
-    output [`CO * `OUT_BW -1:0] o_ot_result
+    output [`core_CO * `OUT_BW -1:0] o_ot_result
     );
     // bias
     localparam LATENCY = 1;
     reg signed [`BIAS_BW-1:0] bias_mem[0:2];
     
-    
+
     //reg signed [`CO * `OUT_BW -1:0] w_ot_result;
     reg signed [`OUT_BW -1:0] w_ot_result[0:2];
     // reg signed [`OUT_BW -1:0] w_ot_result1;
     // reg signed [`OUT_BW -1:0] w_ot_result2;
 
-    reg signed [`CO * `OUT_BW -1:0] r_ot_result;
+    reg signed [`core_CO * `OUT_BW -1:0] r_ot_result;
 
     reg  signed   [LATENCY - 1 : 0]         r_valid;
 
@@ -62,7 +62,7 @@ module stage3_cnn_core(
 
     integer i;
     always @(*) begin
-        for (i = 0;i<`CI ;i = i + 1 ) begin
+        for (i = 0;i<`acc_CO ;i = i + 1 ) begin
             w_ot_result[i] = 0;
             w_ot_result[i] = $signed(o_ot_ci_acc[i * `ACC_BW+:`ACC_BW]) + $signed(bias_mem[i]);
         end
@@ -73,17 +73,17 @@ module stage3_cnn_core(
         if (!reset_n) begin
             r_ot_result <= 0;
         end else if (i_in_valid) begin
-            for (j = 0;j < `CO ; j = j + 1) begin
+            for (j = 0;j < `core_CO ; j = j + 1) begin
                 r_ot_result[j * `OUT_BW +: `OUT_BW] <= $signed(w_ot_result[j]);
             end
         end
     end
 
-    reg signed [`OUT_BW -1:0] d_ot_result [0:`CO-1];
+    reg signed [`OUT_BW -1:0] d_ot_result [0:`core_CO-1];
     integer ch;
     always @(posedge clk) begin
         if (r_valid[LATENCY - 1]) begin
-            for (ch = 0; ch < `CO; ch = ch + 1) begin
+            for (ch = 0; ch < `core_CO; ch = ch + 1) begin
                 d_ot_result [ch] = r_ot_result[ch * `OUT_BW +: `OUT_BW];
             end
         end

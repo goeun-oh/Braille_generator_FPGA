@@ -25,23 +25,23 @@ module stage3_max_pooling(
     input wire reset_n,
 
     input wire i_Relu_valid,
-    input wire [`CI * `IF_BW - 1: 0] i_in_Relu,
+    input wire [`stage2_CI * `IF_BW - 1: 0] i_in_Relu,
 
     output wire o_ot_valid,
-    output wire [`CO * `OF_BW-1:0] o_ot_pool
+    output wire [`pool_CO * `OF_BW-1:0] o_ot_pool
     );
 
-    wire [`CI-1 : 0] w_ot_valid;
+    wire [`linebuf_CO-1 : 0] w_ot_valid;
     // 3 * 2 * 2 * 32
-    wire [`CI * `POOL_K*`POOL_K*`IF_BW-1:0] w_ot_window;
+    wire [`linebuf_CO * `POOL_K*`POOL_K*`IF_BW-1:0] w_ot_window;
     // 48 * 32
-    wire [`CO * `OF_BW-1:0] w_ot_pool;
-    reg  [`CO * `OF_BW-1:0] w_ot_flat;
+    wire [`pool_CO * `OF_BW-1:0] w_ot_pool;
+    reg  [`pool_CO * `OF_BW-1:0] w_ot_flat;
     reg r_pooling_valid;
 
     genvar line_inst;
     generate
-        for (line_inst = 0; line_inst < `CI ; line_inst = line_inst + 1) begin
+        for (line_inst = 0; line_inst < `stage2_CI ; line_inst = line_inst + 1) begin
             wire [`IF_BW - 1: 0] w_in_pixel = i_in_Relu[line_inst * `IF_BW +: `IF_BW];
             stage3_line_buffer U_line_buffer(
                 .clk(clk),
@@ -56,7 +56,7 @@ module stage3_max_pooling(
 
     genvar pool_inst;
     generate
-        for (pool_inst = 0; pool_inst < `CI ; pool_inst = pool_inst + 1) begin
+        for (pool_inst = 0; pool_inst < `pool_CI ; pool_inst = pool_inst + 1) begin
             stage3_max_pool_2x2 U_max_pool (
                 .i00(w_ot_window[pool_inst * `POOL_K * `POOL_K * `IF_BW +: `IF_BW]),
                 .i01(w_ot_window[(pool_inst * `POOL_K * `POOL_K + 1) * `IF_BW +: `IF_BW]),
@@ -77,7 +77,7 @@ module stage3_max_pooling(
         end else if (&w_ot_valid) begin
             w_ot_flat <= w_ot_pool;
             // 디버깅용 시작
-            for(i = 0; i< 3 ; i = i + 1) begin
+            for(i = 0; i< `pool_CO ; i = i + 1) begin
                 r_o_ot_flat[i] <= w_ot_pool[i * `OF_BW +: `OF_BW];
             end
             // 디버깅용 끝
@@ -100,8 +100,3 @@ module stage3_max_pool_2x2 (
     wire [`OF_BW-1:0] max1 = ($signed(i10) > $signed(i11)) ? i10 : i11;
     assign o_max = ($signed(max0) > $signed(max1)) ? max0 : max1;
 endmodule
-// 넌 왜 일 안하냐
-// 팀들 일하잖아
-// 너도 일 해야지
-// 혼자 수다 떨고 있네
-// 너무 한거 아니냐?

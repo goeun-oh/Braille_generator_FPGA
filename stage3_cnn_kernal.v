@@ -25,8 +25,8 @@ module stage3_cnn_kernal(
     input wire reset_n,
 
     input wire i_pooling_valid,
-    input wire [`CI * `OF_BW-1:0] i_pooling,
-    input wire [`CI * `W_BW - 1 : 0] i_weight,
+    input wire [`pool_CI * `OF_BW-1:0] i_pooling,
+    input wire [`pool_CI * `W_BW - 1 : 0] i_weight,
 
     output wire o_kernal_valid,
     output wire [`MUL_BW + $clog2(3) - 1: 0]o_kernel
@@ -48,12 +48,12 @@ module stage3_cnn_kernal(
     end
     assign	ce = r_valid;
 
-    wire  signed    [`CI * `MUL_BW-1 : 0]    mul  ;
-    reg   signed    [`CI * `MUL_BW-1 : 0]    r_mul;
+    wire  signed    [`pool_CI * `MUL_BW-1 : 0]    mul  ;
+    reg   signed    [`pool_CI * `MUL_BW-1 : 0]    r_mul;
 
     genvar mul_idx;
     generate
-        for(mul_idx = 0; mul_idx < `CI; mul_idx = mul_idx + 1) begin : gen_mul
+        for(mul_idx = 0; mul_idx < `pool_CI; mul_idx = mul_idx + 1) begin : gen_mul
             assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  $signed(i_pooling[mul_idx * `OF_BW +: `OF_BW]) * $signed(i_weight[mul_idx * `W_BW +: `W_BW ]);
         
             always @(posedge clk or negedge reset_n) begin
@@ -73,7 +73,7 @@ module stage3_cnn_kernal(
     generate
         always @ (*) begin
             acc_kernel[0 +: (`MUL_BW + $clog2(3))]= 0;
-            for(acc_idx =0; acc_idx < `CI; acc_idx = acc_idx +1) begin
+            for(acc_idx =0; acc_idx < `pool_CI; acc_idx = acc_idx +1) begin
                 acc_kernel[0 +: (`MUL_BW + $clog2(3))] = $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]) + $signed(r_mul[acc_idx*`MUL_BW +: `MUL_BW]); 
             end
         end
