@@ -226,7 +226,6 @@ reg     signed [`W_BW-1:0] d_weight [0:`ST2_Conv_CO-1][0:`ST2_Conv_CI-1][0:`KY-1
 genvar ci_inst;
 generate
 	for(ci_inst = 0; ci_inst < `ST2_Conv_CO; ci_inst = ci_inst + 1) begin : gen_ci_inst
-        
 		assign	w_in_valid[ci_inst] = r_w_valid  [V_LATENCY-1 : 0] ; 
 		stage2_cnn_acc_ci u_stage2_cnn_acc_ci(
 	    .clk             (clk         ),

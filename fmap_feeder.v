@@ -10,7 +10,7 @@ module fmap_feeder #(
     input clk,
     input reset_n,
     input i_valid,                      // 1클럭만 주면 내부에서 자동 시작,
-    input [3:0] sw,
+    //input [3:0] sw,
     output [I_F_BW-1:0] o_pixel,    // cnn_top의 i_pixel에 연결
     output o_out_valid
 );

@@ -43,14 +43,10 @@ module cnn_top_tb;
     // wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
     //wire [KX*KY*I_F_BW-1:0] o_window;
     //wire [KX*I_F_BW-1:0] o_line_buf;
-    clk_div5 u_clk_div5 (
-        .clk     (clk),
-        .reset_n (reset_n),
-        .clk_out (clk_20mhz)
-    );
+
 
     cnn_top dut (
-        .clk(clk_20mhz),
+        .clk(clk),
         .reset_n(reset_n),
         .i_valid(i_valid),
         //.sw(4'd2),

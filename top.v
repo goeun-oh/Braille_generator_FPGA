@@ -38,17 +38,17 @@ module top(
     
     wire clk_20mhz;
     btn_debounce_one_pulse U_BTN(
-        .clk(clk_20mhz),
+        .clk(clk),
         .reset_n(!reset),
         .i_btn(i_btn),
         .o_btn(w_btn)
     );
 
-    clk_div5 u_clk_div5 (
-        .clk     (clk),
-        .reset_n (!reset),
-        .clk_out (clk_20mhz)
-    );
+    //clk_div5 u_clk_div5 (
+    //    .clk     (clk),
+    //    .reset_n (!reset),
+    //    .clk_out (clk_20mhz)
+    //);
 
     cnn_top #(
         .I_F_BW       (I_F_BW),
@@ -76,7 +76,7 @@ module top(
         .POOL_OUT_W (POOL_OUT_W),
         .POOL_OUT_H(POOL_OUT_H)
     ) U_cnn_top(
-        .clk(clk_20mhz),
+        .clk(clk),
         .reset_n(!reset),
         .i_valid(w_btn),
         //.sw(sw),

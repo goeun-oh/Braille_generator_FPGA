@@ -80,7 +80,7 @@ module cnn_top #(
         .clk        (clk),
         .reset_n    (reset_n),
         .i_valid    (i_valid),  // 1클럭만 high!
-        .sw    (sw),  // 1클럭만 high!
+        //.sw    (sw),  // 1클럭만 high!
         .o_pixel    (w_pixel),
         .o_out_valid(o_valid)
     );
