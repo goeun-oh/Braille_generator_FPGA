@@ -6,7 +6,9 @@ module top(
     input i_btn,
     input reset,
     input [3:0] sw,
-    output [2:0] led
+    output [2:0] led,
+    output out_valid,
+    output [7:0] alpha
 );
     parameter I_F_BW       = 8;
     parameter O_F_BW       = 20;
@@ -35,7 +37,7 @@ module top(
     parameter POOL_OUT_H = 1;
 
     wire w_btn;
-    
+
     btn_debounce_one_pulse U_BTN(
         .clk(clk),
         .reset_n(!reset),
@@ -73,8 +75,8 @@ module top(
         .reset_n(!reset),
         .i_valid(w_btn),
         .sw(sw),
-        .out_valid(),
-        .alpha(),
+        .out_valid(out_valid),
+        .alpha(alpha),
         .led(led)
     );
 

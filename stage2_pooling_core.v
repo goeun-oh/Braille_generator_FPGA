@@ -65,20 +65,20 @@ assign	ce = r_valid;
     
     assign o_ot_valid = r_valid[LATENCY-1];
   
-//debug
-//reg signed [`ST2_Pool_IBW - 1 : 0] d_i_in_fmap [0 : `ST2_Pool_CI - 1];
-//integer ch;
-//    always @(posedge clk or negedge reset_n) begin
-//        if(!reset_n) begin
-//            for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
-//                d_i_in_fmap [ch] <= 0;
-//            end
-//        end else if(i_in_valid) begin
-//            for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
-//                d_i_in_fmap [ch] <= $signed(i_in_fmap[ch*`ST2_Pool_IBW+:`ST2_Pool_IBW]);
-//            end
-//        end
-//    end
+// debug
+reg signed [`ST2_Pool_IBW - 1 : 0] d_i_in_fmap [0 : `ST2_Pool_CI - 1];
+integer ch;
+   always @(posedge clk or negedge reset_n) begin
+       if(!reset_n) begin
+           for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
+               d_i_in_fmap [ch] <= 0;
+           end
+       end else if(i_in_valid) begin
+           for(ch =0 ; ch<`ST2_Pool_CI; ch=ch+1) begin
+               d_i_in_fmap [ch] <= $signed(i_in_fmap[ch*`ST2_Pool_IBW+:`ST2_Pool_IBW]);
+           end
+       end
+   end
     
 
 

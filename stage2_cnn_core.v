@@ -87,27 +87,27 @@ localparam ROW = `ST2_Conv_Y; //12
     reg signed [`ST2_Conv_IBW * `ST2_Conv_CI * `KY*`KX-1:0] window;
 
     integer i,j,k;
-    //always @(posedge clk or negedge reset_n) begin
-    //    if(!reset_n) begin
-    //        for(k = 0; k<`ST2_Conv_CI ; k= k+1) begin
-    //            for (j = 0; j < `KY; j=j+1) begin
-    //                for (i = 0; i < `ST2_Conv_X; i = i + 1) begin
-    //                    line_buffer[k][j][i] <= 0;
-    //                end
-    //            end
-    //        end
-    //    end else begin
-    //        //col는 매 clk 0~11 증가
-    //        //한 point씩 올리는 방식
-    //        if(i_in_valid) begin // c가 0되면 line_buffer 1로 shift
-    //            for (k = 0; k < `ST2_Conv_CI; k = k+1) begin
-    //                for (j = 0; j< `KY-1 ; j= j+1) begin
-    //                    line_buffer[k][j][col] <= line_buffer[k][j+1][col];
-    //                end
-    //            end
-    //        end
-    //    end
-    //end    
+    always @(posedge clk or negedge reset_n) begin
+       if(!reset_n) begin
+           for(k = 0; k<`ST2_Conv_CI ; k= k+1) begin
+               for (j = 0; j < `KY; j=j+1) begin
+                   for (i = 0; i < `ST2_Conv_X; i = i + 1) begin
+                       line_buffer[k][j][i] <= 0;
+                   end
+               end
+           end
+       end else begin
+           //col는 매 clk 0~11 증가
+           //한 point씩 올리는 방식
+           if(i_in_valid) begin // c가 0되면 line_buffer 1로 shift
+               for (k = 0; k < `ST2_Conv_CI; k = k+1) begin
+                   for (j = 0; j< `KY-1 ; j= j+1) begin
+                       line_buffer[k][j][col] <= line_buffer[k][j+1][col];
+                   end
+               end
+           end
+       end
+    end    
 
 //==============================================================================
 // receive 1px data to 3ch Line Buffer
@@ -352,4 +352,3 @@ assign o_ot_valid = r_valid[LATENCY-1];
 assign o_ot_fmap  = r_act_relu;
 
 endmodule
-

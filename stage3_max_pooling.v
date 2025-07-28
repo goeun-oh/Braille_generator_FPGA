@@ -66,9 +66,9 @@ module stage3_max_pooling(
             );
         end
     endgenerate
+    
     // 디버깅용
     reg [`OF_BW -1 : 0]r_o_ot_flat [0:2];
-
     integer i;
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
