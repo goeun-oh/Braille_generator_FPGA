@@ -129,9 +129,7 @@ module cnn_core #(
     generate
         for (bias_idx = 0; bias_idx < CO; bias_idx = bias_idx + 1) begin : gen_bias_add
             wire signed [B_BW-1:0] bias_val = $signed(i_cnn_bias[bias_idx*B_BW +: B_BW]);
-            
-            (* use_dsp = "yes" *)
-            always @(posedge clk or negedge reset_n) begin
+                        always @(posedge clk or negedge reset_n) begin
                 if (!reset_n) begin
                     stage_bias[bias_idx] <= {AB_BW{1'b0}};
                 end else if (r_valid[4]) begin
