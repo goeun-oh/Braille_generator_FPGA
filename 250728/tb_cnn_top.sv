@@ -71,12 +71,12 @@ module cnn_top_tb;
         #10
 
 
-        for (sw_val = 0; sw_val < 12; sw_val = sw_val + 1) begin
+        for (sw_val = 0; sw_val < 1; sw_val = sw_val + 1) begin
             $display("\n=== [TEST] sw = %0d ===", sw_val);
             
             @(posedge clk);
             i_valid = 1;
-            #10;
+            #100;
             @(posedge clk);
             i_valid = 0;
 

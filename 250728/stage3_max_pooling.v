@@ -30,6 +30,7 @@ module stage3_max_pooling(
     output wire o_ot_valid,
     output wire [`pool_CO * `OF_BW-1:0] o_ot_pool
     );
+    localparam LATENCY = 2;
 
     wire [`linebuf_CO-1 : 0] w_ot_valid;
     // 3 * 2 * 2 * 32
@@ -38,6 +39,24 @@ module stage3_max_pooling(
     wire [`pool_CO * `OF_BW-1:0] w_ot_pool;
     reg  [`pool_CO * `OF_BW-1:0] w_ot_flat;
     reg r_pooling_valid;
+
+
+//==============================================================================
+// Data Enable Signals 
+//==============================================================================
+wire    [LATENCY-1 : 0] 	ce;
+reg     [LATENCY-1 : 0] 	r_valid;
+always @(posedge clk or negedge reset_n) begin
+    if(!reset_n) begin
+        r_valid   <= 0;
+    end else begin
+        r_valid[LATENCY-2]  <= &w_ot_valid;
+        r_valid[LATENCY-1]  <= r_valid[LATENCY-2];
+    end
+end
+
+assign	ce = r_valid;
+
 
     genvar line_inst;
     generate
@@ -66,7 +85,20 @@ module stage3_max_pooling(
             );
         end
     endgenerate
-    
+
+
+reg [`pool_CO * `OF_BW-1:0] r_pool_result;
+// 1클럭 pipelining
+always @(posedge clk or negedge reset_n) begin
+    if (!reset_n) begin
+        r_pool_result <= 0;
+    end else if (&w_ot_valid) begin
+        r_pool_result <= w_ot_pool;
+    end 
+end
+
+
+
     // 디버깅용
     reg [`OF_BW -1 : 0]r_o_ot_flat [0:2];
     integer i;
@@ -74,21 +106,22 @@ module stage3_max_pooling(
         if (!reset_n) begin
             w_ot_flat <= 0;
             r_pooling_valid <= 0;
-        end else if (&w_ot_valid) begin
-            w_ot_flat <= w_ot_pool;
-            // 디버깅용 시작
-            for(i = 0; i< `pool_CO ; i = i + 1) begin
-                r_o_ot_flat[i] <= w_ot_pool[i * `OF_BW +: `OF_BW];
-            end
-            // 디버깅용 끝
-            r_pooling_valid <= 1;
-        end else begin
-            r_pooling_valid <= 0;
-        end
+        end else if (r_valid[LATENCY-2]) begin
+            w_ot_flat <= r_pool_result;
+            // // 디버깅용 시작
+            // for(i = 0; i< `pool_CO ; i = i + 1) begin
+            //     r_o_ot_flat[i] <= w_ot_pool[i * `OF_BW +: `OF_BW];    
+            // end
+            // // 디버깅용 끝
+            // r_pooling_valid <= 1;
+        end 
+        // else begin
+        //     r_pooling_valid <= 0;
+        // end
     end
 
     assign o_ot_pool = w_ot_flat;
-    assign o_ot_valid = r_pooling_valid;
+    assign o_ot_valid = r_valid[LATENCY-1];
 
 endmodule
 

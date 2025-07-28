@@ -6,6 +6,8 @@
 //----------------------------------------------------------------------
 // 1. 데이터 비트 폭 (Bit-Widths)
 //----------------------------------------------------------------------
+`define KX              5
+`define KY              5
 `define IF_BW           34  // 입력 Feature Map 픽셀 비트폭 (Max Pool 입력)
 `define OF_BW           34  // 출력 Feature Map 픽셀 비트폭 (Max Pool 출력, FC 입력)
 `define W_BW             8  // FC Layer 가중치(Weight) 비트폭
