@@ -19,7 +19,8 @@ module line_buffer #(
     parameter LATENCY = 2;
     reg [$clog2(IX)-1:0] x_cnt;
     reg [$clog2(IY)-1:0] y_cnt;
-
+    integer i;
+    integer j;
     //디버깅
     reg [I_F_BW-1:0] r_line_buf;
     reg flag;
@@ -39,12 +40,12 @@ module line_buffer #(
                 flag <=0;
                 x_cnt <= x_cnt + 1;
             end
-        end
+        end 
     end
 
     reg [I_F_BW-1:0] line_buf[0:KY-1][0:IX-1];  // 4줄만 저장. 최신 줄은 현재 pixel로 채움
     
-    integer i;
+
     always @(posedge clk) begin
         if(i_in_valid) begin
             for (i=0; i < KY-1; i = i+1) begin
@@ -127,7 +128,6 @@ module line_buffer #(
     end
 
     //debug
-    integer j;
     integer k;
     reg [I_F_BW-1:0] result_window [0:KY-1][0:KX-1];
     always @(posedge clk) begin

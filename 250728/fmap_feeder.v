@@ -39,18 +39,18 @@ module fmap_feeder #(
     assign o_out_valid = valid_reg;
 
     initial begin
-        $readmemh("a_1_gray.mem", fmap_rom_a_0);
-        $readmemh("a_2.mem", fmap_rom_a_1);
-        $readmemh("a_3.mem", fmap_rom_a_2);
-        $readmemh("a_4.mem", fmap_rom_a_3);
-        $readmemh("b_1.mem", fmap_rom_b_0);
-        $readmemh("b_2.mem", fmap_rom_b_1);
-        $readmemh("b_3.mem", fmap_rom_b_2);
-        $readmemh("b_4.mem", fmap_rom_b_3);
-        $readmemh("c_1.mem", fmap_rom_c_0);
-        $readmemh("c_2.mem", fmap_rom_c_1);
-        $readmemh("c_3.mem", fmap_rom_c_2);
-        $readmemh("c_4.mem", fmap_rom_c_3);
+        $readmemh("a_1_gray_norm.mem", fmap_rom_a_0);
+        $readmemh("a_2_gray_norm.mem", fmap_rom_a_1);
+        $readmemh("a_3_gray_norm.mem", fmap_rom_a_2);
+        $readmemh("a_4_gray_norm.mem", fmap_rom_a_3);
+        $readmemh("b_1_gray_norm.mem", fmap_rom_b_0);
+        $readmemh("b_2_gray_norm.mem", fmap_rom_b_1);
+        $readmemh("b_3_gray_norm.mem", fmap_rom_b_2);
+        $readmemh("b_4_gray_norm.mem", fmap_rom_b_3);
+        $readmemh("c_1_gray_norm.mem", fmap_rom_c_0);
+        $readmemh("c_2_gray_norm.mem", fmap_rom_c_1);
+        $readmemh("c_3_gray_norm.mem", fmap_rom_c_2);
+        $readmemh("c_4_gray_norm.mem", fmap_rom_c_3);
     end
     
     reg [I_F_BW-1:0] selected_pixel;

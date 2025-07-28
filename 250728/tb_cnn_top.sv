@@ -32,6 +32,8 @@ module cnn_top_tb;
     reg                      i_valid;
     reg  [I_F_BW-1:0]        i_pixel;
 
+    reg [3:0] sw_val;
+
     // DUT output
     wire w_core_valid;
     wire [CO*O_F_BW-1:0] w_core_fmap;
@@ -40,13 +42,13 @@ module cnn_top_tb;
     wire [7:0] alpha;
     // wire                                        w_stage2_core_valid;
     // wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
-    //wire [KX*KY*I_F_BW-1:0] o_window;
-    //wire [KX*I_F_BW-1:0] o_line_buf;
+    // wire [KX*KY*I_F_BW-1:0] o_window;
+    // wire [KX*I_F_BW-1:0] o_line_buf;
     cnn_top dut (
         .clk(clk),
         .reset_n(reset_n),
         .i_valid(i_valid),
-        .sw(4'd0),
+        .sw(sw_val),
         // .w_stage2_core_valid(w_stage2_core_valid),
         // .w_stage2_core_fmap(w_stage2_core_fmap),
         // .o_core_done(core_done)
@@ -68,15 +70,24 @@ module cnn_top_tb;
         reset_n = 1;
         #10
 
-        @(posedge clk);
-        i_valid = 1;
-        #10;
-        @(posedge clk);
-        i_valid = 0;
-        // === 결과 기다리기 ===
 
-        //for (ch = 0; ch < 3; ch = ch + 1) begin
-        //end
+        for (sw_val = 0; sw_val < 12; sw_val = sw_val + 1) begin
+            $display("\n=== [TEST] sw = %0d ===", sw_val);
+            
+            @(posedge clk);
+            i_valid = 1;
+            #10;
+            @(posedge clk);
+            i_valid = 0;
+
+            // 결과 나올 때까지 기다리기
+            wait (core_done == 1);
+
+            // 결과 출력 (또는 저장)
+            #1000;
+        end
+
+        $finish;
     end
     integer ch;
     reg [O_F_BW-1:0] result_fmap[0:CO-1][0:OUT_H-1][0:OUT_W-1];
