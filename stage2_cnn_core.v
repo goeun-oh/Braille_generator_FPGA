@@ -96,32 +96,20 @@ localparam ROW = `ST2_Conv_Y; //12
                    end
                end
            end
-       end else begin
-           //col는 매 clk 0~11 증가
-           //한 point씩 올리는 방식
-           if(i_in_valid) begin // c가 0되면 line_buffer 1로 shift
-               for (k = 0; k < `ST2_Conv_CI; k = k+1) begin
-                   for (j = 0; j< `KY-1 ; j= j+1) begin
-                       line_buffer[k][j][col] <= line_buffer[k][j+1][col];
-                   end
-               end
-           end
-       end
-    end    
-
-//==============================================================================
-// receive 1px data to 3ch Line Buffer
-//==============================================================================
-    always @(posedge clk) begin
-        if (i_in_valid) begin
-            // valid신호가 들어올 때만 data를 받아옴,(col에 따라 위치가 다름)
-            // 맨 첫번째 라인버퍼에만
-            for (k = 0; k < `ST2_Conv_CI; k = k+1) begin  
-                line_buffer[k][4][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW] ;
+        end else if (i_in_valid) begin
+            for (k = 0; k < `ST2_Conv_CI; k = k + 1) begin
+                for (j = 0; j < `KY - 1; j = j + 1) begin
+                    line_buffer[k][j][col] <= line_buffer[k][j + 1][col];
+                end
+                // 마지막 라인 (최상단)에 새로운 입력 넣기
+                line_buffer[k][`KY-1][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW];
             end
         end
     end
 
+//==============================================================================
+// receive 1px data to 3ch Line Buffer
+//==============================================================================
 
 
     

@@ -38,15 +38,22 @@ module cnn_top_tb;
 
     wire core_done;
     wire [7:0] alpha;
+    wire clk_20mhz;
     // wire                                        w_stage2_core_valid;
     // wire [ST2_Conv_CO * (ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap;
     //wire [KX*KY*I_F_BW-1:0] o_window;
     //wire [KX*I_F_BW-1:0] o_line_buf;
+    clk_div5 u_clk_div5 (
+        .clk     (clk),
+        .reset_n (reset_n),
+        .clk_out (clk_20mhz)
+    );
+
     cnn_top dut (
-        .clk(clk),
+        .clk(clk_20mhz),
         .reset_n(reset_n),
         .i_valid(i_valid),
-        .sw(4'd0),
+        //.sw(4'd2),
         // .w_stage2_core_valid(w_stage2_core_valid),
         // .w_stage2_core_fmap(w_stage2_core_fmap),
         // .o_core_done(core_done)
@@ -69,8 +76,9 @@ module cnn_top_tb;
         #10
 
         @(posedge clk);
+        #30;
         i_valid = 1;
-        #10;
+        #100;
         @(posedge clk);
         i_valid = 0;
         // === 결과 기다리기 ===

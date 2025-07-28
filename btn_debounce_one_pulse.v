@@ -1,46 +1,76 @@
 `timescale 1ns / 1ps
 
 module btn_debounce_one_pulse(
-  input        clk,
-  input        reset_n,
-  input        i_btn,
-  output reg   o_btn
-);
+    input clk,
+    input reset_n,
+    input i_btn,
+    output o_btn
+    );
 
-  // debounce용 shift register
-  reg [7:0] q_reg;
-  wire      btn_debounce;
 
-  // debounce shift
-  always @(posedge clk or negedge reset_n) begin
-    if (!reset_n) begin
-      q_reg <= 8'd0;
-    end else begin
-      q_reg <= {i_btn, q_reg[7:1]};
+    //reg state, next;
+    reg [7:0] q_reg, q_next; // shift register
+    reg edge_detect;
+    wire btn_debounce;
+
+    // 1khz clk
+    reg [$clog2(20_000)-1 : 0] counter;
+    reg r_1khz;
+
+    always @(posedge clk, negedge reset_n) begin
+        if (!reset_n) begin
+            counter <= 0;
+        end
+
+        else begin
+            if(counter == 20_000 -1) begin
+                r_1khz <=0; // 8888이 뜨지 않게 하기 위해 
+                counter <= 0;
+                r_1khz <= 1'b1;
+            end
+
+            else begin
+                counter <= counter + 1;
+                r_1khz = 1'b0;
+            end
+        end
+
     end
-  end
 
-  // 8 비트가 모두 1이 되었을 때만 '클린' 신호로 간주
-  assign btn_debounce = &q_reg;
 
-  // one pulse 생성용 previous 상태 저장
-  reg btn_debounce_d;
+    //state logic, shift register
+    always@(posedge r_1khz, negedge reset_n) begin
+        if (!reset_n) begin
+            q_reg <= 0;
+        end
 
-  always @(posedge clk or negedge reset_n) begin
-    if (!reset_n) begin
-      btn_debounce_d <= 1'b0;
-    end else begin
-      btn_debounce_d <= btn_debounce;
+        else begin 
+            q_reg <= q_next;
+        end
     end
-  end
 
-  // rising edge(버튼이 처음 눌릴 때)만 1클럭 o_btn 출력
-  always @(posedge clk or negedge reset_n) begin
-    if (!reset_n) begin
-      o_btn <= 1'b0;
-    end else begin
-      o_btn <= btn_debounce & ~btn_debounce_d;
+
+    // next logic
+    always @(i_btn, r_1khz) begin
+        // q_reg 현재의 상위 7bit를 다음 하위 7bit에 넣고, 최상위에는 i_btn 넣기
+        q_next = {i_btn, q_reg[7:1]}; // 8 shift의 동작 설명
     end
-  end
+
+    // 8 input And gate
+    assign btn_debounce = &q_reg;
+
+    always @(posedge clk, negedge reset_n) begin
+        if (!reset_n) begin
+            edge_detect <= 0;
+        end
+
+        else begin
+            edge_detect <= btn_debounce;
+        end
+
+    end
+    
+    // 최종 출력
+    assign o_btn = btn_debounce & (~edge_detect);
 
 endmodule

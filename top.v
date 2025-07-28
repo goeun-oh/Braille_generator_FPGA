@@ -5,10 +5,8 @@ module top(
     input clk,
     input i_btn,
     input reset,
-    input [3:0] sw,
-    output [2:0] led,
-    output out_valid,
-    output [7:0] alpha
+    //input [3:0] sw,
+    output [2:0] led
 );
     parameter I_F_BW       = 8;
     parameter O_F_BW       = 20;
@@ -37,12 +35,19 @@ module top(
     parameter POOL_OUT_H = 1;
 
     wire w_btn;
-
+    
+    wire clk_20mhz;
     btn_debounce_one_pulse U_BTN(
-        .clk(clk),
+        .clk(clk_20mhz),
         .reset_n(!reset),
         .i_btn(i_btn),
         .o_btn(w_btn)
+    );
+
+    clk_div5 u_clk_div5 (
+        .clk     (clk),
+        .reset_n (!reset),
+        .clk_out (clk_20mhz)
     );
 
     cnn_top #(
@@ -71,12 +76,12 @@ module top(
         .POOL_OUT_W (POOL_OUT_W),
         .POOL_OUT_H(POOL_OUT_H)
     ) U_cnn_top(
-        .clk(clk),
+        .clk(clk_20mhz),
         .reset_n(!reset),
         .i_valid(w_btn),
-        .sw(sw),
-        .out_valid(out_valid),
-        .alpha(alpha),
+        //.sw(sw),
+        .out_valid(),
+        .alpha(),
         .led(led)
     );
 
