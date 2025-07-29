@@ -105,24 +105,15 @@ localparam ROW = `ST2_Conv_Y; //12
                         line_buffer[k][j][col] <= line_buffer[k][j+1][col];
                     end
                 end
-            end
-        end
-    end    
-
 //==============================================================================
 // receive 1px data to 3ch Line Buffer
 //==============================================================================
-    always @(posedge clk) begin
-        if (i_in_valid) begin
-            // valid신호가 들어올 때만 data를 받아옴,(col에 따라 위치가 다름)
-            // 맨 첫번째 라인버퍼에만
-            for (k = 0; k < `ST2_Conv_CI; k = k+1) begin  
-                line_buffer[k][4][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW] ;
+                for (k = 0; k < `ST2_Conv_CI; k = k+1) begin  
+                    line_buffer[k][4][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW] ;
+                end
             end
         end
-    end
-
-
+    end    
 
     
 //==============================================================================
