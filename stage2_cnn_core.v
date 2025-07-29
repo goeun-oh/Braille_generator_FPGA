@@ -88,29 +88,32 @@ localparam ROW = `ST2_Conv_Y; //12
 
     integer i,j,k;
     always @(posedge clk or negedge reset_n) begin
-       if(!reset_n) begin
-           for(k = 0; k<`ST2_Conv_CI ; k= k+1) begin
-               for (j = 0; j < `KY; j=j+1) begin
-                   for (i = 0; i < `ST2_Conv_X; i = i + 1) begin
-                       line_buffer[k][j][i] <= 0;
-                   end
-               end
-           end
-        end else if (i_in_valid) begin
-            for (k = 0; k < `ST2_Conv_CI; k = k + 1) begin
-                for (j = 0; j < `KY - 1; j = j + 1) begin
-                    line_buffer[k][j][col] <= line_buffer[k][j + 1][col];
+        if(!reset_n) begin
+            for(k = 0; k<`ST2_Conv_CI ; k= k+1) begin
+                for (j = 0; j < `KY; j=j+1) begin
+                    for (i = 0; i < `ST2_Conv_X; i = i + 1) begin
+                        line_buffer[k][j][i] <= 0;
+                    end
                 end
-                // 마지막 라인 (최상단)에 새로운 입력 넣기
-                line_buffer[k][`KY-1][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW];
             end
-        end
-    end
-
+        end else begin
+            //col는 매 clk 0~11 증가
+            //한 point씩 올리는 방식
+            if(i_in_valid) begin // c가 0되면 line_buffer 1로 shift
+                for (k = 0; k < `ST2_Conv_CI; k = k+1) begin
+                    for (j = 0; j< `KY-1 ; j= j+1) begin
+                        line_buffer[k][j][col] <= line_buffer[k][j+1][col];
+                    end
+                end
 //==============================================================================
 // receive 1px data to 3ch Line Buffer
 //==============================================================================
-
+                for (k = 0; k < `ST2_Conv_CI; k = k+1) begin  
+                    line_buffer[k][4][col] <= i_in_fmap[k*`ST2_Conv_IBW +: `ST2_Conv_IBW] ;
+                end
+            end
+        end
+    end    
 
     
 //==============================================================================
@@ -226,6 +229,7 @@ reg     signed [`W_BW-1:0] d_weight [0:`ST2_Conv_CO-1][0:`ST2_Conv_CI-1][0:`KY-1
 genvar ci_inst;
 generate
 	for(ci_inst = 0; ci_inst < `ST2_Conv_CO; ci_inst = ci_inst + 1) begin : gen_ci_inst
+        
 		assign	w_in_valid[ci_inst] = r_w_valid  [V_LATENCY-1 : 0] ; 
 		stage2_cnn_acc_ci u_stage2_cnn_acc_ci(
 	    .clk             (clk         ),
@@ -339,3 +343,4 @@ assign o_ot_valid = r_valid[LATENCY-1];
 assign o_ot_fmap  = r_act_relu;
 
 endmodule
+

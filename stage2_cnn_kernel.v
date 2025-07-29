@@ -1,119 +1,154 @@
 
 `timescale 1ns / 1ps
 `include "stage2_defines_cnn_core.v"
+
 module stage2_cnn_kernel (
-    input                               		   clk,
-    input                               		   reset_n,
-    input     signed [`KX*`KY*`W_BW-1 : 0] 	       i_cnn_weight,
-    input                                          i_in_valid,
-    input     signed [`KX*`KY*`ST2_Conv_IBW-1 : 0] i_in_fmap,
-    output                                         o_ot_valid,
-    output    signed [`AK_BW-1 : 0]  			   o_ot_kernel_acc           
-);
+    // Clock & Reset
+input                               		   clk         	,
+input                               		   reset_n     	,
 
-    localparam LATENCY = 5;
-    localparam KERNEL_SIZE = `KX * `KY;  // 25
+//5x5x7
+input     signed [`KX*`KY*`W_BW-1 : 0] 	       i_cnn_weight ,
+input                                          i_in_valid  	,
+input     signed [`KX*`KY*`ST2_Conv_IBW-1 : 0] i_in_fmap    , //5x5x(20bit)
+output                                         o_ot_valid  	,
+output    signed [`AK_BW-1 : 0]  			   o_ot_kernel_acc           
+    );
 
-    reg [LATENCY-1:0] r_valid;
-    always @(posedge clk or negedge reset_n) begin
-        if(!reset_n) begin
-            r_valid <= {LATENCY{1'b0}};
-        end else begin
-            r_valid <= {r_valid[LATENCY-2:0], i_in_valid};
+localparam LATENCY = 3+25;
+
+integer i,j,k,c;
+//==============================================================================
+// Data Enable Signals 
+//==============================================================================
+wire    [LATENCY-1 : 0] 	ce;
+reg     [LATENCY-1 : 0] 	r_valid;
+always @(posedge clk or negedge reset_n) begin
+    if (!reset_n) begin
+        r_valid <= 0;
+    end else begin
+        r_valid[0] <= i_in_valid;
+        for ( i = 1; i < LATENCY; i = i + 1) begin
+            r_valid[i] <= r_valid[i - 1];
         end
     end
+end
+assign	ce = r_valid;
 
-    // Input pipeline
-    reg signed [`ST2_Conv_IBW-1:0] stage1_fmap [0:KERNEL_SIZE-1];
-    reg signed [`W_BW-1:0] stage1_weight [0:KERNEL_SIZE-1];
+//==============================================================================
+// mul = fmap * weight
+//==============================================================================
 
-    integer i;
-    always @(posedge clk) begin
-        if (i_in_valid) begin
-            for (i = 0; i < KERNEL_SIZE; i = i + 1) begin
-                stage1_fmap[i] <= i_in_fmap[i * `ST2_Conv_IBW +: `ST2_Conv_IBW];
-                stage1_weight[i] <= i_cnn_weight[i * `W_BW +: `W_BW];
+reg       signed [`M_BW-1 : 0]  mul [0:`KY-1][0:`KX-1];
+//5x5 28bit
+reg       signed [`M_BW-1 : 0]  r_mul [0:(`KY*`KX)-1][0:`KY-1][0:`KX-1];
+
+
+	//i_in_valid 들어오면 25개 각각 곱셈
+	genvar y,x;
+	generate
+		for(y=0 ; y<`KY ; y=y+1) begin
+			for(x=0 ; x<`KX ; x=x+1) begin
+				(* use_dsp = "yes" *) 
+				//이게 1clk안에 가능? setup, hold지카면서?
+				// assign  mul[(y*`KX+x)* `M_BW +: `M_BW]	=  $signed(i_in_fmap[(y*`KX+x)* `ST2_Conv_IBW +: `ST2_Conv_IBW]) *  $signed(i_cnn_weight[(y*`KX+x) * `W_BW +: `W_BW]);
+				always @(posedge clk or negedge reset_n) begin
+					if(!reset_n) begin
+						mul[y][x] <= 0;
+					end else if(i_in_valid)begin
+						mul[y][x] <= 
+							$signed(i_in_fmap[(y*`KX+x)*`ST2_Conv_IBW +: `ST2_Conv_IBW]) * 
+							$signed(i_cnn_weight[(y*`KX+x)*`W_BW +: `W_BW]);					
+					end
+				end
+			end
+		end	
+	endgenerate
+
+
+
+	always @(posedge clk or negedge reset_n) begin
+		if(!reset_n) begin
+			for(c=0; c<`KY*`KX; c=c+1) begin
+				for(j=0;j<`KY;j=j+1)begin
+					for(i=0; i<`KX;i=i+1) begin
+						r_mul[c][j][i] <= 0;
+					end
+				end
+			end
+		end else begin
+			for(c=0; c<`KY*`KX-1; c= c+1) begin
+				for(j=0;j<`KY;j=j+1)begin
+					for(i=0; i<`KX;i=i+1) begin
+						r_mul[c+1][j][i] <= r_mul[c][j][i];
+					end
+				end	
+			end
+			if(r_valid[0])begin
+				for(j=0;j<`KY;j=j+1)begin
+					for(i=0; i<`KX;i=i+1) begin
+						r_mul[0][j][i] <= $signed(mul[j][i]);
+					end
+				end	
+			end			
+		end
+	end
+
+    //debug
+    reg signed [`M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
+	always @(posedge clk or negedge reset_n) begin
+		if(!reset_n) begin
+			for(j=0;j<`KY;j=j+1)begin
+				for(i=0; i<`KX;i=i+1) begin
+					d_mul[j][i]<=0;
+				end
+			end
+		end else if(r_valid[0])begin
+			for(j=0;j<`KY;j=j+1)begin
+				for(i=0; i<`KX;i=i+1) begin
+					d_mul[j][i] <= $signed(mul[j][i]);
+				end
+			end	
+		end
+	end
+
+
+//r_valid[1], r_mul[1]
+reg       signed [`AK_BW-1 : 0]    acc_kernel[0:`KY*`KX-1]  	;
+reg       signed [`AK_BW-1 : 0]    r_acc_kernel         ;
+reg [4:0] acc_idx;  // 0~24 index
+reg accumulating;
+reg acc_done;
+
+always @(posedge clk or negedge reset_n) begin
+    if (!reset_n) begin
+        for (k = 0; k < 25; k = k + 1) begin
+            acc_kernel[k] <= 0;
+        end
+        r_acc_kernel <= 0;
+    end else begin
+        for (k = 0; k < 25; k = k + 1) begin
+            if (r_valid[k + 1]) begin
+                if (k == 0)
+                    acc_kernel[0] <= r_mul[0][0][0];
+                else begin
+                    // y, x 위치 계산
+                    	j = k / 5;
+                    	i = k % 5;
+                    acc_kernel[k] <= acc_kernel[k - 1] + r_mul[k][j][i];
+                end
             end
         end
-    end
 
-    // 선택적 DSP 사용: 처음 10개만 DSP, 나머지 15개는 LUT
-    reg signed [`M_BW-1:0] stage2_mul [0:KERNEL_SIZE-1];
-
-    genvar mul_idx;
-    generate
-        for (mul_idx = 0; mul_idx < KERNEL_SIZE; mul_idx = mul_idx + 1) begin : gen_mixed_mul
-            if (mul_idx < 10) begin : gen_dsp_mul
-                // 처음 10개는 DSP 사용
-                (* use_dsp = "yes" *)
-                always @(posedge clk or negedge reset_n) begin
-                    if (!reset_n) begin
-                        stage2_mul[mul_idx] <= {`M_BW{1'b0}};
-                    end else if (r_valid[0]) begin
-                        stage2_mul[mul_idx] <= stage1_fmap[mul_idx] * stage1_weight[mul_idx];
-                    end
-                end
-            end else begin : gen_lut_mul
-                // 나머지 15개는 LUT 사용 (DSP 지시어 없음)
-                always @(posedge clk or negedge reset_n) begin
-                    if (!reset_n) begin
-                        stage2_mul[mul_idx] <= {`M_BW{1'b0}};
-                    end else if (r_valid[0]) begin
-                        stage2_mul[mul_idx] <= stage1_fmap[mul_idx] * stage1_weight[mul_idx];
-                    end
-                end
-            end
-        end
-    endgenerate
-
-    // 나머지 누산 로직은 동일 (기존 코드 유지)
-    reg signed [`AK_BW-1:0] stage3_partial_sum [0:`KY-1];
-
-    genvar row_idx;
-    generate
-        for (row_idx = 0; row_idx < `KY; row_idx = row_idx + 1) begin : gen_row_sum
-            wire signed [`AK_BW-1:0] row_sum_temp = 
-                {{(`AK_BW-`M_BW){stage2_mul[row_idx*`KX + 0][`M_BW-1]}}, stage2_mul[row_idx*`KX + 0]} +
-                {{(`AK_BW-`M_BW){stage2_mul[row_idx*`KX + 1][`M_BW-1]}}, stage2_mul[row_idx*`KX + 1]} +
-                {{(`AK_BW-`M_BW){stage2_mul[row_idx*`KX + 2][`M_BW-1]}}, stage2_mul[row_idx*`KX + 2]} +
-                {{(`AK_BW-`M_BW){stage2_mul[row_idx*`KX + 3][`M_BW-1]}}, stage2_mul[row_idx*`KX + 3]} +
-                {{(`AK_BW-`M_BW){stage2_mul[row_idx*`KX + 4][`M_BW-1]}}, stage2_mul[row_idx*`KX + 4]};
-
-            always @(posedge clk or negedge reset_n) begin
-                if (!reset_n) begin
-                    stage3_partial_sum[row_idx] <= {`AK_BW{1'b0}};
-                end else if (r_valid[1]) begin
-                    stage3_partial_sum[row_idx] <= row_sum_temp;
-                end
-            end
-        end
-    endgenerate
-
-    reg signed [`AK_BW-1:0] stage4_sum1, stage4_sum2, stage4_sum3;
-    
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            stage4_sum1 <= {`AK_BW{1'b0}};
-            stage4_sum2 <= {`AK_BW{1'b0}};
-            stage4_sum3 <= {`AK_BW{1'b0}};
-        end else if (r_valid[2]) begin
-            stage4_sum1 <= stage3_partial_sum[0] + stage3_partial_sum[1];
-            stage4_sum2 <= stage3_partial_sum[2] + stage3_partial_sum[3];
-            stage4_sum3 <= stage3_partial_sum[4];
+        // 마지막 결과 저장
+        if (r_valid[26]) begin
+            r_acc_kernel <= acc_kernel[24];
         end
     end
+end
 
-    reg signed [`AK_BW-1:0] stage5_final_acc;
-    
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            stage5_final_acc <= {`AK_BW{1'b0}};
-        end else if (r_valid[3]) begin
-            stage5_final_acc <= stage4_sum1 + stage4_sum2 + stage4_sum3;
-        end
-    end
 
-    assign o_ot_valid = r_valid[LATENCY-1];
-    assign o_ot_kernel_acc = stage5_final_acc;
+assign o_ot_valid = r_valid[27];
+assign o_ot_kernel_acc = r_acc_kernel;
 
 endmodule

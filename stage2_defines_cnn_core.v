@@ -4,12 +4,12 @@
 
 `define    W_BW         8  // BW of weight parameter
 `define    B_BW         16  // BW of bias parameter
-`define    M_BW         28 // I_F_BW * W_BW
+`define    M_BW         (`ST2_Conv_IBW + `W_BW) // I_F_BW * W_BW
 `define    AK_BW        33 // M_BW + log(KY*KX) Accum Kernel 
 
 `define    ACI_BW		35 // AK_BW + log (CI) Accum Channel Input
-`define    AB_BW        35 // ACI_BW + bias (#1). 
-`define    O_F_BW       35 // reLU Activation, after Activation it becomes O_F_BW-1 bit
+`define    AB_BW        `ACI_BW // ACI_BW + bias (#1). 
+`define    O_F_BW       `ACI_BW // reLU Activation, after Activation it becomes O_F_BW-1 bit
 
 // `define    O_F_ACC_BW   27 // for demo, O_F_BW + log (CO)
 

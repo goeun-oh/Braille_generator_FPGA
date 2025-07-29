@@ -65,7 +65,6 @@ module stage3_top_cnn(
     .o_ot_result(w_core)
     );
     
-    wire w_stage3_valid;
     stage3_compare_alpha U_stage3_compare_alpha(
         .clk(clk),
         .reset_n(reset_n),
@@ -73,20 +72,8 @@ module stage3_top_cnn(
         .i_in_core(w_core),
         .o_alpha(alpha),
         .led(led),
-        .o_valid(w_stage3_valid)
+        .o_valid(o_valid)
     );
-    localparam LATENCY = 1;
-    reg  signed   [LATENCY - 1 : 0]         r_valid;
-    always @(posedge clk or negedge reset_n) begin
-        if(!reset_n) begin
-            r_valid   <= 0;
-        end else begin
-            r_valid[LATENCY - 1]  <= w_stage3_valid;
-        end
-    end
-
-
-    assign o_valid = r_valid[LATENCY - 1];
 
 endmodule
 
@@ -97,11 +84,11 @@ module stage3_compare_alpha (
     input reset_n,
     input i_in_valid,
     input [`core_CO * `OUT_BW -1:0] i_in_core,
-    output [7:0] o_alpha,
-    output [2:0] led,
+    output reg [7:0] o_alpha,
+    output reg [2:0] led,
     output o_valid
 );
-    localparam LATENCY = 2;
+    localparam LATENCY = 1;
     reg signed [`OUT_BW - 1:0] c_ot_result [0 : `core_CO-1];
 
     reg  signed   [LATENCY - 1 : 0]         r_valid;
@@ -110,8 +97,9 @@ module stage3_compare_alpha (
         if(!reset_n) begin
             r_valid   <= 0;
         end else begin
-            r_valid[LATENCY - 2]  <= i_in_valid;
-            r_valid[LATENCY - 1]  <= r_valid[LATENCY-2];
+            r_valid[LATENCY - 1]  <= i_in_valid;
+            // r_valid[LATENCY - 2]  <= i_in_valid;
+            // r_valid[LATENCY - 1]  <= r_valid[LATENCY - 2];
         end
     end
 
@@ -128,30 +116,18 @@ module stage3_compare_alpha (
         end
     end
 
-    reg [7:0] r_alpha;
-    reg [2:0] r_led;
-
-    always @(posedge clk or negedge reset_n) begin
-        if (!reset_n) begin
-            r_alpha <= 8'd0;
-            r_led <= 3'd0;
-        end else if (r_valid[LATENCY - 1]) begin
-            if ((c_ot_result[0] >= c_ot_result[1]) && (c_ot_result[0] >= c_ot_result[2])) begin
-                r_alpha <= 8'h61;
-                r_led <= 3'b100;
-            end else if ((c_ot_result[1] >= c_ot_result[0]) && (c_ot_result[1] >= c_ot_result[2])) begin
-                r_alpha <= 8'h62;
-                r_led <= 3'b010;
-            end else begin
-                r_alpha <= 8'h63;
-                r_led <= 3'b001;
-            end
+    always @(*) begin
+        if ((c_ot_result[0] >= c_ot_result[1]) && (c_ot_result[0] >= c_ot_result[2])) begin
+            o_alpha = 8'h61;
+            led = 3'b100;
+        end else if ((c_ot_result[1] >= c_ot_result[0]) && (c_ot_result[1] >= c_ot_result[2])) begin
+            o_alpha = 8'h62;
+            led = 3'b010;
+        end else begin
+            o_alpha = 8'h63;
+            led = 3'b001;
         end
     end
-
-    assign o_alpha = r_alpha;
-    assign led = r_led;
-
 
     assign o_valid = r_valid[LATENCY - 1];
 
