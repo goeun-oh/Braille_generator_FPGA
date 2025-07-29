@@ -10,7 +10,7 @@ input                               		   reset_n     	,
 //5x5x7
 input     signed [`KX*`KY*`W_BW-1 : 0] 	       i_cnn_weight ,
 input                                          i_in_valid  	,
-input     signed [`KX*`KY*`ST2_Conv_IBW-1 : 0] i_in_fmap    , //5x5x(20bit)
+input     signed [`ST2_Conv_IBW-1 : 0] i_in_fmap    , //5x5x(20bit)
 output                                         o_ot_valid  	,
 output    signed [`AK_BW-1 : 0]  			   o_ot_kernel_acc           
     );
