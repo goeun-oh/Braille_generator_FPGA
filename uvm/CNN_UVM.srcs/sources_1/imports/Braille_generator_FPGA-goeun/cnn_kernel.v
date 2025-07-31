@@ -56,7 +56,7 @@ module cnn_kernel #(
         for (
             mul_idx = 0; mul_idx < KY * KX; mul_idx = mul_idx + 1
         ) begin : gen_mul
-            assign  mul[mul_idx * M_BW +: M_BW]	=$signed({1'b0, i_in_fmap[mul_idx * I_F_BW +: I_F_BW]}) * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
+            assign  mul[mul_idx * M_BW +: M_BW]   =$signed({1'b0, i_in_fmap[mul_idx * I_F_BW +: I_F_BW]}) * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
             always @(posedge clk or negedge reset_n) begin
                 if (!reset_n) begin
                     r_mul[mul_idx*M_BW+:M_BW] <= 0;
@@ -76,9 +76,26 @@ module cnn_kernel #(
             end
         end
     end
+
+    //(* mark_debug = "true" *) reg signed [M_BW-1:0] d_reg_mul [0:KX-1];
+    //always @(posedge clk, negedge reset_n) begin
+    //    if (!reset_n) begin
+    //        d_reg_mul [0] <= 0; 
+    //        d_reg_mul [1] <= 0;
+    //        d_reg_mul [2] <= 0;
+    //        d_reg_mul [3] <= 0;
+    //        d_reg_mul [4] <= 0;
+    //    end else begin
+    //        d_reg_mul [0] <= reg_r_mul[0][0];
+    //        d_reg_mul [1] <= reg_r_mul[0][1];
+    //        d_reg_mul [2] <= reg_r_mul[0][2];
+    //        d_reg_mul [3] <= reg_r_mul[0][3];
+    //        d_reg_mul [4] <= reg_r_mul[0][4];
+    //    end
+    //end
+
     reg signed [AK_BW-1 : 0] acc_kernel;
     reg signed [AK_BW-1 : 0] r_acc_kernel;
-
     integer               acc_idx;
     generate
         always @(*) begin
@@ -88,6 +105,7 @@ module cnn_kernel #(
             end
         end
     endgenerate
+
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
             r_acc_kernel[0+:AK_BW] <= 0;
@@ -95,8 +113,12 @@ module cnn_kernel #(
             r_acc_kernel[0+:AK_BW] <= $signed(acc_kernel[0+:AK_BW]);
         end
     end
+<<<<<<<< HEAD:uvm/CNN_UVM.srcs/sources_1/imports/Braille_generator_FPGA-goeun/cnn_kernel.v
     integer j;
     integer k;
+========
+
+>>>>>>>> 795b8ca93255502977f40a63f052dd73148f36fd:abc_verilogcode_done/cnn_kernel.v
     reg [W_BW-1:0] reg_weight [0:KY-1][0:KX-1];
     always @(posedge clk) begin
         for (k= 0; k < KY; k = k + 1) begin
@@ -105,6 +127,7 @@ module cnn_kernel #(
             end
         end
     end
+    
     reg [I_F_BW-1:0] reg_i_fmap [0:KY-1][0:KX-1];
     always @(posedge clk) begin
         if(i_in_valid)begin
@@ -115,6 +138,7 @@ module cnn_kernel #(
             end
         end
     end
+
     assign o_ot_valid = r_valid[LATENCY-1];
     assign o_ot_kernel_acc = r_acc_kernel;
 
