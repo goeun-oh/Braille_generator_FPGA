@@ -1,0 +1,69 @@
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'cnn_sequence' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(55) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(59) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(55) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(59) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(55) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(59) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(55) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(62) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(55) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(62) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(55) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv(62) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@

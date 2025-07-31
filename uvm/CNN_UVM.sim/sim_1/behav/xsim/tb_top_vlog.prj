@@ -1,0 +1,21 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../CNN_UVM.srcs/sources_1/imports/new/top.v" \
+
+sv xil_defaultlib  \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/apb_packet.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/apb_monitor.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/apb_sequencer.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/apb_agent.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/apb_env.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/tb_env.sv" \
+"../../../../CNN_UVM.srcs/sim_1/new/cnn_seq.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/tb_top.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,27 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+C:/Xilinx/Vivado/2020.2/data/xsim/system_verilog/uvm_include/uvm_macros.svh,1605717275,verilog,,,,,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_agent.sv,1753533048,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_env.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv,1753533060,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_sequencer.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_env.sv,1753533036,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_intf.sv,1753533418,verilog,,,,apb_if,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_intf_inst.sv,1753533320,verilog,,,,,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_monitor.sv,1753785043,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_packet.sv,1753535812,systemVerilog,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_intf.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_intf.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_top.sv,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_monitor.sv,C:/Xilinx/Vivado/2020.2/data/xsim/system_verilog/uvm_include/uvm_macros.svh,$unit_apb_packet_sv,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_sequencer.sv,1753533208,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_agent.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/base_test.sv,1753783925,verilog,,,,,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_intf.sv,1753780551,verilog,,,,cnn_intf,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_intf_inst.sv,1753780550,verilog,,,,,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv,1753782254,verilog,,,,,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_test.sv,1753780552,verilog,,,,,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv,1753783503,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_env.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_env.sv,1753780543,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/new/cnn_seq.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_pkg.sv,1753779961,verilog,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_top.sv,,C:/Xilinx/Vivado/2020.2/data/xsim/system_verilog/uvm_include/uvm_macros.svh;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_packet.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_sequencer.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_monitor.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_agent.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_env.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/counter_seq.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_env.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/base_test.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/counter_test.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_seq.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_test.sv,tb_pkg,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_top.sv,1753783976,systemVerilog,,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_pkg.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_intf.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/counter_intf.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_intf_inst.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/counter_intf_inst.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_intf.sv;D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/cnn_intf_inst.sv,tb_top,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/new/cnn_seq.sv,1753780934,systemVerilog,,D:/Working/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/tb_top.sv,,,,uvm,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sources_1/imports/new/apb3_ip.v,1753783325,verilog,,,,custom_ip_APB3,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sources_1/imports/new/cnn_kernel.v,1753783966,verilog,,,,cnn_kernel,,,,,,,,
+D:/Working/CNN_UVM/CNN_UVM.srcs/sources_1/imports/new/top.v,1753783370,verilog,,,D:/Working/CNN_UVM/CNN_UVM.srcs/sources_1/imports/new/apb3_ip.v;D:/Working/CNN_UVM/CNN_UVM.srcs/sources_1/imports/new/My_IP.v;D:/Working/CNN_UVM/CNN_UVM.srcs/sources_1/imports/new/cnn_kernel.v,top,,uvm,,,,,,
