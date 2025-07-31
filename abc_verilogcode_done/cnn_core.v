@@ -1,8 +1,5 @@
 `timescale 1ns / 1ps
-<<<<<<< HEAD:abc_verilogcode_done/cnn_core.v
-=======
 
->>>>>>> 4000c94a57c81b4e2451570b0058aaef18856a6d:cnn_core.v
 module cnn_core #(
     parameter I_F_BW = 8,
     parameter KX = 5,
