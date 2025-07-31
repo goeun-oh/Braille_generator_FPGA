@@ -109,6 +109,8 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
     reg [`ST2_Pool_IBW-1:0] r_o_pooling;
     reg r_valid;
 
+    reg 
+
     always @(*) begin
         o_pooling = max_pixel({
             line_buffer0[col_delay-1], line_buffer0[col_delay],
@@ -124,7 +126,6 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
             r_o_pooling <= o_pooling;
             r_valid     <= 1;
         end else begin
-            r_o_pooling <= 0;
             r_valid     <= 0;
         end
     end    

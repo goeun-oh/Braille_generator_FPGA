@@ -38,7 +38,7 @@ module fmap_feeder #(
 
 
     initial begin
-        $readmemh("c_2_gray.mem", fmap_rom_a_0);
+        $readmemh("a_1.mem", fmap_rom_a_0);
         $readmemh("c_2_gray.mem", fmap_rom_a_1);
         $readmemh("c_1_gray.mem", fmap_rom_a_2);
         $readmemh("c_1_gray.mem", fmap_rom_a_3);
