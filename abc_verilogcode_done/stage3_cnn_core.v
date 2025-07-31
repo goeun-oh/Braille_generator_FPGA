@@ -29,7 +29,7 @@ module stage3_cnn_core(
     // 48 개 중 0, 16, 32
     input [`acc_CO * `ACC_BW-1:0] o_ot_ci_acc,
     
-    (* mark_debug = "true" *) output o_ot_valid,
+    output o_ot_valid,
     output [`core_CO * `OUT_BW -1:0] o_ot_result
     );
     // bias
@@ -102,7 +102,7 @@ module stage3_cnn_core(
     //         end
     // end
 
-    (* mark_debug = "true" *) reg signed [`OUT_BW -1:0] d_ot_result [0:`core_CO-1];
+    reg signed [`OUT_BW -1:0] d_ot_result [0:`core_CO-1];
     integer ch;
     always @(posedge clk) begin
         if (r_valid[LATENCY - 1]) begin
