@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Jul 30 15:35:55 2025
+# Process ID: 11008
+# Current directory: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent22320 C:\Users\kccistc\Documents\카카오톡 받은 파일\CNN_UVM\CNN_UVM.xpr
+# Log file: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/vivado.log
+# Journal file: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project {C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.xpr}
+update_compile_order -fileset sources_1

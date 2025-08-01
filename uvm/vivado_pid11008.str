@@ -1,0 +1,148 @@
+/*
+
+Xilinx Vivado v2020.2 (64-bit) [Major: 2020, Minor: 2]
+SW Build: 3064766 on Wed Nov 18 09:12:45 MST 2020
+IP Build: 3064653 on Wed Nov 18 14:17:31 MST 2020
+
+Process ID (PID): 11008
+License: Customer
+Mode: GUI Mode
+
+Current time: 	Wed Jul 30 15:36:25 KST 2025
+Time zone: 	Korean Standard Time (Asia/Seoul)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 16
+
+Screen size: 2560x1440
+Screen resolution (DPI): 100
+Available screens: 1
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+Scale size: 12
+
+Java version: 	11.0.2 64-bit
+Java home: 	C:/Xilinx/Vivado/2020.2/tps/win64/jre11.0.2
+Java executable location: 	C:/Xilinx/Vivado/2020.2/tps/win64/jre11.0.2/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	kccistc
+User home directory: C:/Users/kccistc
+User working directory: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM
+User country: 	KR
+User language: 	ko
+User locale: 	ko_KR
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2020.2
+RDI_DATADIR: C:/Xilinx/Vivado/2020.2/data
+RDI_BINDIR: C:/Xilinx/Vivado/2020.2/bin
+
+Vivado preferences file location: C:/Users/kccistc/AppData/Roaming/Xilinx/Vivado/2020.2/vivado.xml
+Vivado preferences directory: C:/Users/kccistc/AppData/Roaming/Xilinx/Vivado/2020.2/
+Vivado layouts directory: C:/Users/kccistc/AppData/Roaming/Xilinx/Vivado/2020.2/data/layouts
+PlanAhead jar file location: 	C:/Xilinx/Vivado/2020.2/lib/classes/planAhead.jar
+Vivado log file location: 	C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/vivado.log
+Vivado journal file location: 	C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/vivado.jou
+Engine tmp dir: 	C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/.Xil/Vivado-11008-DESKTOP-7CFQ9ND
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/Xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_DSP: C:/Xilinx/Vivado/2020.2/ids_lite/ISE
+XILINX_HLS: C:/Xilinx/Vitis_HLS/2020.2
+XILINX_PLANAHEAD: C:/Xilinx/Vivado/2020.2
+XILINX_SDK: C:/Xilinx/Vitis/2020.2
+XILINX_VITIS: C:/Xilinx/Vitis/2020.2
+XILINX_VIVADO: C:/Xilinx/Vivado/2020.2
+XILINX_VIVADO_HLS: C:/Xilinx/Vivado/2020.2
+
+
+GUI allocated memory:	131 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,058 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// bz (cr):  Open Project : addNotify
+// Opening Vivado Project: C:\Users\kccistc\Documents\카카오톡 받은 파일\CNN_UVM\CNN_UVM.xpr. Version: Vivado v2020.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project {C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.xpr} 
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 60 MB. Current time: 7/30/25, 3:36:26 PM KST
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project {C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.xpr} 
+// Tcl Message: INFO: [Project 1-313] Project file moved from 'D:/Working/CNN_UVM' since last save. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 108 MB (+110556kb) [00:00:17]
+// [Engine Memory]: 1,058 MB (+958085kb) [00:00:17]
+// [GUI Memory]: 120 MB (+6601kb) [00:00:18]
+// WARNING: HEventQueue.dispatchEvent() is taking  2144 ms.
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'. 
+// Project name: CNN_UVM; location: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM; part: xcvc1802-viva1596-1LHP-i-L
+// Tcl Message: open_project: Time (s): cpu = 00:00:02 ; elapsed = 00:00:08 . Memory (MB): peak = 1084.969 ; gain = 0.000 
+dismissDialog("Open Project"); // bz
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// [GUI Memory]: 127 MB (+1785kb) [00:00:22]
+// [GUI Memory]: 142 MB (+8471kb) [00:00:23]
+// Tcl Message: update_compile_order -fileset sources_1 
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources]", 8); // D
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1]", 9); // D
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv)]", 14); // D
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv), tb_pkg (tb_top.sv)]", 15); // D
+// Elapsed time: 17 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv), tb_pkg (tb_top.sv), apb_driver (apb_driver.sv)]", 20, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv), tb_pkg (tb_top.sv), apb_driver (apb_driver.sv)]", 20, true, false, false, false, false, true); // D - Double Click - Node
+// Launch External Editor: 'C:/Users/kccistc/AppData/Local/Programs/Microsoft VS Code/Code.exe -g "C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_driver.sv":0'
+// Elapsed time: 10 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv), tb_pkg (tb_top.sv), apb_sequencer (apb_sequencer.sv)]", 22, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv), tb_pkg (tb_top.sv), apb_sequencer (apb_sequencer.sv)]", 22, true, false, false, false, false, true); // D - Double Click - Node
+// Launch External Editor: 'C:/Users/kccistc/AppData/Local/Programs/Microsoft VS Code/Code.exe -g "C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.srcs/sim_1/imports/new/apb_sequencer.sv":0'
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv), tb_pkg (tb_top.sv), cnn_sequence (cnn_seq.sv)]", 28, true); // D - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Simulation Sources, sim_1, tb_top (tb_top.sv), tb_pkg (tb_top.sv), cnn_sequence (cnn_seq.sv)]", 28, true, false, false, false, false, true); // D - Double Click - Node
+// Launch External Editor: 'C:/Users/kccistc/AppData/Local/Programs/Microsoft VS Code/Code.exe -g "C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.srcs/sim_1/new/cnn_seq.sv":0'
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 82 MB. Current time: 7/30/25, 4:06:26 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 4:36:27 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 5:06:27 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 5:36:27 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 6:06:28 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 6:36:28 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 7:06:28 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 7:36:29 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 8:06:29 PM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/30/25, 8:36:29 PM KST
+// WARNING: HEventQueue.dispatchEvent() is taking  22467540 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/31/25, 3:00:02 AM KST
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 71 MB. Current time: 7/31/25, 9:31:12 AM KST
+// WARNING: HEventQueue.dispatchEvent() is taking  1515 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  11903194 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 1,058 MB. GUI used memory: 72 MB. Current time: 7/31/25, 12:49:57 PM KST
+// WARNING: HEventQueue.dispatchEvent() is taking  490777 ms.
