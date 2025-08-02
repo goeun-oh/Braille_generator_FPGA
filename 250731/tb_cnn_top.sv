@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-
+`include "defines_cnn_core.v" 
 module cnn_top_tb;
     parameter CLK_PERIOD = 10;
     parameter I_F_BW = 8;
@@ -57,6 +57,14 @@ module cnn_top_tb;
     integer i;
     integer row, col, idx;
     reg [$clog2(IX)-1:0]cnt;
+
+initial begin
+    $display("ST1_AR_BW     = %0d", `ST1_AR_BW);
+    $display("ST2_Pool_IBW  = %0d", `ST2_Pool_IBW);
+    $display("ST3_IF_BW     = %0d", `ST3_IF_BW);
+    $display("ST3_OUT_BW    = %0d", `ST3_OUT_BW);
+end
+
     initial begin
         // 초기화
         reset_n = 0;

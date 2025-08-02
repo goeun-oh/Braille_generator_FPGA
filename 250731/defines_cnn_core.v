@@ -19,7 +19,7 @@
 `define ST1_AK_BW         (`ST1_I_M_BW + $clog2(`KX*`KY))         // ST1_M_BW + log(KY*KX) Accum Kernel 
 `define ST1_ACI_BW        (`ST1_AK_BW + $clog2(`ST1_CI))          // Accum Channel Input
 `define ST1_AB_BW         (`ST1_ACI_BW+1)                         // After add bias, 연산애매해서 일단 +1함
-`define ST1_AR_BW         (`ST1_AK_BW-1)                          // After ReLU
+`define ST1_AR_BW         (`ST1_AB_BW-1)                          // After ReLU
 
 `define ST1_OUT_W         (`ST1_IX - `KX + 1)
 `define ST1_OUT_H         (`ST1_IY - `KY + 1)
@@ -59,7 +59,7 @@
 `define    ST2_Conv_Y      12 // Number of y (Con Input Channel)
 
 
-`define    ST2_BITSHIFT_BW 2
+`define    ST2_BITSHIFT_BW 6
 //======================================================================
 //          stage 3
 //======================================================================
@@ -73,7 +73,7 @@
 // 1. 데이터 비트 폭 (Bit-Widths)
 //----------------------------------------------------------------------
 
-`define ST3_IF_BW           `ST2_O_F_BW  // 입력 Feature Map 픽셀 비트폭 (Max Pool 입력)
+`define ST3_IF_BW           (`ST2_O_F_BW-`ST2_BITSHIFT_BW)  // 입력 Feature Map 픽셀 비트폭 (Max Pool 입력)
 `define ST3_OF_BW           `ST3_IF_BW  // 출력 Feature Map 픽셀 비트폭 (Max Pool 출력, FC 입력)
 `define ST3_W_BW             8  // FC Layer 가중치(Weight) 비트폭
 `define ST3_BIAS_BW          16  // FC Layer 편향(Bias) 비트폭
@@ -94,6 +94,10 @@
 `define acc_CO                  3  // acc 출력 채널 수 kernal 출력 채널, Core 입력 채널과 같음 
 `define core_CO                 3  // core 출력 채널 수
 
+
+
+
+`define    ST3_BITSHIFT_BW      8
 //----------------------------------------------------------------------
 // 3. Max Pooling 레이어 관련 파라미터
 //----------------------------------------------------------------------

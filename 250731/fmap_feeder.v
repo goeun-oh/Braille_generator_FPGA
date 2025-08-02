@@ -146,7 +146,7 @@ module fmap_feeder(
                         pixel_next = 0;
                         valid_next = 0;
                         addr_next = 0;
-                        state_next <= DONE;
+                        state_next = DONE;
                     end           
             end
             DONE    : begin

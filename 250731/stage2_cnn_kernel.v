@@ -10,15 +10,21 @@ input                               		   reset_n     	,
 
 //5x5x7
 input     signed [`KX*`KY*`ST2_W_BW-1 : 0] 	       i_cnn_weight ,
-input                                          i_in_valid  	,
-input     signed [`KX*`KY*`ST2_Conv_IBW-1 : 0] i_in_fmap    , //5x5x(20bit)
-output                                         o_ot_valid  	,
+input                                              i_in_valid  	,
+input     signed [`KX*`KY*`ST2_Conv_IBW-1 : 0]     i_in_fmap    , //5x5x(20bit)
+output                                             o_ot_valid  	,
 output    signed [`ST2_AK_BW-1 : 0]  			   o_ot_kernel_acc           
     );
 
 localparam LATENCY = 3+25;
 
 integer i,j,k,c;
+
+
+reg                                          i_in_valid2  ;	
+reg signed [`KX*`KY*`ST2_Conv_IBW-1 : 0]     i_in_fmap2   ; 
+
+
 //==============================================================================
 // Data Enable Signals 
 //==============================================================================
@@ -26,12 +32,16 @@ wire    [LATENCY-1 : 0] 	ce;
 reg     [LATENCY-1 : 0] 	r_valid;
 always @(posedge clk or negedge reset_n) begin
     if (!reset_n) begin
+		i_in_valid2 <= 0;
         r_valid <= 0;
+		i_in_fmap2 <=  0;
     end else begin
-        r_valid[0] <= i_in_valid;
+        i_in_valid2 <= i_in_valid;
+        r_valid[0] <= i_in_valid2;
         for ( i = 1; i < LATENCY; i = i + 1) begin
             r_valid[i] <= r_valid[i - 1];
         end
+		i_in_fmap2 <= i_in_fmap;
     end
 end
 assign	ce = r_valid;
@@ -56,7 +66,7 @@ reg       signed [`ST2_M_BW-1 : 0]  r_mul [0:(`KY*`KX)-1][0:`KY-1][0:`KX-1];
 				always @(posedge clk or negedge reset_n) begin
 					if(!reset_n) begin
 						mul[y][x] <= 0;
-					end else if(i_in_valid)begin
+					end else if(i_in_valid2)begin
 						mul[y][x] <= 
 							$signed(i_in_fmap[(y*`KX+x)*`ST2_Conv_IBW +: `ST2_Conv_IBW]) * 
 							$signed(i_cnn_weight[(y*`KX+x)*`ST2_W_BW +: `ST2_W_BW]);					

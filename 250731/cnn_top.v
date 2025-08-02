@@ -102,7 +102,7 @@ module cnn_top (
     genvar t;
     generate
         for (t = 0; t < `ST1_CO; t = t + 1) begin : GEN_SHIFT
-            wire signed [`ST1_O_F_BW-1:0] bs_temp_in  = w_core_fmap[t*`ST1_O_F_BW +: `ST1_O_F_BW];
+            wire signed [`ST1_O_F_BW-1:0] bs_temp_in  = $signed(w_core_fmap[t*`ST1_O_F_BW +: `ST1_O_F_BW]);
             wire signed [`ST1_O_F_BW-`ST1_BITSHIFT_BW-1:0] bs_temp_out = bs_temp_in >>> (`ST1_BITSHIFT_BW);
 
             assign w_bs_core_fmap[t*(`ST1_O_F_BW-`ST1_BITSHIFT_BW) +: (`ST1_O_F_BW-`ST1_BITSHIFT_BW)] = bs_temp_out;
@@ -138,14 +138,14 @@ module cnn_top (
     // bit_shift after Conv2 
     // ===============================
 
-    wire signed [`ST2_Conv_CO*(`ST2_Conv_IBW-`ST2_BITSHIFT_BW)-1:0] w_bs_stage2_core_fmap;
+    wire signed [`ST2_Conv_CO*(`ST2_O_F_BW-`ST2_BITSHIFT_BW)-1:0] w_bs_stage2_core_fmap;
 
 generate
     for (t = 0; t < `ST2_Conv_CO; t = t + 1) begin : GEN_SHIFT2
-        wire signed [`ST2_Conv_IBW-1:0] bs2_temp_in  = w_stage2_core_fmap[t*`ST2_Conv_IBW +: `ST2_Conv_IBW];
-        wire signed [`ST2_Conv_IBW-`ST2_BITSHIFT_BW-1:0] bs2_temp_out = bs2_temp_in >>> (`ST2_BITSHIFT_BW);
+        wire signed [`ST2_O_F_BW-1:0] bs2_temp_in  = $signed(w_stage2_core_fmap[t*`ST2_O_F_BW +: `ST2_O_F_BW]);
+        wire signed [`ST2_O_F_BW-`ST2_BITSHIFT_BW-1:0] bs2_temp_out = bs2_temp_in >>> (`ST2_BITSHIFT_BW);
 
-        assign w_bs_stage2_core_fmap[t*(`ST2_Conv_IBW-`ST2_BITSHIFT_BW) +: (`ST2_Conv_IBW-`ST2_BITSHIFT_BW)] = bs2_temp_out;
+        assign w_bs_stage2_core_fmap[t*(`ST2_O_F_BW-`ST2_BITSHIFT_BW) +: (`ST2_O_F_BW-`ST2_BITSHIFT_BW)] = bs2_temp_out;
     end
 endgenerate    
 
@@ -157,7 +157,7 @@ endgenerate
         .clk(clk),
         .reset_n(reset_n),
         .i_Relu_valid(w_stage2_core_valid),
-        .i_in_Relu(w_stage2_core_fmap),
+        .i_in_Relu(w_bs_stage2_core_fmap),
         .o_valid(out_valid),
         .alpha(alpha),
         .led(led)
