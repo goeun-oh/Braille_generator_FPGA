@@ -42,7 +42,7 @@ module cnn_top (
 
     initial begin
         $readmemh("conv1_weights.mem", rom);
-        $readmemh("bias.mem", bias_mem);
+        $readmemh("conv1_bias.mem", bias_mem);
 
     end  
     always @(*) begin
