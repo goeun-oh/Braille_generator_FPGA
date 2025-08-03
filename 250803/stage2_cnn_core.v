@@ -24,7 +24,7 @@ input     signed [`ST2_Conv_CI*`ST2_B_BW - 1  : 0]                          i_cn
 input                                                                   i_in_valid  	; 
 input     signed [`ST2_Conv_CI * `ST2_Conv_IBW-1 : 0]  	                i_in_fmap    	;//3*( bitwidh) , 3ch에 대한 1point output
 output                                                                  o_ot_valid  	;
-output    signed [`ST2_Conv_CO * (`ST2_O_F_BW)-1 : 0]  		        o_ot_fmap           ;//3*( bitwidh)    
+output    signed [`ST2_Conv_CO * (`ST2_O_F_BW)-1 : 0]  		            o_ot_fmap           ;//3*( bitwidh)    
 
 localparam LATENCY = 2;
 localparam COL = `ST2_Conv_X; //12
@@ -329,7 +329,7 @@ reg [`ST2_Conv_CO * (`ST2_O_F_BW)-1:0] r_act_relu;
 	    always @ (*) begin
             for (i = 0; i < `ST2_Conv_CO; i = i + 1) begin
                 if (r_add_bias[i*`ST2_AB_BW +: `ST2_AB_BW] >>> (`ST2_AB_BW-1)) begin// MSB가 1이면 음수
-                    act_relu[i*`ST2_O_F_BW +: `ST2_O_F_BW] = 0;
+                    act_relu[i*`ST2_AB_BW +: `ST2_AB_BW] = 0;
                     //debug
                     d_act_relu [i] = 0;
                 end else begin

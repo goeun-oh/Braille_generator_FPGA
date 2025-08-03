@@ -50,7 +50,7 @@ output    signed [`ST2_Conv_CO * (`ST2_O_F_BW)-1 : 0]  		          o_ot_fmap    
 
 
     //debug
-    reg signed [`ST2_O_F_BW-1:0] d_ot_fmap [`ST2_Conv_CI-1:0];
+    reg signed [`ST2_O_F_BW-1:0] d_ot_fmap [0:`ST2_Conv_CO-1];
     integer c;
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
@@ -59,7 +59,7 @@ output    signed [`ST2_Conv_CO * (`ST2_O_F_BW)-1 : 0]  		          o_ot_fmap    
             end            
         end else if (o_ot_valid) begin
             for(c=0 ; c< `ST2_Conv_CO; c= c+1) begin
-                d_ot_fmap[c] <= $signed(o_ot_fmap[c*(`ST2_O_F_BW-1) +: (`ST2_O_F_BW-1)]);
+                d_ot_fmap[c] <= $signed(o_ot_fmap[c*(`ST2_O_F_BW) +: (`ST2_O_F_BW)]);
             end
         end
         
