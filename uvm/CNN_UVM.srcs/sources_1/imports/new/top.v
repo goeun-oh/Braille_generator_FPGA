@@ -22,7 +22,7 @@ module top (
     //  additional ports here
     , input         PCLK
     , input         PRESETN
-    , output wire [15:0] O_OT_KERNEL_ACC
+    , output wire [15:0] O_MUL
 );
         wire    [8-1:0]   O_CNN_WEIGHT;
         wire    [8-1:0]   O_IN_FMAP;
@@ -51,7 +51,7 @@ module top (
           .i_in_valid      (O_IN_VALID      ),
           .i_in_fmap       (O_IN_FMAP       ),
           .o_ot_valid      ( ),
-          .o_ot_kernel_acc (O_OT_KERNEL_ACC )
+          .o_mul (O_MUL)
     );
     endmodule                                
 //apb vip 를 만들어서 검증하려한다. (vip 용어: 이미 검증된 uvm 코드)
