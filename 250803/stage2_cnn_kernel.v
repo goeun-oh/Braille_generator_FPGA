@@ -95,23 +95,23 @@ reg       signed [`ST2_M_BW-1 : 0]  r_mul [0:(`KY*`KX)-1][0:`KY-1][0:`KX-1];
 		end
 	end
 
-    //debug
-    reg signed [`ST2_M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
-	always @(posedge clk or negedge reset_n) begin
-		if(!reset_n) begin
-			for(j=0;j<`KY;j=j+1)begin
-				for(i=0; i<`KX;i=i+1) begin
-					d_mul[j][i]<=0;
-				end
-			end
-		end else if(r_valid[0])begin
-			for(j=0;j<`KY;j=j+1)begin
-				for(i=0; i<`KX;i=i+1) begin
-					d_mul[j][i] <= $signed(mul[j][i]);
-				end
-			end	
-		end
-	end
+    // //debug
+    // reg signed [`ST2_M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
+	// always @(posedge clk or negedge reset_n) begin
+	// 	if(!reset_n) begin
+	// 		for(j=0;j<`KY;j=j+1)begin
+	// 			for(i=0; i<`KX;i=i+1) begin
+	// 				d_mul[j][i]<=0;
+	// 			end
+	// 		end
+	// 	end else if(r_valid[0])begin
+	// 		for(j=0;j<`KY;j=j+1)begin
+	// 			for(i=0; i<`KX;i=i+1) begin
+	// 				d_mul[j][i] <= $signed(mul[j][i]);
+	// 			end
+	// 		end	
+	// 	end
+	// end
 
 
 //r_valid[1], r_mul[1]

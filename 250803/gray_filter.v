@@ -9,7 +9,7 @@
 module gray_filter(
         input   clk,
         input   reset_n,
-        input   [`ISP_BW - 1 : 0]  one_px,           // 32 bit
+        input   [`ISP_BW - 1 : 0]  one_px,              // 32 bit
         input   i_in_valid,                            
         output  [`ST1_I_F_BW - 1 : 0] grayed_one_px,    // 8 bit
         output  o_valid

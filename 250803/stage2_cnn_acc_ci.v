@@ -8,11 +8,11 @@ input                                           		clk         ,
 input                                           		reset_n     ,
 
 //3*5*5*(7)
-input     signed [`ST2_Conv_CI*`KX*`KY*`ST2_W_BW-1 : 0]  			i_cnn_weight,
+input     signed [`ST2_Conv_CI*`KX*`KY*`ST2_W_BW-1 : 0]  	    i_cnn_weight,
 input                                           				i_in_valid  ,
 input     signed [`ST2_Conv_CI*`KX*`KY*`ST2_Conv_IBW-1 : 0]  	i_in_fmap   , //3x5x5x(20bit)
 output                                          				o_ot_valid  ,
-output    signed [`ST2_ACI_BW-1 : 0]  			            		o_ot_ci_acc 	     
+output    signed [`ST2_ACI_BW-1 : 0]  			                o_ot_ci_acc 	     
     );
 
 localparam LATENCY = 1;
