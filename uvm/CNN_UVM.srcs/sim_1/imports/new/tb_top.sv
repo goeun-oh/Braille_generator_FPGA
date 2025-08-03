@@ -27,7 +27,7 @@ module tb_top;
       .PSLVERR (  ),
       .PCLK    (clk              ),  
       .PRESETN (rst_n            ),   
-      .O_OT_KERNEL_ACC (  ) 
+      .O_MUL () 
     );
     
     // clock generation

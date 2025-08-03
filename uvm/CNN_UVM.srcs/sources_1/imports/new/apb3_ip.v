@@ -126,7 +126,6 @@ module custom_ip_APB3 (
             `WEIGHT: prdata = reg_cnn_weight;
             `VALID : prdata = reg_in_valid;
             `FMAP  : prdata = reg_in_fmap;
-            default : prdata = 32'h0000_0000;
         endcase
     end
 

@@ -14,7 +14,7 @@ module cnn_kernel #(
     input i_in_valid,
     input [I_F_BW-1 : 0] i_in_fmap,
     output o_ot_valid,
-    output signed [M_BW-1:0] o_mul
+    output [M_BW-1:0] o_mul
     //output signed [AK_BW-1 : 0] o_ot_kernel_acc
 );
 
@@ -56,7 +56,7 @@ module cnn_kernel #(
     //    for (
     //        mul_idx = 0; mul_idx < KY * KX; mul_idx = mul_idx + 1
     //    ) begin : gen_mul
-    assign  mul[0 +: M_BW]   =$signed({1'b0, i_in_fmap[0 +: I_F_BW]}) * $signed(i_cnn_weight[0 +: W_BW]);
+    assign  mul[0 +: M_BW]   = i_in_fmap[0 +: I_F_BW] * i_cnn_weight[0 +: W_BW];
     //always @(posedge clk or negedge reset_n) begin
     //    if (!reset_n) begin
     //        r_mul[0+:M_BW] <= 0;
