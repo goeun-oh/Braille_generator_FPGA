@@ -23,65 +23,24 @@ module fmap_feeder(
     reg [`ISP_BW-1:0] fmap_rom_c_2 [0:`TOTAL_PIXELS-1];
     reg [`ISP_BW-1:0] fmap_rom_c_3 [0:`TOTAL_PIXELS-1];
 
-    // reg [$clog2(`TOTAL_PIXELS)-1:0] addr;
-
-    // reg [`ISP_BW-1:0] pixel_reg;
-    // reg valid_reg;
-    // reg is_sending;
-    // reg is_done;
-
+    reg [$clog2(`TOTAL_PIXELS)-1:0] addr;
 
 
     initial begin
-        $readmemh("a_1_gray.mem", fmap_rom_a_0);
-        $readmemh("a_2_gray.mem", fmap_rom_a_1);
-        $readmemh("a_3_gray.mem", fmap_rom_a_2);
-        $readmemh("a_4_gray.mem", fmap_rom_a_3);
-        $readmemh("b_1_gray.mem", fmap_rom_b_0);
-        $readmemh("b_2_gray.mem", fmap_rom_b_1);
-        $readmemh("b_3_gray.mem", fmap_rom_b_2);
-        $readmemh("b_4_gray.mem", fmap_rom_b_3);
-        $readmemh("c_1_gray.mem", fmap_rom_c_0);
-        $readmemh("c_2_gray.mem", fmap_rom_c_1);
-        $readmemh("c_3_gray.mem", fmap_rom_c_2);
-        $readmemh("c_4_gray.mem", fmap_rom_c_3);
+        $readmemh("a_1_rgb.mem", fmap_rom_a_0);
+        $readmemh("a_2_rgb.mem", fmap_rom_a_1);
+        $readmemh("a_3_rgb.mem", fmap_rom_a_2);
+        $readmemh("a_4_rgb.mem", fmap_rom_a_3);
+        $readmemh("b_1_rgb.mem", fmap_rom_b_0);
+        $readmemh("b_2_rgb.mem", fmap_rom_b_1);
+        $readmemh("b_3_rgb.mem", fmap_rom_b_2);
+        $readmemh("b_4_rgb.mem", fmap_rom_b_3);
+        $readmemh("c_1_rgb.mem", fmap_rom_c_0);
+        $readmemh("c_2_rgb.mem", fmap_rom_c_1);
+        $readmemh("c_3_rgb.mem", fmap_rom_c_2);
+        $readmemh("c_4_rgb.mem", fmap_rom_c_3);
     end
-    
-    // always @(*) begin
-    //     if (i_valid)
-    //         is_sending <= 1;
-    //     else if (is_done)
-    //         is_sending <= 0;
-    // end
 
-    // always @(posedge clk or negedge reset_n) begin
-    //     if (!reset_n) begin
-    //         addr <= 0;
-    //         pixel_reg <= 0;
-    //         valid_reg <= 0;
-    //         is_done <=0;
-    //     end else begin
-    //         if (is_sending) begin
-    //             pixel_reg <=0;
-    //             if (addr < `TOTAL_PIXELS) begin
-    //                 pixel_reg <= selected_pixel;
-    //                 valid_reg <= 1;
-    //                 addr <= addr + 1;
-    //                 is_done <=0;
-    //             end else if (addr == `TOTAL_PIXELS)begin
-    //                 valid_reg <= 0;
-    //                 pixel_reg <= 0;
-    //                 addr <=0;
-    //                 is_done <= 1;
-    //             end
-    //         end else begin
-    //             valid_reg <= 0;
-    //             addr <=0;
-    //             pixel_reg <=0;
-    //             is_done <=0;
-    //         end
-    //     end
-    // end
     reg [`ISP_BW-1:0] selected_pixel;
 
     reg [1:0] state, state_next;

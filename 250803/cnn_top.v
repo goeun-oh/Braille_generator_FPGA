@@ -69,14 +69,14 @@ module cnn_top (
     wire [7:0] grayed_px;
     wire grayed_o_valid;    
 
-    // gray_filter u_gray_filter(
-    //     .clk(clk),
-    //     .reset_n(reset_n),
-    //     .one_px(w_pixel),           // 32 bit
-    //     .i_in_valid(o_valid),                            
-    //     .grayed_one_px(grayed_px),    // 8 bit
-    //     .o_valid(grayed_o_valid)
-    // );
+    gray_filter u_gray_filter(
+        .clk(clk),
+        .reset_n(reset_n),
+        .one_px(w_pixel),           // 32 bit
+        .i_in_valid(o_valid),                            
+        .grayed_one_px(grayed_px),    // 8 bit
+        .o_valid(grayed_o_valid)
+    );
 
 
 
@@ -86,8 +86,8 @@ module cnn_top (
         .reset_n(reset_n),
         .i_cnn_weight(w_cnn_weight),
         .i_cnn_bias(w_cnn_bias),
-        .i_in_valid(o_valid),
-        .i_in_fmap(w_pixel),
+        .i_in_valid(grayed_o_valid),
+        .i_in_fmap(grayed_px),
         .o_ot_valid(w_core_valid),
         .o_ot_fmap(w_core_fmap)
     );
