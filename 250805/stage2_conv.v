@@ -26,8 +26,8 @@ output    signed [`ST2_Conv_CO * (`ST2_O_F_BW)-1 : 0]  		          o_ot_fmap    
 
 
     // 3 * (3 * 5 * 5) * (8bit)
-    wire signed  [`ST2_Conv_CI*`ST2_Conv_CO*  `KX*`KY  *`ST2_W_BW -1 : 0] w_cnn_weight;
-    wire signed  [`ST2_Conv_CI*`ST2_B_BW - 1  : 0]   w_cnn_bias;
+    wire signed  [`ST2_Conv_CO*`ST2_Conv_CI*  `KX*`KY  *`ST2_W_BW -1 : 0] w_cnn_weight;
+    wire signed  [`ST2_Conv_CO*`ST2_B_BW - 1  : 0]   w_cnn_bias;
 
     conv2_weight_rom u_weight_rom (
         .weight(w_cnn_weight) // 3x(3x5x5)

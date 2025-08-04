@@ -19,8 +19,8 @@ module stage2_cnn_core (
 //==============================================================================
 input                                                                   clk         	;
 input                                                                   reset_n     	;
-input     signed [`ST2_Conv_CI* `ST2_Conv_CO*  `KX*`KY  *`ST2_W_BW -1 : 0]  i_cnn_weight    ; // 3 * (3 * 5 * 5) * (bitwidth)
-input     signed [`ST2_Conv_CI*`ST2_B_BW - 1  : 0]                          i_cnn_bias;
+input     signed [`ST2_Conv_CO* `ST2_Conv_CI*  `KX*`KY  *`ST2_W_BW -1 : 0]  i_cnn_weight    ; // 3 * (3 * 5 * 5) * (bitwidth)
+input     signed [`ST2_Conv_CO* `ST2_B_BW - 1  : 0]                          i_cnn_bias;
 input                                                                   i_in_valid  	; 
 input     signed [`ST2_Conv_CI * `ST2_Conv_IBW-1 : 0]  	                i_in_fmap    	;//3*( bitwidh) , 3ch에 대한 1point output
 output                                                                  o_ot_valid  	;
@@ -227,19 +227,19 @@ reg     signed [`ST2_W_BW-1:0] d_weight [0:`ST2_Conv_CO-1][0:`ST2_Conv_CI-1][0:`
     end
 
 
-genvar ci_inst;
+genvar co_inst;
 generate
-	for(ci_inst = 0; ci_inst < `ST2_Conv_CO; ci_inst = ci_inst + 1) begin : gen_ci_inst
+	for(co_inst = 0; co_inst < `ST2_Conv_CO; co_inst = co_inst + 1) begin : gen_co_inst
         
-		assign	w_in_valid[ci_inst] = r_w_valid  [V_LATENCY-1 : 0] ; 
+		assign	w_in_valid[co_inst] = r_w_valid  [V_LATENCY-1 : 0] ; 
 		stage2_cnn_acc_ci u_stage2_cnn_acc_ci(
 	    .clk             (clk         ),
 	    .reset_n         (reset_n     ),
-	    .i_cnn_weight    (w_cnn_weight[ci_inst*`ST2_Conv_CI*`KX*`KY*`ST2_W_BW +: `ST2_Conv_CI*`KX*`KY*`ST2_W_BW]),
-	    .i_in_valid      (w_in_valid[ci_inst]),
+	    .i_cnn_weight    (w_cnn_weight[co_inst*`ST2_Conv_CI*`KX*`KY*`ST2_W_BW +: `ST2_Conv_CI*`KX*`KY*`ST2_W_BW]),
+	    .i_in_valid      (w_in_valid[co_inst]),
 	    .i_in_fmap       (window),
-	    .o_ot_valid      (w_ot_valid[ci_inst]),
-	    .o_ot_ci_acc     (w_ot_ci_acc[ci_inst*(`ST2_ACI_BW) +: (`ST2_ACI_BW)])         
+	    .o_ot_valid      (w_ot_valid[co_inst]),
+	    .o_ot_ci_acc     (w_ot_ci_acc[co_inst*(`ST2_ACI_BW) +: (`ST2_ACI_BW)])         
 	    );
 	end
 endgenerate
