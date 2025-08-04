@@ -9,7 +9,7 @@
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: ST3_W_BW
 // 
 // Dependencies: 
 // 
@@ -18,13 +18,15 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-`include "stage3_defines_cnn_core.vh"
+`include "defines_cnn_core.v"
+
+
 module stage3_top_cnn(
     input wire clk,
     input wire reset_n,
 
     input wire i_Relu_valid,
-    input wire [`stage2_CI * `IF_BW - 1: 0] i_in_Relu,
+    input wire [`stage3_CI * `ST3_IF_BW - 1: 0] i_in_Relu,
 
     output o_valid,
     output [7:0] alpha,
@@ -32,11 +34,11 @@ module stage3_top_cnn(
     );
 
     wire pool_valid;
-    wire [`pool_CO * `OF_BW-1:0] w_pool;
+    wire [`pool_CO * `ST3_OF_BW-1:0] w_pool;
     wire acc_valid;
-    wire [`acc_CO * `ACC_BW-1:0] w_acc;
+    wire [`acc_CO * `ST3_ACC_BW-1:0] w_acc;
     wire core_valid;
-    wire [`core_CO * `OUT_BW -1:0] w_core;
+    wire [`core_CO * `ST3_OUT_BW -1:0] w_core;
     // 확인 완료
     stage3_max_pooling U_stage3_max_pooling(
     .clk(clk),
@@ -83,13 +85,13 @@ module stage3_compare_alpha (
     input clk,
     input reset_n,
     input i_in_valid,
-    input [`core_CO * `OUT_BW -1:0] i_in_core,
+    input [`core_CO * `ST3_OUT_BW -1:0] i_in_core,
     output reg [7:0] o_alpha,
     output reg [2:0] led,
     output o_valid
 );
     localparam LATENCY = 1;
-    reg signed [`OUT_BW - 1:0] c_ot_result [0 : `core_CO-1];
+    reg signed [`ST3_OUT_BW - 1:0] c_ot_result [0 : `core_CO-1];
 
     reg  signed   [LATENCY - 1 : 0]         r_valid;
 
@@ -111,7 +113,7 @@ module stage3_compare_alpha (
             end
         end else if (i_in_valid) begin
             for (i=0;i<`core_CO;i=i+1) begin
-                c_ot_result[i] <= $signed(i_in_core [i*`OUT_BW+:`OUT_BW]);
+                c_ot_result[i] <= $signed(i_in_core [i*`ST3_OUT_BW+:`ST3_OUT_BW]);
             end
         end
     end

@@ -1,6 +1,7 @@
 
 `timescale 1ns / 1ps
-`include "stage2_defines_cnn_core.v"
+
+`include "defines_cnn_core.v"
 
 module stage2_cnn_kernel (
     // Clock & Reset
@@ -8,11 +9,11 @@ input                               		   clk         	,
 input                               		   reset_n     	,
 
 //5x5x7
-input     signed [`KX*`KY*`W_BW-1 : 0] 	       i_cnn_weight ,
+input     signed [`KX*`KY*`ST2_W_BW-1 : 0] 	       i_cnn_weight ,
 input                                          i_in_valid  	,
 input     signed [`KX*`KY*`ST2_Conv_IBW-1 : 0] i_in_fmap    , //5x5x(20bit)
 output                                         o_ot_valid  	,
-output    signed [`AK_BW-1 : 0]  			   o_ot_kernel_acc           
+output    signed [`ST2_AK_BW-1 : 0]  			   o_ot_kernel_acc           
     );
 
 localparam LATENCY = 3+25;
@@ -39,9 +40,9 @@ assign	ce = r_valid;
 // mul = fmap * weight
 //==============================================================================
 
-reg       signed [`M_BW-1 : 0]  mul [0:`KY-1][0:`KX-1];
+reg       signed [`ST2_M_BW-1 : 0]  mul [0:`KY-1][0:`KX-1];
 //5x5 28bit
-reg       signed [`M_BW-1 : 0]  r_mul [0:(`KY*`KX)-1][0:`KY-1][0:`KX-1];
+reg       signed [`ST2_M_BW-1 : 0]  r_mul [0:(`KY*`KX)-1][0:`KY-1][0:`KX-1];
 
 
 	//i_in_valid 들어오면 25개 각각 곱셈
@@ -51,14 +52,14 @@ reg       signed [`M_BW-1 : 0]  r_mul [0:(`KY*`KX)-1][0:`KY-1][0:`KX-1];
 			for(x=0 ; x<`KX ; x=x+1) begin
 				(* use_dsp = "yes" *) 
 				//이게 1clk안에 가능? setup, hold지카면서?
-				// assign  mul[(y*`KX+x)* `M_BW +: `M_BW]	=  $signed(i_in_fmap[(y*`KX+x)* `ST2_Conv_IBW +: `ST2_Conv_IBW]) *  $signed(i_cnn_weight[(y*`KX+x) * `W_BW +: `W_BW]);
+				// assign  mul[(y*`KX+x)* `ST2_M_BW +: `ST2_M_BW]	=  $signed(i_in_fmap[(y*`KX+x)* `ST2_Conv_IBW +: `ST2_Conv_IBW]) *  $signed(i_cnn_weight[(y*`KX+x) * `ST2_W_BW +: `ST2_W_BW]);
 				always @(posedge clk or negedge reset_n) begin
 					if(!reset_n) begin
 						mul[y][x] <= 0;
 					end else if(i_in_valid)begin
 						mul[y][x] <= 
 							$signed(i_in_fmap[(y*`KX+x)*`ST2_Conv_IBW +: `ST2_Conv_IBW]) * 
-							$signed(i_cnn_weight[(y*`KX+x)*`W_BW +: `W_BW]);					
+							$signed(i_cnn_weight[(y*`KX+x)*`ST2_W_BW +: `ST2_W_BW]);					
 					end
 				end
 			end
@@ -94,28 +95,28 @@ reg       signed [`M_BW-1 : 0]  r_mul [0:(`KY*`KX)-1][0:`KY-1][0:`KX-1];
 		end
 	end
 
-    //debug
-    reg signed [`M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
-	always @(posedge clk or negedge reset_n) begin
-		if(!reset_n) begin
-			for(j=0;j<`KY;j=j+1)begin
-				for(i=0; i<`KX;i=i+1) begin
-					d_mul[j][i]<=0;
-				end
-			end
-		end else if(r_valid[0])begin
-			for(j=0;j<`KY;j=j+1)begin
-				for(i=0; i<`KX;i=i+1) begin
-					d_mul[j][i] <= $signed(mul[j][i]);
-				end
-			end	
-		end
-	end
+    // //debug
+    // reg signed [`ST2_M_BW-1:0] d_mul [0:`KY-1][0:`KX-1];    
+	// always @(posedge clk or negedge reset_n) begin
+	// 	if(!reset_n) begin
+	// 		for(j=0;j<`KY;j=j+1)begin
+	// 			for(i=0; i<`KX;i=i+1) begin
+	// 				d_mul[j][i]<=0;
+	// 			end
+	// 		end
+	// 	end else if(r_valid[0])begin
+	// 		for(j=0;j<`KY;j=j+1)begin
+	// 			for(i=0; i<`KX;i=i+1) begin
+	// 				d_mul[j][i] <= $signed(mul[j][i]);
+	// 			end
+	// 		end	
+	// 	end
+	// end
 
 
 //r_valid[1], r_mul[1]
-reg       signed [`AK_BW-1 : 0]    acc_kernel[0:`KY*`KX-1]  	;
-reg       signed [`AK_BW-1 : 0]    r_acc_kernel         ;
+reg       signed [`ST2_AK_BW-1 : 0]    acc_kernel[0:`KY*`KX-1]  	;
+reg       signed [`ST2_AK_BW-1 : 0]    r_acc_kernel         ;
 reg [4:0] acc_idx;  // 0~24 index
 reg accumulating;
 reg acc_done;

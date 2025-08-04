@@ -1,21 +1,14 @@
 `timescale 1ns / 1ps
-module cnn_kernel #(
-    parameter KX = 5,  // Number of Kernel X
-    parameter KY = 5,  // Number of Kernel Y
-    parameter I_F_BW = 8,  // Bit Width of Input Feature
-    parameter W_BW = 8,  // BW of weight parameter
-    parameter B_BW = 16,  // BW of bias parameter
-    parameter AK_BW = 21,  // M_BW + log(KY*KX) Accum Kernel 
-    parameter M_BW = 16 // I_F_BW * W_BW
-)(
+`include "defines_cnn_core.v"
+module cnn_kernel(
     // Clock & Reset
     input clk,
     input reset_n,
-    input [KX*KY*W_BW-1 : 0] i_cnn_weight,
+    input [`KX*`KY*`ST1_W_BW-1 : 0] i_cnn_weight,
     input i_in_valid,
-    input [KX*KY*I_F_BW-1 : 0] i_in_fmap,
+    input [`KX*`KY*`ST1_I_F_BW-1 : 0] i_in_fmap,
     output o_ot_valid,
-    output signed [AK_BW-1 : 0] o_ot_kernel_acc
+    output signed [`ST1_AK_BW-1 : 0] o_ot_kernel_acc
     
 );
 
@@ -48,39 +41,39 @@ module cnn_kernel #(
     // mul = fmap * weight
     //==============================================================================
 
-    wire [KY*KX*M_BW-1 : 0] mul;
-    reg [KY*KX*M_BW-1 : 0] r_mul;
+    wire [`KY*`KX*`ST1_I_M_BW-1 : 0] mul;
+    reg [`KY*`KX*`ST1_I_M_BW-1 : 0] r_mul;
 
     // TODO Multiply each of Kernels
     genvar mul_idx;
     generate
         for (
-            mul_idx = 0; mul_idx < KY * KX; mul_idx = mul_idx + 1
+            mul_idx = 0; mul_idx < `KY * `KX; mul_idx = mul_idx + 1
         ) begin : gen_mul
-            assign  mul[mul_idx * M_BW +: M_BW]   =$signed({1'b0, i_in_fmap[mul_idx * I_F_BW +: I_F_BW]}) * $signed(i_cnn_weight[mul_idx * W_BW +: W_BW]);
+            assign  mul[mul_idx * `ST1_I_M_BW +: `ST1_I_M_BW]   =$signed({1'b0, i_in_fmap[mul_idx * `ST1_I_F_BW +: `ST1_I_F_BW]}) * $signed(i_cnn_weight[mul_idx * `ST1_W_BW +: `ST1_W_BW]);
             always @(posedge clk or negedge reset_n) begin
                 if (!reset_n) begin
-                    r_mul[mul_idx*M_BW+:M_BW] <= 0;
+                    r_mul[mul_idx*`ST1_I_M_BW+:`ST1_I_M_BW] <= 0;
                 end else if (i_in_valid) begin
-                    r_mul[mul_idx*M_BW+:M_BW] <= $signed(mul[mul_idx*M_BW+:M_BW]);
+                    r_mul[mul_idx*`ST1_I_M_BW+:`ST1_I_M_BW] <= $signed(mul[mul_idx*`ST1_I_M_BW+:`ST1_I_M_BW]);
                 end
             end
         end
     endgenerate
-    reg signed [M_BW-1:0] reg_r_mul [0:KY-1][0:KX-1];
+    reg signed [`ST1_I_M_BW-1:0] reg_r_mul [0:`KY-1][0:`KX-1];
     integer k;
     integer j;
     always @(posedge clk) begin
         if(i_in_valid)begin
-            for (k= 0; k < KY; k = k + 1) begin
-                for (j= 0; j < KX; j = j + 1) begin
-                    reg_r_mul[k][j] <= $signed(r_mul[(k*KY+j)*M_BW +: M_BW]);
+            for (k= 0; k < `KY; k = k + 1) begin
+                for (j= 0; j < `KX; j = j + 1) begin
+                    reg_r_mul[k][j] <= $signed(r_mul[(k*`KY+j)*`ST1_I_M_BW +: `ST1_I_M_BW]);
                 end
             end
         end
     end
 
-    //(* mark_debug = "true" *) reg signed [M_BW-1:0] d_reg_mul [0:KX-1];
+    //(* mark_debug = "true" *) reg signed [`ST1_I_M_BW-1:0] d_reg_mul [0:`KX-1];
     //always @(posedge clk, negedge reset_n) begin
     //    if (!reset_n) begin
     //        d_reg_mul [0] <= 0; 
@@ -97,41 +90,41 @@ module cnn_kernel #(
     //    end
     //end
 
-    reg signed [AK_BW-1 : 0] acc_kernel;
-    reg signed [AK_BW-1 : 0] r_acc_kernel;
+    reg signed [`ST1_AK_BW-1 : 0] acc_kernel;
+    reg signed [`ST1_AK_BW-1 : 0] r_acc_kernel;
     integer               acc_idx;
     generate
         always @(*) begin
-            acc_kernel[0+:AK_BW] = 0;
-            for (acc_idx = 0; acc_idx < KY * KX; acc_idx = acc_idx + 1) begin
-                acc_kernel[0 +: AK_BW] = $signed(acc_kernel[0 +: AK_BW]) + $signed(r_mul[acc_idx*M_BW +: M_BW]);
+            acc_kernel[0+:`ST1_AK_BW] = 0;
+            for (acc_idx = 0; acc_idx < `KY * `KX; acc_idx = acc_idx + 1) begin
+                acc_kernel[0 +: `ST1_AK_BW] = $signed(acc_kernel[0 +: `ST1_AK_BW]) + $signed(r_mul[acc_idx*`ST1_I_M_BW +: `ST1_I_M_BW]);
             end
         end
     endgenerate
 
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
-            r_acc_kernel[0+:AK_BW] <= 0;
+            r_acc_kernel[0+:`ST1_AK_BW] <= 0;
         end else if (ce[LATENCY-2]) begin
-            r_acc_kernel[0+:AK_BW] <= $signed(acc_kernel[0+:AK_BW]);
+            r_acc_kernel[0+:`ST1_AK_BW] <= $signed(acc_kernel[0+:`ST1_AK_BW]);
         end
     end
 
-    reg [W_BW-1:0] reg_weight [0:KY-1][0:KX-1];
+    reg [`ST1_W_BW-1:0] reg_weight [0:`KY-1][0:`KX-1];
     always @(posedge clk) begin
-        for (k= 0; k < KY; k = k + 1) begin
-            for (j= 0; j < KX; j = j + 1) begin
-                reg_weight[k][j] <= i_cnn_weight[(k*KY+j)*W_BW +: W_BW];
+        for (k= 0; k < `KY; k = k + 1) begin
+            for (j= 0; j < `KX; j = j + 1) begin
+                reg_weight[k][j] <= i_cnn_weight[(k*`KY+j)*`ST1_W_BW +: `ST1_W_BW];
             end
         end
     end
     
-    reg [I_F_BW-1:0] reg_i_fmap [0:KY-1][0:KX-1];
+    reg [`ST1_I_F_BW-1:0] reg_i_fmap [0:`KY-1][0:`KX-1];
     always @(posedge clk) begin
         if(i_in_valid)begin
-            for (k= 0; k < KY; k = k + 1) begin
-                for (j= 0; j < KX; j = j + 1) begin
-                    reg_i_fmap[k][j] <= i_in_fmap[(k*KY+j)*I_F_BW +: I_F_BW];
+            for (k= 0; k < `KY; k = k + 1) begin
+                for (j= 0; j < `KX; j = j + 1) begin
+                    reg_i_fmap[k][j] <= i_in_fmap[(k*`KY+j)*`ST1_I_F_BW +: `ST1_I_F_BW];
                 end
             end
         end

@@ -18,18 +18,18 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-`include "stage3_defines_cnn_core.vh"
+`include "defines_cnn_core.v"
 
 module stage3_cnn_kernal(
     input wire clk,
     input wire reset_n,
 
     input wire i_pooling_valid,
-    input wire [`pool_CI * `OF_BW-1:0] i_pooling,
-    input wire [`pool_CI * `W_BW - 1 : 0] i_weight,
+    input wire [`pool_CI * `ST3_OF_BW-1:0] i_pooling,
+    input wire [`pool_CI * `ST3_W_BW - 1 : 0] i_weight,
 
     output wire o_kernal_valid,
-    output wire [`MUL_BW + $clog2(3) - 1: 0]o_kernel
+    output wire [`ST3_MUL_BW + $clog2(3) - 1: 0]o_kernel
     // 값 확인용
 
     );
@@ -51,8 +51,8 @@ module stage3_cnn_kernal(
 
 
     // reducing fanout by pipelining
-    reg [`OF_BW-1:0] pool_ch[0:`pool_CI-1];
-    reg [`W_BW-1:0]  weight_ch[0:`pool_CI-1];
+    reg [`ST3_OF_BW-1:0] pool_ch[0:`pool_CI-1];
+    reg [`ST3_W_BW-1:0]  weight_ch[0:`pool_CI-1];
 
     integer i;
     always @(posedge clk or negedge reset_n) begin
@@ -63,23 +63,23 @@ module stage3_cnn_kernal(
             end
         end else if (i_pooling_valid) begin
             for (i = 0; i < `pool_CI; i = i + 1) begin
-                pool_ch[i]   <= i_pooling[i * `OF_BW +: `OF_BW];
-                weight_ch[i] <= i_weight[i * `W_BW +: `W_BW];
+                pool_ch[i]   <= i_pooling[i * `ST3_OF_BW +: `ST3_OF_BW];
+                weight_ch[i] <= i_weight[i * `ST3_W_BW +: `ST3_W_BW];
             end
         end
     end
 
 
-    wire  signed    [`pool_CI * `MUL_BW-1 : 0]    mul  ;
-    reg   signed    [`pool_CI * `MUL_BW-1 : 0]    r_mul;
+    wire  signed    [`pool_CI * `ST3_MUL_BW-1 : 0]    mul  ;
+    reg   signed    [`pool_CI * `ST3_MUL_BW-1 : 0]    r_mul;
     
-   reg [`MUL_BW-1 : 0] d_mul;
+   reg [`ST3_MUL_BW-1 : 0] d_mul;
 
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
             d_mul <= 0;
         end else begin
-            d_mul <= r_mul[0 +: `MUL_BW];
+            d_mul <= r_mul[0 +: `ST3_MUL_BW];
         end
     end
 
@@ -87,33 +87,33 @@ module stage3_cnn_kernal(
     generate
         for(mul_idx = 0; mul_idx < `pool_CI; mul_idx = mul_idx + 1) begin : gen_mul
             (* use_dsp = "yes" *) 
-            assign  mul[mul_idx * `MUL_BW +: `MUL_BW]	=  $signed(pool_ch[mul_idx]) * $signed(weight_ch[mul_idx]);
+            assign  mul[mul_idx * `ST3_MUL_BW +: `ST3_MUL_BW]	=  $signed(pool_ch[mul_idx]) * $signed(weight_ch[mul_idx]);
         
             always @(posedge clk or negedge reset_n) begin
                 if(!reset_n) begin
-                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= 0;
+                    r_mul[mul_idx * `ST3_MUL_BW +: `ST3_MUL_BW] <= 0;
                 end else if(r_valid[LATENCY-3])begin
-                    r_mul[mul_idx * `MUL_BW +: `MUL_BW] <= $signed(mul[mul_idx * `MUL_BW +: `MUL_BW]);
+                    r_mul[mul_idx * `ST3_MUL_BW +: `ST3_MUL_BW] <= $signed(mul[mul_idx * `ST3_MUL_BW +: `ST3_MUL_BW]);
                 end
             end
         end
     endgenerate 
     
-    reg signed [`MUL_BW + $clog2(3) - 1: 0] acc_kernel 	;
-    reg signed [`MUL_BW + $clog2(3) - 1: 0] r_acc_kernel   ;
+    reg signed [`ST3_MUL_BW + $clog2(3) - 1: 0] acc_kernel 	;
+    reg signed [`ST3_MUL_BW + $clog2(3) - 1: 0] r_acc_kernel   ;
 
     integer acc_idx;
     always @ (*) begin
-        acc_kernel[0 +: (`MUL_BW + $clog2(3))]= 0;
+        acc_kernel[0 +: (`ST3_MUL_BW + $clog2(3))]= 0;
         for(acc_idx =0; acc_idx < `pool_CI; acc_idx = acc_idx +1) begin
-            acc_kernel[0 +: (`MUL_BW + $clog2(3))] = $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]) + $signed(r_mul[acc_idx*`MUL_BW +: `MUL_BW]); 
+            acc_kernel[0 +: (`ST3_MUL_BW + $clog2(3))] = $signed(acc_kernel[0 +: (`ST3_MUL_BW + $clog2(3))]) + $signed(r_mul[acc_idx*`ST3_MUL_BW +: `ST3_MUL_BW]); 
         end
     end
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
-            r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= 0;
+            r_acc_kernel[0 +: (`ST3_MUL_BW + $clog2(3))] <= 0;
         end else if(r_valid[LATENCY-2])begin
-            r_acc_kernel[0 +: (`MUL_BW + $clog2(3))] <= $signed(acc_kernel[0 +: (`MUL_BW + $clog2(3))]);
+            r_acc_kernel[0 +: (`ST3_MUL_BW + $clog2(3))] <= $signed(acc_kernel[0 +: (`ST3_MUL_BW + $clog2(3))]);
         end
     end
 
