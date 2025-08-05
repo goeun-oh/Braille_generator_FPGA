@@ -428,9 +428,9 @@ module compare (
     input                               clk,
     input                               reset_n,
     input                               i_in_valid,
-    input [`ST3_OUT_BW - 1 : 0]         in_core0,
+    input signed [`ST3_OUT_BW - 1 : 0]         in_core0,
     input [$clog2(`core_CO)-1 : 0]      in_core0_index,
-    input [`ST3_OUT_BW - 1 : 0]         in_core1,
+    input signed [`ST3_OUT_BW - 1 : 0]         in_core1,
     input [$clog2(`core_CO)-1 : 0]      in_core1_index,
     output reg                          o_ot_valid,
     output reg [`ST3_OUT_BW - 1 : 0]    out_core,
@@ -444,12 +444,14 @@ module compare (
             o_core_index <= 0;
         end else begin
             o_ot_valid <= i_in_valid;
-            if(in_core0 >= in_core1) begin
-                out_core     <= in_core0;
-                o_core_index <= in_core0_index;
-            end else begin
-                out_core     <= in_core1;
-                o_core_index <= in_core1_index;
+            if(i_in_valid) begin
+                if(in_core0 >= in_core1) begin
+                    out_core     <= in_core0;
+                    o_core_index <= in_core0_index;
+                end else begin
+                    out_core     <= in_core1;
+                    o_core_index <= in_core1_index;
+                end
             end
         end
     end
