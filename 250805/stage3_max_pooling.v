@@ -147,7 +147,7 @@ assign	ce = r_valid;
 
 
     // 디버깅용
-    reg [`ST3_OF_BW -1 : 0]r_o_ot_flat [0:2];
+    reg [`ST3_OF_BW -1 : 0]r_o_ot_flat [0:`pool_CO-1];
     integer i;
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin

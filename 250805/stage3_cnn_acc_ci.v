@@ -54,16 +54,19 @@ module stage3_cnn_acc_ci(
         end
     end
 
+    integer ch, mul;
+    always @(*) begin
+        for (mul = 0; mul < `acc_CO; mul = mul + 1) begin
+            for (ch = 0; ch < `pool_CO; ch = ch + 1 ) begin
+                w_cnn_weight [mul][ch* `ST3_W_BW +: `ST3_W_BW] = rom[(mul*`FC_IN_VEC) + (ch * `P_SIZE * `P_SIZE) + w_cnt];
+            end 
+        end
+    end
+
     // -- cnn_kernal 인스턴스 생성 및 각 채널 w_ot_valid 연결
-    integer ch;
     genvar mul_inst;
     generate
         for (mul_inst = 0; mul_inst < `acc_CO; mul_inst = mul_inst + 1) begin: gen_mul
-            always @(*) begin
-                for (ch = 0; ch < `pool_CO; ch = ch + 1 ) begin
-                    w_cnn_weight [mul_inst][ch* `ST3_W_BW +: `ST3_W_BW] = rom[(mul_inst*`FC_IN_VEC) + (ch * `P_SIZE * `P_SIZE) + w_cnt];
-                end 
-            end
             stage3_cnn_kernal U_cnn_kernal(
                 .clk(clk),
                 .reset_n(reset_n),

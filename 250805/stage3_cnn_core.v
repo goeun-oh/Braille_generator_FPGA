@@ -38,7 +38,7 @@ module stage3_cnn_core(
     
 
     //reg signed [`CO * `ST3_OUT_BW -1:0] w_ot_result;
-    reg signed [`ST3_OUT_BW -1:0] w_ot_result[0:2];
+    reg signed [`ST3_OUT_BW -1:0] w_ot_result[0:`core_CO-1];
     // reg signed [`ST3_OUT_BW -1:0] w_ot_result1;
     // reg signed [`ST3_OUT_BW -1:0] w_ot_result2;
 

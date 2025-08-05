@@ -30,7 +30,7 @@ module stage3_top_cnn(
 
     output o_valid,
     output [7:0] alpha,
-    output [2:0] led
+    output [3:0] led
     );
 
     wire pool_valid;
@@ -78,7 +78,60 @@ module stage3_top_cnn(
     );
 
 endmodule
+// module stage3_compare_alpha (
+//     input clk,
+//     input reset_n,
+//     input i_in_valid,
+//     input [`core_CO * `ST3_OUT_BW -1:0] i_in_core,
+//     output reg [7:0] alpha,
+//     output reg [2:0] led,
+//     output o_valid
+// );
+//     localparam LATENCY = 1;
+//     reg signed [`ST3_OUT_BW - 1:0] c_ot_result [0 : `core_CO-1];
 
+//     reg  signed   [LATENCY - 1 : 0]         r_valid;
+
+//     always @(posedge clk or negedge reset_n) begin
+//         if(!reset_n) begin
+//             r_valid   <= 0;
+//         end else begin
+//             r_valid[LATENCY - 1]  <= i_in_valid;
+//             // r_valid[LATENCY - 2]  <= i_in_valid;
+//             // r_valid[LATENCY - 1]  <= r_valid[LATENCY - 2];
+//         end
+//     end
+
+//     integer i;
+//     always @(posedge clk, negedge reset_n) begin
+//         if (!reset_n) begin
+//             for (i=0;i<`core_CO;i=i+1) begin
+//                 c_ot_result[i] <= 0;
+//             end
+//         end else if (i_in_valid) begin
+//             for (i=0;i<`core_CO;i=i+1) begin
+//                 c_ot_result[i] <= $signed(i_in_core [i*`ST3_OUT_BW +: `ST3_OUT_BW]);
+//             end
+//         end
+//     end
+
+//     always @(*) begin
+//         if ((c_ot_result[0] >= c_ot_result[1]) && (c_ot_result[0] >= c_ot_result[2])) begin
+//             alpha = 8'h61;
+//             led = 3'b100;
+//         end else if ((c_ot_result[1] >= c_ot_result[0]) && (c_ot_result[1] >= c_ot_result[2])) begin
+//             alpha = 8'h62;
+//             led = 3'b010;
+//         end else begin
+//             alpha = 8'h63;
+//             led = 3'b001;
+//         end
+//     end
+
+//     assign o_valid = r_valid[LATENCY - 1];
+
+
+// endmodule
 // a = 0x61 b = 0x62, c = 0x63
 module stage3_compare_alpha (
     input                               clk,
@@ -123,11 +176,18 @@ module stage3_compare_alpha (
     wire                             valid_stage4;
     wire [`ST3_OUT_BW-1:0]           data_stage5;
     wire [$clog2(`core_CO)-1 : 0]    index_stage5;
+    
+    reg [7:0] o_alpha; 
+    reg [3:0] o_led;
 
     reg start_valid;
     integer i;
     always @(posedge clk or negedge reset_n) begin
         if (!reset_n) begin
+            start_valid <= 0;
+            o_valid <= 0;
+            alpha <= 0;
+            led <= 0;
             for (i = 0;i < `core_CO ; i= i + 1) begin
                 index_stage0[i] <= i;
                 data_stage0[i]  <= 0;
@@ -140,116 +200,131 @@ module stage3_compare_alpha (
                 end
             end
             o_valid <= valid_stage4;
-            if (valid_stage4) begin
-                case (index_stage5)
-                    5'd0: begin
-                        alpha <= 8'h61;
-                        led <= 4'b0000;
-                    end
-                    5'd1: begin
-                        alpha <= 8'h62;
-                        led <= 4'b0001;
-                    end
-                    5'd2: begin
-                        alpha <= 8'h63;
-                        led <= 4'b0010;
-                    end
-                    5'd3: begin
-                        alpha <= 8'h64;
-                        led <= 4'b0011;
-                    end
-                    5'd4: begin
-                        alpha <= 8'h65;
-                        led <= 4'b0100;
-                    end
-                    5'd5: begin
-                        alpha <= 8'h66;
-                        led <= 4'b0101;
-                    end
-                    5'd6: begin
-                        alpha <= 8'h67;
-                        led <= 4'b0110;
-                    end
-                    5'd7: begin
-                        alpha <= 8'h68;
-                        led <= 4'b0111;
-                    end
-                    5'd8: begin
-                        alpha <= 8'h69;
-                        led <= 4'b1000;
-                    end
-                    5'd9: begin
-                        alpha <= 8'h6A;
-                        led <= 4'b1001;
-                    end
-                    5'd10: begin
-                        alpha <= 8'h6B;
-                        led <= 4'b1010;
-                    end
-                    5'd11: begin
-                        alpha <= 8'h6C;
-                        led <= 4'b1011;
-                    end
-                    5'd12: begin
-                        alpha <= 8'h6D;
-                        led <= 4'b1100;
-                    end
-                    5'd13: begin
-                        alpha <= 8'h6E;
-                        led <= 4'b1101;
-                    end
-                    5'd14: begin
-                        alpha <= 8'h6F;
-                        led <= 4'b1110;
-                    end
-                    5'd15: begin
-                        alpha <= 8'h70;
-                        led <= 4'b1111;
-                    end
-                    5'd16: begin
-                        alpha <= 8'h71;
-                    end
-                    5'd17: begin
-                        alpha <= 8'h72;
-                    end
-                    5'd18: begin
-                        alpha <= 8'h73;
-                    end
-                    5'd19: begin
-                        alpha <= 8'h74;
-                    end
-                    5'd20: begin
-                        alpha <= 8'h75;
-                    end
-                    5'd21: begin
-                        alpha <= 8'h76;
-                    end
-                    5'd22: begin
-                        alpha <= 8'h77;
-                    end
-                    5'd23: begin
-                        alpha <= 8'h78;
-                    end
-                    5'd24: begin
-                        alpha <= 8'h79;
-                    end
-                    5'd25: begin
-                        alpha <= 8'h7A;
-                    end
-                    default: begin
-                        alpha <= 8'h61;
-                        led <= 4'b0000;
-                    end
-                endcase
-            end
+            alpha <= o_alpha;
+            led <= o_led;
         end
     end
-
+    always @(*) begin
+        if (valid_stage4) begin
+            o_alpha = 0;
+            o_led = 0;
+            case (index_stage5)
+                5'd0: begin
+                    o_alpha = 8'h61;
+                    o_led = 4'b0000;
+                end
+                5'd1: begin
+                    o_alpha = 8'h62;
+                    o_led = 4'b0001;
+                end
+                5'd2: begin
+                    o_alpha = 8'h63;
+                    o_led = 4'b0010;
+                end
+                5'd3: begin
+                    o_alpha = 8'h64;
+                    o_led = 4'b0011;
+                end
+                5'd4: begin
+                    o_alpha = 8'h65;
+                    o_led = 4'b0100;
+                end
+                5'd5: begin
+                    o_alpha = 8'h66;
+                    o_led = 4'b0101;
+                end
+                5'd6: begin
+                    o_alpha = 8'h67;
+                    o_led = 4'b0110;
+                end
+                5'd7: begin
+                    o_alpha = 8'h68;
+                    o_led = 4'b0111;
+                end
+                5'd8: begin
+                    o_alpha = 8'h69;
+                    o_led = 4'b1000;
+                end
+                5'd9: begin
+                    o_alpha = 8'h6A;
+                    o_led = 4'b1001;
+                end
+                5'd10: begin
+                    o_alpha = 8'h6B;
+                    o_led = 4'b1010;
+                end
+                5'd11: begin
+                    o_alpha = 8'h6C;
+                    o_led = 4'b1011;
+                end
+                5'd12: begin
+                    o_alpha = 8'h6D;
+                    o_led = 4'b1100;
+                end
+                5'd13: begin
+                    o_alpha = 8'h6E;
+                    o_led = 4'b1101;
+                end
+                5'd14: begin
+                    o_alpha = 8'h6F;
+                    o_led = 4'b1110;
+                end
+                5'd15: begin
+                    o_alpha = 8'h70;
+                    o_led = 4'b1111;
+                end
+                5'd16: begin
+                    o_alpha = 8'h71;
+                    o_led = 4'b0000;
+                end
+                5'd17: begin
+                    o_alpha = 8'h72;
+                    o_led = 4'b0000;
+                end
+                5'd18: begin
+                    o_alpha = 8'h73;
+                    o_led = 4'b0000;
+                end
+                5'd19: begin
+                    o_alpha = 8'h74;
+                    o_led = 4'b0000;
+                end
+                5'd20: begin
+                    o_alpha = 8'h75;
+                    o_led = 4'b0000;
+                end
+                5'd21: begin
+                    o_alpha = 8'h76;
+                    o_led = 4'b0000;
+                end
+                5'd22: begin
+                    o_alpha = 8'h77;
+                    o_led = 4'b0000;
+                end
+                5'd23: begin
+                    o_alpha = 8'h78;
+                    o_led = 4'b0000;
+                end
+                5'd24: begin
+                    o_alpha = 8'h79;
+                    o_led = 4'b0000;
+                end
+                5'd25: begin
+                    o_alpha = 8'h7A;
+                    o_led = 4'b0000;
+                end
+                default: begin
+                    o_alpha = 8'h61;
+                    o_led = 4'b0000;
+                end
+            endcase
+        end
+    end
 
     // 13번
     genvar stage0;
     generate
-        for(stage0 = 0 ; stage0 < (`core_CO/2) ; stage0 = stage0 + 1) begin
+        for(stage0 = 0 ; stage0 < 13 ; stage0 = stage0 + 1) begin
             compare U_compare0(
                 .clk(clk),
                 .reset_n(reset_n),
@@ -269,7 +344,7 @@ module stage3_compare_alpha (
     // 6 13번째는 assign으로 보내기
     genvar stage1;
     generate
-        for(stage1 = 0 ; stage1 < (`core_CO/4) ; stage1 = stage1 + 1) begin
+        for(stage1 = 0 ; stage1 < 6 ; stage1 = stage1 + 1) begin
             compare U_compare1(
                 .clk(clk),
                 .reset_n(reset_n),
@@ -291,7 +366,7 @@ module stage3_compare_alpha (
     // 3 7번째는 assign으로 보내기
     genvar stage2;
     generate
-        for(stage2 = 0 ; stage2 < (`core_CO/8) ; stage2 = stage2 + 1) begin
+        for(stage2 = 0 ; stage2 < 3 ; stage2 = stage2 + 1) begin
             compare U_compare2(
                 .clk(clk),
                 .reset_n(reset_n),
@@ -306,29 +381,36 @@ module stage3_compare_alpha (
             );
         end
     endgenerate
+
     assign data_stage3[3] = data_stage2[6];
     assign index_stage3[3] = index_stage2[6];
 
-    // 2
-    genvar stage3;
-    generate
-        for(stage3 = 0 ; stage3 < (`core_CO/13) ; stage3 = stage3 + 1) begin
-            compare U_compare3(
-                .clk(clk),
-                .reset_n(reset_n),
-                .i_in_valid(valid_stage2[2*stage3] & valid_stage2[2*stage3+1]),
-                .in_core0(data_stage3[2*stage3]),
-                .in_core0_index(index_stage3[2*stage3]),
-                .in_core1(data_stage3[2*stage3+1]),
-                .in_core1_index(index_stage3[2*stage3+1]),
-                .o_ot_valid(valid_stage3[stage3]),
-                .out_core(data_stage4[stage3]),
-                .o_core_index(index_stage4[stage3])
-            );
-        end
-    endgenerate
-    // 1
+    compare U_compare3(
+        .clk(clk),
+        .reset_n(reset_n),
+        .i_in_valid(valid_stage2[0] & valid_stage2[1]),
+        .in_core0(data_stage3[0]),
+        .in_core0_index(index_stage3[0]),
+        .in_core1(data_stage3[1]),
+        .in_core1_index(index_stage3[1]),
+        .o_ot_valid(valid_stage3[0]),
+        .out_core(data_stage4[0]),
+        .o_core_index(index_stage4[0])
+    );
     compare U_compare4(
+        .clk(clk),
+        .reset_n(reset_n),
+        .i_in_valid(valid_stage2[2]),
+        .in_core0(data_stage3[2]),
+        .in_core0_index(index_stage3[2]),
+        .in_core1(data_stage3[3]),
+        .in_core1_index(index_stage3[3]),
+        .o_ot_valid(valid_stage3[1]),
+        .out_core(data_stage4[1]),
+        .o_core_index(index_stage4[1])
+    );
+    // 1
+    compare U_compare5(
         .clk(clk),
         .reset_n(reset_n),
         .i_in_valid(valid_stage3[0] & valid_stage3[1]),
