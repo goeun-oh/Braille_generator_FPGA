@@ -86,10 +86,10 @@
 `define ST3_MUL_BW          (`ST3_OF_BW + `ST3_W_BW)            // 곱셈 결과 비트폭 (35 + 8 = 43)
 `define ST3_KER_BW          (`ST3_MUL_BW + $clog2(`pool_CO))    // 45비트
 `define ST3_ACC_BW          (`ST3_MUL_BW + $clog2(`FC_IN_VEC))  // 내적 누산기 비트폭 (45 + log2(48) -> 45 + 5.xx = 51)
-`define ST3_OUT_BW          (`ST3_ACC_BW + 1) -(`ST2_BITSHIFT_BW) // 최종 출력 뉴런 비트폭 (누산기 + Bias 덧셈 후: 51 + 1 = 52)
+`define ST3_OUT_BW          (`ST3_ACC_BW + 1 -(`ST3_BITSHIFT_BW)) // 최종 출력 뉴런 비트폭 (누산기 + Bias 덧셈 후: 51 + 1 = 52)
 
 
-`define    ST3_BITSHIFT_BW  0
+`define    ST3_BITSHIFT_BW  16
 //----------------------------------------------------------------------
 // 2. 레이어 차원 (Layer Dimensions)
 //----------------------------------------------------------------------
