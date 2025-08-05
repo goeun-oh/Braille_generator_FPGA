@@ -11,7 +11,8 @@ module cnn_top (
     //output [CO*O_F_BW-1:0] o_core_fmap,
     // output o_core_done
     output       out_valid,
-    output [7:0] alpha
+    output [7:0] alpha,
+    output [2:0] led
 );
     wire signed [`ST1_CO*`ST1_O_F_BW-1:0] w_core_fmap;
     wire w_core_valid;
@@ -115,8 +116,8 @@ module cnn_top (
         .clk       (clk),
         .reset_n   (reset_n),
         .i_in_valid(w_core_valid),
-         .i_in_fmap (w_core_fmap),
-        //.i_in_fmap (w_bs_core_fmap),
+        // .i_in_fmap (w_core_fmap),
+        .i_in_fmap (w_bs_core_fmap),
         .o_ot_valid(w_pooling_core_valid),
         .o_ot_fmap (w_pooling_core_fmap)
     );
@@ -152,13 +153,14 @@ endgenerate
     // stage3_convolution instance
     // ===============================
 
-    stage3_top_cnn U_stage3_top_cnn(
+    (* dont_touch = "true" *) stage3_top_cnn U_stage3_top_cnn(
         .clk(clk),
         .reset_n(reset_n),
         .i_Relu_valid(w_stage2_core_valid),
         .i_in_Relu(w_bs_stage2_core_fmap),
         .o_valid(out_valid),
-        .alpha(alpha)
+        .alpha(alpha),
+        .led(led)
     );
 
     // ===============================

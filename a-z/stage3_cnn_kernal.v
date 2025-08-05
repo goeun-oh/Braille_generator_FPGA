@@ -86,7 +86,6 @@ module stage3_cnn_kernal(
     genvar mul_idx;
     generate
         for(mul_idx = 0; mul_idx < `pool_CO; mul_idx = mul_idx + 1) begin : gen_mul
-            (* use_dsp = "yes" *) 
             assign  mul[mul_idx * `ST3_MUL_BW +: `ST3_MUL_BW]	=  $signed(pool_ch[mul_idx]) * $signed(weight_ch[mul_idx]);
         
             always @(posedge clk or negedge reset_n) begin

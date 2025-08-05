@@ -116,6 +116,9 @@ module cnn_core (
     assign o_ot_valid = r_valid[LATENCY-1];
     assign o_ot_fmap  = r_add_bias;
     
+
+
+    //debug before add bias
     integer ch;
     integer j;
     integer k;

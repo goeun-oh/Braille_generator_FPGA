@@ -95,6 +95,17 @@ module alpha_decoder (
                 alpha = 8'h61;
             end
         endcase
+        //case (index_info)
+        //    2'd0: begin
+        //        alpha = 8'h61;
+        //    end
+        //    2'd1: begin
+        //        alpha = 8'h62;
+        //    end
+        //    2'd2: begin
+        //        alpha = 8'h63;
+        //    end
+        //endcase
     end
 
 endmodule

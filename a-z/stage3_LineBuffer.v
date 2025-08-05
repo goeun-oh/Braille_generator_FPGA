@@ -1,23 +1,5 @@
  `timescale 1ns / 1ps
-// //////////////////////////////////////////////////////////////////////////////////
-// // Company: 
-// // Engineer: 
-// // 
-// // Create Date: 2025/07/21 16:09:05
-// // Design Name: 
-// // Module Name: LineBuffer
-// // Project Name: 
-// // Target Devices: 
-// // Tool Versions: 
-// // Description: 
-// // 
-// // Dependencies: 
-// // 
-// // Revision:
-// // Revision 0.01 - File Created
-// // Additional Comments:
-// // 
-// //////////////////////////////////////////////////////////////////////////////////
+
 // // 현재 목표 4라인 buffer 구현
  `include "defines_cnn_core.v"
 

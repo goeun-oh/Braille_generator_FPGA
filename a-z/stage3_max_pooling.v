@@ -91,7 +91,7 @@ module stage3_max_pooling(
 //==============================================================================
 // Data Enable Signals 
 //==============================================================================
-// wire    [LATENCY-1 : 0] 	ce;
+wire    [LATENCY-1 : 0] 	ce;
 reg     [LATENCY-1 : 0] 	r_valid;
 always @(posedge clk or negedge reset_n) begin
     if(!reset_n) begin
@@ -102,7 +102,7 @@ always @(posedge clk or negedge reset_n) begin
     end
 end
 
-// assign	ce = r_valid;
+assign	ce = r_valid;
 
 
     genvar line_inst;
@@ -147,24 +147,24 @@ end
 
 
     // 디버깅용
-    // reg [`ST3_OF_BW -1 : 0]r_o_ot_flat [0:`pool_CO-1];
+    reg [`ST3_OF_BW -1 : 0]r_o_ot_flat [0:`pool_CO-1];
     integer i;
     always @(posedge clk, negedge reset_n) begin
         if (!reset_n) begin
             w_ot_flat <= 0;
-            //r_pooling_valid <= 0;
+            r_pooling_valid <= 0;
         end else if (r_valid[LATENCY-2]) begin
             w_ot_flat <= r_pool_result;
             // 디버깅용 시작
-            // for(i = 0; i< `pool_CO ; i = i + 1) begin
-            //     r_o_ot_flat[i] <= r_pool_result[i * `ST3_OF_BW +: `ST3_OF_BW];    
-            // end
-            // // 디버깅용 끝
-            // r_pooling_valid <= 1;
+            for(i = 0; i< `pool_CO ; i = i + 1) begin
+                r_o_ot_flat[i] <= r_pool_result[i * `ST3_OF_BW +: `ST3_OF_BW];    
+            end
+            // 디버깅용 끝
+            r_pooling_valid <= 1;
         end 
-        // else begin
-        //     r_pooling_valid <= 0;
-        // end
+        else begin
+            r_pooling_valid <= 0;
+        end
     end
 
     // (* mark_debug = "true" *) reg [`ST3_OF_BW -1 : 0] d_ot_flat0;

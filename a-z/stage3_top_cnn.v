@@ -29,9 +29,10 @@ module stage3_top_cnn(
     input wire [`stage3_CI * `ST3_IF_BW - 1: 0] i_in_Relu,
 
     output o_valid,
-    output [7:0] alpha
+    output [7:0] alpha,
+    output [2:0] led
     );
-
+    assign led = 3'b000;
     wire pool_valid;
     wire [`pool_CO * `ST3_OF_BW-1:0] w_pool;
     wire acc_valid;
@@ -90,3 +91,4 @@ module stage3_top_cnn(
     );
 
 endmodule
+
