@@ -21,7 +21,7 @@
 `include "defines_cnn_core.v"
 
 
-module stage3_top_cnn(
+    module stage3_top_cnn(
     input wire clk,
     input wire reset_n,
 
