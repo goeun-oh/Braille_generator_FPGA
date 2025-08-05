@@ -2,10 +2,10 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Mon Aug  4 09:13:28 2025
-# Process ID: 5732
+# Start of session at: Mon Aug  4 15:02:27 2025
+# Process ID: 19380
 # Current directory: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16364 C:\Users\kccistc\Documents\GitHub\Braille_generator_FPGA\uvm\CNN_UVM.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16748 C:\Users\kccistc\Documents\GitHub\Braille_generator_FPGA\uvm\CNN_UVM.xpr
 # Log file: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/vivado.log
 # Journal file: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm\vivado.jou
 #-----------------------------------------------------------
@@ -13,25 +13,3 @@ start_gui
 open_project C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/CNN_UVM.xpr
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
-save_project_as project_1 C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1 -force
-import_files
-launch_simulation
-export_ip_user_files -of_objects  [get_files C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg] -no_script -reset -force -quiet
-remove_files  -fileset sim_1 C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg
-update_compile_order -fileset sim_1
-update_compile_order -fileset sim_1
-launch_simulation
-add_files -fileset sim_1 ./sim_1/imports/new/cnn_seq.sv
-add_files -fileset sim_1 ./sim_1/imports/new/cnn_seq.sv
-launch_simulation
-source tb_top.tcl
-run all
-relaunch_sim
-relaunch_sim
-update_compile_order -fileset sim_1
-relaunch_sim
-relaunch_sim
-relaunch_sim
-relaunch_sim
-run all
-close_sim

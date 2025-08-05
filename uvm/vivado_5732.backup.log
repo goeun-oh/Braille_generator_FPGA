@@ -1,0 +1,1125 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Mon Aug  4 09:13:28 2025
+# Process ID: 5732
+# Current directory: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16364 C:\Users\kccistc\Documents\GitHub\Braille_generator_FPGA\uvm\CNN_UVM.xpr
+# Log file: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/vivado.log
+# Journal file: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/CNN_UVM.xpr
+INFO: [Project 1-313] Project file moved from '/home/goeun/gitHub/Braille_generator_FPGA/uvm' since last save.
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionXsim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionModelSim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionQuesta
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionXcelium
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionVCS
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionRiviera
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionActiveHdl
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionXsim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionModelSim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionQuesta
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionXcelium
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionVCS
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionRiviera
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionActiveHdl
+WARNING: [filemgmt 56-2] Default IP Output Path : Could not find the directory 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/CNN_UVM.gen/sources_1', nor could it be found using path 'C:/home/goeun/gitHub/Braille_generator_FPGA/uvm/CNN_UVM.gen/sources_1'.
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name EnableResourceEstimation
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimCompileState
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name ClassicSocBoot
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name LocalIPRepoLeafDirName
+CRITICAL WARNING: [Project 1-311] Could not find the file 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg', nor could it be found using path 'C:/home/goeun/gitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg'.
+Scanning sources...
+Finished scanning sources
+WARNING: [Project 1-231] Project 'CNN_UVM.xpr' was created with a future version and may or may not perform reliably with this version of Vivado. It has been opened in read-only mode for the protection of unrecognized data. Use 'File | Save Project As...' if you wish to alter a copy of the project.
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
+WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+save_project_as project_1 C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1 -force
+import_files
+INFO: [filemgmt 20-348] Importing the appropriate files for fileset: 'sim_1'
+WARNING: [filemgmt 20-342] File / dir doesn't exist, skipping: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg
+INFO: [filemgmt 20-334] All file(s) are already imported in fileset: 'sources_1'
+INFO: [filemgmt 20-348] Importing the appropriate files for fileset: 'sources_1'
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module custom_ip_APB3
+ERROR: [VRFC 10-3195] cannot open include file 'cnn_kernel.v' [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v:2]
+INFO: [VRFC 10-311] analyzing module top
+ERROR: [VRFC 10-2865] module 'top' ignored due to previous errors [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v:5]
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim/xvlog.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim/xvlog.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+export_ip_user_files -of_objects  [get_files C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg] -no_script -reset -force -quiet
+remove_files  -fileset sim_1 C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg
+update_compile_order -fileset sim_1
+WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+update_compile_order -fileset sim_1
+WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module custom_ip_APB3
+INFO: [VRFC 10-311] analyzing module cnn_kernel
+INFO: [VRFC 10-311] analyzing module top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_packet.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_sequencer.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv" into library xil_defaultlib
+ERROR: [VRFC 10-3195] cannot open include file 'cnn_seq.sv' [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_pkg.sv:12]
+ERROR: [VRFC 10-3195] cannot open include file 'cnn_test.sv' [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_pkg.sv:15]
+ERROR: [VRFC 10-2865] package 'tb_pkg' ignored due to previous errors [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_pkg.sv:1]
+ERROR: [VRFC 10-2865] interface 'apb_if' ignored due to previous errors [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_intf.sv:1]
+ERROR: [VRFC 10-3195] cannot open include file 'cnn_intf.sv' [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv:5]
+INFO: [VRFC 10-311] analyzing module tb_top
+ERROR: [VRFC 10-2989] 'tb_pkg' is not declared [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv:8]
+ERROR: [VRFC 10-3195] cannot open include file 'cnn_intf_inst.sv' [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv:16]
+ERROR: [VRFC 10-2989] 'cnn_vif' is not declared [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv:46]
+ERROR: [VRFC 10-2865] module 'tb_top' ignored due to previous errors [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv:6]
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-99] Step results log file:'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim/xvlog.log'
+ERROR: [USF-XSim-62] 'compile' step failed with error(s). Please check the Tcl console output or 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim/xvlog.log' file for more information.
+ERROR: [Vivado 12-4473] Detected error while running simulation. Please correct the issue and retry this operation.
+ERROR: [Common 17-39] 'launch_simulation' failed due to earlier errors.
+add_files -fileset sim_1 ./sim_1/imports/new/cnn_seq.sv
+ERROR: [Vivado 12-172] File or Directory './sim_1/imports/new/cnn_seq.sv' does not exist
+add_files -fileset sim_1 ./sim_1/imports/new/cnn_seq.sv
+ERROR: [Vivado 12-172] File or Directory './sim_1/imports/new/cnn_seq.sv' does not exist
+launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module custom_ip_APB3
+INFO: [VRFC 10-311] analyzing module cnn_kernel
+INFO: [VRFC 10-311] analyzing module top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_packet.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_sequencer.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_top
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xelab -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4468] File : /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_apb_packet_sv
+Compiling package uvm.uvm_pkg
+Compiling package std.std
+Compiling package xil_defaultlib.tb_pkg
+Compiling module xil_defaultlib.apb_if
+Compiling module xil_defaultlib.cnn_intf
+Compiling module xil_defaultlib.custom_ip_APB3
+Compiling module xil_defaultlib.cnn_kernel
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.tb_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_top_behav
+
+****** Webtalk v2020.2 (64-bit)
+  **** SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+  **** IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+    ** Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim/xsim.dir/tb_top_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-206] Exiting Webtalk at Mon Aug  4 09:19:09 2025...
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:01:04 . Memory (MB): peak = 1104.859 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '64' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "tb_top_behav -key {Behavioral:sim_1:Functional:tb_top} -tclbatch {tb_top.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+source tb_top.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(61) @ 145000: uvm_test_top.tb.sb [scoreboard] Fmap set to: 0x04
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_ERROR C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(78) @ 195000: uvm_test_top.tb.sb [scoreboard] [FAIL] fmap (0x04) × weight (0xxx) = 0xxxxx, but cnn_out = 0x0008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(55) @ 225000: uvm_test_top.tb.sb [scoreboard] Weight set to: 0x02
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'tb_top_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:01:08 . Memory (MB): peak = 1104.859 ; gain = 0.000
+run all
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(19968) @ 2235000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(59) @ 2235000: uvm_test_top.tb.apb.agent.monitor [apb_monitor] REPORT: COLLECT PACKET: 6
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(13673) @ 2235000: reporter [UVM/REPORT/SERVER] [uvm_test_top.tb.apb.agent.monitor]     1
+[uvm_test_top.tb]     2
+[uvm_test_top]     2
+[scoreboard]    17
+[cnn_test]     1
+[cnn_sequence]     7
+[apb_monitor]     3
+[apb_env]     1
+[apb_driver]     4
+[apb_agent]     2
+[UVM/RELNOTES]     1
+[UVM/COMP/NAMECHECK]     1
+[TPRGED]     8
+[TEST_DONE]     1
+[RNTST]     1
+** Report counts by id
+UVM_FATAL :    0
+UVM_ERROR :    1
+UVM_WARNING :    8
+UVM_INFO :   43
+** Report counts by severity
+
+--- UVM Report Summary ---
+
+
+$finish called at time : 2235 ns : File "C:/Xilinx/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xelab -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
+Completed static elaboration
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:13 . Memory (MB): peak = 1104.859 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '13' seconds
+launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:00:13 . Memory (MB): peak = 1104.859 ; gain = 0.000
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(61) @ 145000: uvm_test_top.tb.sb [scoreboard] Fmap set to: 0x04
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_ERROR C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(78) @ 195000: uvm_test_top.tb.sb [scoreboard] [FAIL] fmap (0x04) × weight (0xxx) = 0xxxxx, but cnn_out = 0x0008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(55) @ 225000: uvm_test_top.tb.sb [scoreboard] Weight set to: 0x02
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
+relaunch_sim: Time (s): cpu = 00:00:00 ; elapsed = 00:00:18 . Memory (MB): peak = 1104.859 ; gain = 0.000
+relaunch_sim
+WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_packet.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_sequencer.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/new/cnn_seq.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_top
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xelab -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4468] File : /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_apb_packet_sv
+Compiling package uvm.uvm_pkg
+Compiling package std.std
+Compiling package xil_defaultlib.tb_pkg
+Compiling module xil_defaultlib.apb_if
+Compiling module xil_defaultlib.cnn_intf
+Compiling module xil_defaultlib.custom_ip_APB3
+Compiling module xil_defaultlib.cnn_kernel
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.tb_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_top_behav
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:01:00 . Memory (MB): peak = 1104.859 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '60' seconds
+launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:01:00 . Memory (MB): peak = 1104.859 ; gain = 0.000
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'cnn_sequence' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(95) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(99) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(95) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(99) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(95) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(99) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(95) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(102) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(95) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(102) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(95) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(102) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
+relaunch_sim: Time (s): cpu = 00:00:00 ; elapsed = 00:01:05 . Memory (MB): peak = 1104.859 ; gain = 0.000
+update_compile_order -fileset sim_1
+WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+relaunch_sim
+WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_packet.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_sequencer.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/new/cnn_seq.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_top
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xelab -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4468] File : /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_apb_packet_sv
+Compiling package uvm.uvm_pkg
+Compiling package std.std
+Compiling package xil_defaultlib.tb_pkg
+Compiling module xil_defaultlib.apb_if
+Compiling module xil_defaultlib.cnn_intf
+Compiling module xil_defaultlib.custom_ip_APB3
+Compiling module xil_defaultlib.cnn_kernel
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.tb_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_top_behav
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:58 . Memory (MB): peak = 1104.859 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '58' seconds
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:58 . Memory (MB): peak = 1104.859 ; gain = 0.000
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'cnn_sequence' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(61) @ 145000: uvm_test_top.tb.sb [scoreboard] Fmap set to: 0x04
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_ERROR C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(79) @ 195000: uvm_test_top.tb.sb [scoreboard] [FAIL] fmap (0x04) × weight (0xxx) = 0xxxxx, but cnn_out = 0x0008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(54) @ 215000: uvm_test_top.tb.sb [scoreboard] Weight set to: 0x01
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
+relaunch_sim: Time (s): cpu = 00:00:01 ; elapsed = 00:01:04 . Memory (MB): peak = 1104.859 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_packet.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_sequencer.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/new/cnn_seq.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_top
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xelab -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4468] File : /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_apb_packet_sv
+Compiling package uvm.uvm_pkg
+Compiling package std.std
+Compiling package xil_defaultlib.tb_pkg
+Compiling module xil_defaultlib.apb_if
+Compiling module xil_defaultlib.cnn_intf
+Compiling module xil_defaultlib.custom_ip_APB3
+Compiling module xil_defaultlib.cnn_kernel
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.tb_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_top_behav
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:57 . Memory (MB): peak = 1104.859 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '57' seconds
+launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:00:57 . Memory (MB): peak = 1104.859 ; gain = 0.000
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'cnn_sequence' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(100) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(61) @ 145000: uvm_test_top.tb.sb [scoreboard] Fmap set to: 0x04
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_ERROR C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(78) @ 195000: uvm_test_top.tb.sb [scoreboard] [FAIL] fmap (0x04) × weight (0xxx) = 0xxxxx, but cnn_out = 0x0008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(96) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(103) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(55) @ 225000: uvm_test_top.tb.sb [scoreboard] Weight set to: 0x02
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
+relaunch_sim: Time (s): cpu = 00:00:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1104.859 ; gain = 0.000
+WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_packet.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_sequencer.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/new/cnn_seq.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_top
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xelab -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4468] File : /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_apb_packet_sv
+Compiling package uvm.uvm_pkg
+Compiling package std.std
+Compiling package xil_defaultlib.tb_pkg
+Compiling module xil_defaultlib.apb_if
+Compiling module xil_defaultlib.cnn_intf
+Compiling module xil_defaultlib.custom_ip_APB3
+Compiling module xil_defaultlib.cnn_kernel
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.tb_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_top_behav
+run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:01:00 . Memory (MB): peak = 1104.859 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '60' seconds
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:01:00 . Memory (MB): peak = 1104.859 ; gain = 0.000
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'cnn_sequence' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(62) @ 155000: uvm_test_top.tb.sb [scoreboard] Fmap set to: 0x04
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_ERROR C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(79) @ 195000: uvm_test_top.tb.sb [scoreboard] [FAIL] fmap (0x04) × weight (0xxx) = 0xxxxx, but cnn_out = 0x0008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(55) @ 225000: uvm_test_top.tb.sb [scoreboard] Weight set to: 0x02
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
+relaunch_sim: Time (s): cpu = 00:00:01 ; elapsed = 00:01:05 . Memory (MB): peak = 1104.859 ; gain = 0.000
+relaunch_sim
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'tb_top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -L uvm -L uvm -prj tb_top_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_packet.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_sequencer.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/new/cnn_seq.sv" into library xil_defaultlib
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_top
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+Command: launch_simulation -simset sim_1 -mode behavioral
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.sim/sim_1/behav/xsim'
+"xelab -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm"
+Vivado Simulator 2020.2
+Copyright 1986-1999, 2001-2020 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2020.2/bin/unwrapped/win64.o/xelab.exe -wto c8a14d3e19a047918ebfa9461a76b28b --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L unisims_ver -L secureip --snapshot tb_top_behav xil_defaultlib.tb_top xil_defaultlib.glbl -log elaborate.log -L uvm 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
+WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4468] File : /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package xil_defaultlib.$unit_apb_packet_sv
+Compiling package uvm.uvm_pkg
+Compiling package std.std
+Compiling package xil_defaultlib.tb_pkg
+Compiling module xil_defaultlib.apb_if
+Compiling module xil_defaultlib.cnn_intf
+Compiling module xil_defaultlib.custom_ip_APB3
+Compiling module xil_defaultlib.cnn_kernel
+Compiling module xil_defaultlib.top
+Compiling module xil_defaultlib.tb_top
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tb_top_behav
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:01:01 . Memory (MB): peak = 1104.859 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '61' seconds
+launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:01:02 . Memory (MB): peak = 1104.859 ; gain = 0.000
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(18601) @ 0: reporter [UVM/RELNOTES] 
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+
+  You are using a version of the UVM library that has been compiled
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+----------------------------------------------------------------
+(C) 2013-2014 NVIDIA Corporation
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2007-2014 Mentor Graphics Corporation
+
+
+----------------------------------------------------------------
+
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_monitor' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_driver' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_sequencer' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_agent' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'scoreboard' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'tb_env' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'apb_packet' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_WARNING @ 0: reporter [TPRGED] Type name 'cnn_sequence' already registered with factory. No string-based lookup support for multiple types with the same type name.
+UVM_INFO @ 0: reporter [RNTST] Running test cnn_test...
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/base_test.sv(14) @ 0: uvm_test_top [cnn_test] build_phase(test_lib)uvm_test_top
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(12) @ 0: uvm_test_top [uvm_test_top] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(16) @ 0: uvm_test_top.tb [uvm_test_top.tb] build_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_env.sv(15) @ 0: uvm_test_top.tb.apb [apb_env] [BUILD PHASE] APB ENV
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(24) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [BUILD PHASE] APB AGENT 1
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(16) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [BUILD PHASE] apb_driver build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(23) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] [BUILD PHASE] apb_monitor build phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(21) @ 0: uvm_test_top.tb.sb [scoreboard] [BUILD_PHASE] scoreboard build
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_agent.sv(29) @ 0: uvm_test_top.tb.apb.agent [apb_agent] [CONNECT PHASE] connect start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/tb_env.sv(21) @ 0: uvm_test_top.tb [uvm_test_top.tb] Connect phase complete.
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(20867) @ 0: reporter [UVM/COMP/NAMECHECK] This implementation of the component name checks requires DPI to be enabled
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_test.sv(16) @ 0: uvm_test_top [uvm_test_top] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(26) @ 0: uvm_test_top.tb.sb [scoreboard] [RUN_PHASE] scoreboard run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(31) @ 0: uvm_test_top.tb.apb.agent.monitor [apb_monitor] run_phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(38) @ 0: uvm_test_top.tb.apb.agent.monitor [uvm_test_top.tb.apb.agent.monitor] Run stage start.
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(20) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] [RUN PHASE] driver run_phase start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(40) @ 0: uvm_test_top.tb.apb.agent.driver [apb_driver] Drive signals ... 
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(44) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] cnn_seq body() start
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 0: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x008, WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_driver.sv(30) @ 1000: uvm_test_top.tb.apb.agent.driver [apb_driver] negedge apb_vif.PRESETN
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 20000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x004, [DUT] WDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 35000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x000, WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(62) @ 155000: uvm_test_top.tb.sb [scoreboard] Fmap set to: 0x04
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(55) @ 185000: uvm_test_top.tb.sb [scoreboard] Weight set to: 0x02
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(75) @ 235000: uvm_test_top.tb.sb [scoreboard] [PASS] fmap (0x04) × weight (0x02) = 0x0008 (cnn_out)
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
+relaunch_sim: Time (s): cpu = 00:00:00 ; elapsed = 00:01:07 . Memory (MB): peak = 1104.859 ; gain = 0.000
+run all
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(19968) @ 2235000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(59) @ 2235000: uvm_test_top.tb.apb.agent.monitor [apb_monitor] REPORT: COLLECT PACKET: 6
+UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(13673) @ 2235000: reporter [UVM/REPORT/SERVER] [uvm_test_top.tb.apb.agent.monitor]     1
+[uvm_test_top.tb]     2
+[uvm_test_top]     2
+[scoreboard]    17
+[cnn_test]     1
+[cnn_sequence]     7
+[apb_monitor]     3
+[apb_env]     1
+[apb_driver]     4
+[apb_agent]     2
+[UVM/RELNOTES]     1
+[UVM/COMP/NAMECHECK]     1
+[TPRGED]     9
+[TEST_DONE]     1
+[RNTST]     1
+** Report counts by id
+UVM_FATAL :    0
+UVM_ERROR :    0
+UVM_WARNING :    9
+UVM_INFO :   44
+** Report counts by severity
+
+--- UVM Report Summary ---
+
+
+$finish called at time : 2235 ns : File "C:/Xilinx/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Aug  4 09:34:12 2025...

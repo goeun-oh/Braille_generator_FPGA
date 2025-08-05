@@ -7,27 +7,4 @@ Pass Through NonSizing Optimizer
 WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:19]
 WARNING: [VRFC 10-3597] non-void function 'get' called as a task without void casting [C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv:20]
 Completed static elaboration
-Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "/proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 4356. Module uvm_pkg doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4468] File : /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv, Line : 25994, RANDC variable size more than 8 bits. This will be treated as a RAND variable instead.
-WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/top.v" Line 5. Module top doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/apb3_ip.v" Line 11. Module custom_ip_APB3 doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sources_1/imports/new/cnn_kernel.v" Line 1. Module cnn_kernel doesn't have a timescale but at least one module in design has a timescale.
-Completed simulation data flow analysis
-Time Resolution for simulation is 1ps
-Compiling package xil_defaultlib.$unit_apb_packet_sv
-Compiling package uvm.uvm_pkg
-Compiling package std.std
-Compiling package xil_defaultlib.tb_pkg
-Compiling module xil_defaultlib.apb_if
-Compiling module xil_defaultlib.cnn_intf
-Compiling module xil_defaultlib.custom_ip_APB3
-Compiling module xil_defaultlib.cnn_kernel
-Compiling module xil_defaultlib.top
-Compiling module xil_defaultlib.tb_top
-Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_top_behav
+INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel

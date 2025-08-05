@@ -57,44 +57,4 @@ UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/
 UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 60000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x002, [DUT] WDATA: 0x002
 UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(9) @ 75000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_WRITE] ADDR: 0x004, WDATA: 0x001
 UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDATA: 0x001, [DUT] WDATA: 0x001
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x008, [DUT] ADDR: 0x008
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 140000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x004, [DUT] RDATA: 0x004
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(62) @ 155000: uvm_test_top.tb.sb [scoreboard] Fmap set to: 0x04
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 155000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x008, RDATA: 0x004
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x000, [DUT] ADDR: 0x000
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 180000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x002, [DUT] RDATA: 0x002
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(55) @ 185000: uvm_test_top.tb.sb [scoreboard] Weight set to: 0x02
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 195000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x000, RDATA: 0x002
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(97) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] ADDR: 0x004, [DUT] ADDR: 0x004
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(104) @ 220000: uvm_test_top.tb.sb [scoreboard] [Packet] RDATA: 0x001, [DUT] RDATA: 0x001
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(75) @ 235000: uvm_test_top.tb.sb [scoreboard] [PASS] fmap (0x04) × weight (0x02) = 0x0008 (cnn_out)
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/cnn_seq.sv(26) @ 235000: uvm_test_top.tb.apb.agent.sequencer@@seq [cnn_sequence] [HW_READ] ADDR: 0x004, RDATA: 0x001
-UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(19968) @ 2235000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/apb_monitor.sv(59) @ 2235000: uvm_test_top.tb.apb.agent.monitor [apb_monitor] REPORT: COLLECT PACKET: 6
-UVM_INFO /proj/xbuilds/SWIP/2020.2_0711_1805/installs/lin64/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv(13673) @ 2235000: reporter [UVM/REPORT/SERVER] [uvm_test_top.tb.apb.agent.monitor]     1
-[uvm_test_top.tb]     2
-[uvm_test_top]     2
-[scoreboard]    17
-[cnn_test]     1
-[cnn_sequence]     7
-[apb_monitor]     3
-[apb_env]     1
-[apb_driver]     4
-[apb_agent]     2
-[UVM/RELNOTES]     1
-[UVM/COMP/NAMECHECK]     1
-[TPRGED]     9
-[TEST_DONE]     1
-[RNTST]     1
-** Report counts by id
-UVM_FATAL :    0
-UVM_ERROR :    0
-UVM_WARNING :    9
-UVM_INFO :   44
-** Report counts by severity
-
---- UVM Report Summary ---
-
-
-$finish called at time : 2235 ns : File "C:/Xilinx/Vivado/2020.2/data/system_verilog/uvm_1.2/xlnx_uvm_package.sv" Line 18699
+UVM_INFO C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/project_1/project_1.srcs/sim_1/imports/new/scoreboard.sv(101) @ 100000: uvm_test_top.tb.sb [scoreboard] [Packet] WDAT
