@@ -46,7 +46,7 @@ module alpha_decoder (
             reg_led_g <=0;
             reg_led_b <=0;
             reg_led <=0;
-        end else begin
+        end else if (i_valid)begin
             reg_led_r <=next_led_r;
             reg_led_g <=next_led_g;
             reg_led_b <=next_led_b;            
