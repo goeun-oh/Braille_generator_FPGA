@@ -1,15 +1,29 @@
 `include "defines_cnn_core.v"
 
 module alpha_decoder (
+    input clk,
+    input reset_n,
     input                         i_valid,
     input  [$clog2(`core_CO)-1:0] index_info,
-    output [                 7:0] o_alpha,
-    output                        o_valid
+    output reg [                 7:0] o_alpha,
+    output reg                        o_valid
 );
 
     reg [7:0] alpha;
-    assign o_alpha = alpha;
-    assign o_valid = i_valid;
+    //assign o_alpha = alpha;
+    //assign o_valid = i_valid;
+
+    always @(posedge clk, negedge reset_n) begin
+        if (!reset_n) begin
+            o_alpha <= 0;
+            o_valid <= 0;
+        end else begin
+            o_valid <= i_valid;
+            if (i_valid) begin
+                o_alpha <= alpha;
+            end
+        end
+    end
 
     always @(*) begin
         case (index_info)

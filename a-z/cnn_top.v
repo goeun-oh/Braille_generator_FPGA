@@ -153,7 +153,7 @@ endgenerate
     // stage3_convolution instance
     // ===============================
 
-    (* dont_touch = "true" *) stage3_top_cnn U_stage3_top_cnn(
+    stage3_top_cnn U_stage3_top_cnn(
         .clk(clk),
         .reset_n(reset_n),
         .i_Relu_valid(w_stage2_core_valid),

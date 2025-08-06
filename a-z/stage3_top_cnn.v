@@ -84,6 +84,8 @@ module stage3_top_cnn(
     );
 
     alpha_decoder u_alpha_decoder(
+        .clk(clk),
+        .reset_n(reset_n),
         .i_valid(w_compare_valid),
         .index_info(max_index_info),
         .o_alpha(alpha),
