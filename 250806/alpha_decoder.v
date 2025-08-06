@@ -60,6 +60,7 @@ module alpha_decoder (
         next_led_b = reg_led_b;
         next_led = reg_led;
         case (index_info)
+        //a
             5'd0: begin
                 alpha = 8'h61;
                 next_led = 4'd0;
@@ -67,6 +68,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //b
             5'd1: begin
                 alpha = 8'h62;
                 next_led = 4'd1;
@@ -74,6 +76,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //c
             5'd2: begin
                 alpha = 8'h63;
                 next_led = 4'd2;
@@ -81,6 +84,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //d
             5'd3: begin
                 alpha = 8'h64;
                 next_led = 4'd3;
@@ -88,6 +92,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //e
             5'd4: begin
                 alpha = 8'h65;
                 next_led = 4'd4;
@@ -95,6 +100,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //f
             5'd5: begin
                 alpha = 8'h66;
                 next_led = 4'd5;
@@ -102,6 +108,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //g
             5'd6: begin
                 alpha = 8'h67;
                 next_led = 4'd6;
@@ -109,6 +116,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //h
             5'd7: begin
                 alpha = 8'h68;
                 next_led = 4'd7;
@@ -116,6 +124,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //i
             5'd8: begin
                 alpha = 8'h69;
                 next_led = 4'd8;
@@ -123,6 +132,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //j
             5'd9: begin
                 alpha = 8'h6A;
                 next_led = 4'd9;
@@ -130,6 +140,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //k
             5'd10: begin
                 alpha = 8'h6B;
                 next_led = 4'd10;
@@ -137,6 +148,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //l
             5'd11: begin
                 alpha = 8'h6C;
                 next_led = 4'd11;
@@ -144,6 +156,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //m
             5'd12: begin
                 alpha = 8'h6D;
                 next_led = 4'd12;
@@ -151,6 +164,7 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+            //n
             5'd13: begin
                 alpha = 8'h6E;
                 next_led = 4'd13;
@@ -158,6 +172,8 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+
+            //o
             5'd14: begin
                 alpha = 8'h6F;
                 next_led = 4'd14;
@@ -165,6 +181,8 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+
+            //p
             5'd15: begin
                 alpha = 8'h70;
                 next_led = 4'd15;
@@ -172,6 +190,8 @@ module alpha_decoder (
                 next_led_g = 1;
                 next_led_b = 1;
             end
+
+            //q
             5'd16: begin
                 alpha = 8'h71;
                 next_led = 4'd0;
@@ -179,6 +199,8 @@ module alpha_decoder (
                 next_led_g = 0;
                 next_led_b = 1;
             end
+
+            //r
             5'd17: begin
                 alpha = 8'h72;
                 next_led = 4'd1;
@@ -186,6 +208,8 @@ module alpha_decoder (
                 next_led_g = 0;
                 next_led_b = 1;
             end
+
+            //s
             5'd18: begin
                 alpha = 8'h73;
                 next_led = 4'd2;
@@ -193,6 +217,8 @@ module alpha_decoder (
                 next_led_g = 0;
                 next_led_b = 1;
             end
+
+            //t
             5'd19: begin
                 alpha = 8'h74;
                 next_led = 4'd3;
