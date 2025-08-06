@@ -22,6 +22,10 @@ module fmap_feeder(
     reg [`ISP_BW-1:0] fmap_rom_c_1 [0:`TOTAL_PIXELS-1];
     reg [`ISP_BW-1:0] fmap_rom_c_2 [0:`TOTAL_PIXELS-1];
     reg [`ISP_BW-1:0] fmap_rom_c_3 [0:`TOTAL_PIXELS-1];
+    reg [`ISP_BW-1:0] fmap_rom_d_0 [0:`TOTAL_PIXELS-1];
+    reg [`ISP_BW-1:0] fmap_rom_d_1 [0:`TOTAL_PIXELS-1];
+    reg [`ISP_BW-1:0] fmap_rom_d_2 [0:`TOTAL_PIXELS-1];
+    reg [`ISP_BW-1:0] fmap_rom_d_3 [0:`TOTAL_PIXELS-1];
 
     // reg [$clog2(`TOTAL_PIXELS)-1:0] addr;
 
@@ -33,18 +37,25 @@ module fmap_feeder(
 
 
     initial begin
-        $readmemh("a_1_gray.mem", fmap_rom_a_0);
-        $readmemh("a_2_gray.mem", fmap_rom_a_1);
-        $readmemh("a_3_gray.mem", fmap_rom_a_2);
-        $readmemh("a_4_gray.mem", fmap_rom_a_3);
-        $readmemh("b_1_gray.mem", fmap_rom_b_0);
-        $readmemh("b_2_gray.mem", fmap_rom_b_1);
-        $readmemh("b_3_gray.mem", fmap_rom_b_2);
-        $readmemh("b_4_gray.mem", fmap_rom_b_3);
-        $readmemh("c_1_gray.mem", fmap_rom_c_0);
-        $readmemh("c_2_gray.mem", fmap_rom_c_1);
-        $readmemh("c_3_gray.mem", fmap_rom_c_2);
-        $readmemh("c_4_gray.mem", fmap_rom_c_3);
+        $readmemh("a_1_rgb.mem", fmap_rom_a_0);
+        $readmemh("b_1_rgb.mem", fmap_rom_a_1);
+        $readmemh("c_1_rgb.mem", fmap_rom_a_2);
+        $readmemh("d_1_rgb.mem", fmap_rom_a_3);
+
+        $readmemh("e_1_rgb.mem", fmap_rom_b_0);
+        $readmemh("f_1_rgb.mem", fmap_rom_b_1);
+        $readmemh("g_1_rgb.mem", fmap_rom_b_2);
+        $readmemh("h_1_rgb.mem", fmap_rom_b_3);
+
+        $readmemh("i_1_rgb.mem", fmap_rom_c_0);
+        $readmemh("j_1_rgb.mem", fmap_rom_c_1);
+        $readmemh("k_1_rgb.mem", fmap_rom_c_2);
+        $readmemh("l_1_rgb.mem", fmap_rom_c_3);
+
+        $readmemh("m_1_rgb.mem", fmap_rom_d_0);
+        $readmemh("n_1_rgb.mem", fmap_rom_d_1);
+        $readmemh("o_1_rgb.mem", fmap_rom_d_2);
+        $readmemh("p_1_rgb.mem", fmap_rom_d_3);
     end
     
     // always @(*) begin
@@ -95,14 +106,22 @@ module fmap_feeder(
             4'd1: selected_pixel = fmap_rom_a_1[addr_reg];
             4'd2: selected_pixel = fmap_rom_a_2[addr_reg];
             4'd3: selected_pixel = fmap_rom_a_3[addr_reg];
+
             4'd4: selected_pixel = fmap_rom_b_0[addr_reg];
             4'd5: selected_pixel = fmap_rom_b_1[addr_reg];
             4'd6: selected_pixel = fmap_rom_b_2[addr_reg];
             4'd7: selected_pixel = fmap_rom_b_3[addr_reg];
+
             4'd8: selected_pixel = fmap_rom_c_0[addr_reg];
             4'd9: selected_pixel = fmap_rom_c_1[addr_reg];
             4'd10: selected_pixel = fmap_rom_c_2[addr_reg];
             4'd11: selected_pixel = fmap_rom_c_3[addr_reg];
+            
+            4'd12: selected_pixel = fmap_rom_d_0[addr_reg];
+            4'd13: selected_pixel = fmap_rom_d_1[addr_reg];
+            4'd14: selected_pixel = fmap_rom_d_2[addr_reg];
+            4'd15: selected_pixel = fmap_rom_d_3[addr_reg];
+
             default: selected_pixel = 8'd0;
         endcase
     end

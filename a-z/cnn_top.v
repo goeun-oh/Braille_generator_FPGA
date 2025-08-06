@@ -4,6 +4,7 @@ module cnn_top (
     input       clk,
     input       reset_n,
     input       i_valid,
+    input [31:0] i_pixel,
     input [3:0] sw,
     // output                                        w_stage2_core_valid,
     // output [`ST2_Conv_CO * (`ST2_O_F_BW-1)-1 : 0]   w_stage2_core_fmap,
@@ -12,7 +13,10 @@ module cnn_top (
     // output o_core_done
     output       out_valid,
     output [7:0] alpha,
-    output [2:0] led
+    output [3:0] led,
+    output led_r,
+    output led_g,
+    output led_b
 );
     wire signed [`ST1_CO*`ST1_O_F_BW-1:0] w_core_fmap;
     wire w_core_valid;
@@ -55,28 +59,19 @@ module cnn_top (
     end
     
 
-    wire o_valid;
-    fmap_feeder feeder (
-        .clk        (clk),
-        .reset_n    (reset_n),
-        .i_valid    (i_valid),  // 1클럭만 high!
-        .sw         (sw),  // 1클럭만 high!
-        .o_pixel    (w_pixel),
-        .o_out_valid(o_valid)
-    );
 
 
     wire [7:0] grayed_px;
     wire grayed_o_valid;    
 
-    // gray_filter u_gray_filter(
-    //     .clk(clk),
-    //     .reset_n(reset_n),
-    //     .one_px(w_pixel),           // 32 bit
-    //     .i_in_valid(o_valid),                            
-    //     .grayed_one_px(grayed_px),    // 8 bit
-    //     .o_valid(grayed_o_valid)
-    // );
+    gray_filter u_gray_filter(
+        .clk(clk),
+        .reset_n(reset_n),
+        .one_px(w_pixel),           // 32 bit
+        .i_in_valid(i_valid),                            
+        .grayed_one_px(grayed_px),    // 8 bit
+        .o_valid(grayed_o_valid)
+    );
 
 
 
@@ -86,8 +81,8 @@ module cnn_top (
         .reset_n(reset_n),
         .i_cnn_weight(w_cnn_weight),
         .i_cnn_bias(w_cnn_bias),
-        .i_in_valid(o_valid),
-        .i_in_fmap(w_pixel),
+        .i_in_valid(grayed_o_valid),
+        .i_in_fmap(grayed_px),
         .o_ot_valid(w_core_valid),
         .o_ot_fmap(w_core_fmap)
     );
@@ -160,7 +155,10 @@ endgenerate
         .i_in_Relu(w_bs_stage2_core_fmap),
         .o_valid(out_valid),
         .alpha(alpha),
-        .led(led)
+        .led(led),
+        .led_r(led_r),
+        .led_g(led_g),
+        .led_b(led_b)
     );
 
     // ===============================
