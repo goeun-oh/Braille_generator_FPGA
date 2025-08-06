@@ -14,17 +14,7 @@ module top(
 
 
     wire w_btn;
-    // wire clk_out;
-
-    // clk_div5 u_clk_div5(
-    // .clk(clk),        // 100MHz 입력 클럭
-    // .reset_n(!reset),    // 비동기 리셋 (active low)
-    // .clk_out(clk_out)  
-    // );
-
-    
-
-
+    wire w_valid;
     
     btn_debounce_one_pulse U_BTN(
         .clk(clk),
@@ -38,11 +28,17 @@ module top(
         .reset_n(!reset),
         .i_valid(w_btn),
         .sw(sw),
-        .out_valid(out_valid),
+        .out_valid(w_valid),
         .alpha(alpha),
         .led(led)
     );
 
+    valid_gen u_valid_gen(
+        .clk(clk),
+        .reset_n(!reset),
+        .i_valid(w_valid),
+        .o_valid(out_valid)
+    );
 
 endmodule
 
