@@ -30,15 +30,19 @@ module stage3_top_cnn(
 
     output o_valid,
     output [7:0] alpha,
-    output [2:0] led
+    output [3:0] led,
+    output led_r,
+    output led_g,
+    output led_b
     );
-    assign led = 3'b000;
     wire pool_valid;
     wire [`pool_CO * `ST3_OF_BW-1:0] w_pool;
     wire acc_valid;
     wire [`acc_CO * `ST3_ACC_BW-1:0] w_acc;
     wire core_valid;
     wire [`core_CO * `ST3_OUT_BW -1:0] w_core;
+
+
     // 확인 완료
     stage3_max_pooling U_stage3_max_pooling(
     .clk(clk),
@@ -84,11 +88,18 @@ module stage3_top_cnn(
     );
 
     alpha_decoder u_alpha_decoder(
+        .clk(clk),
+        .reset_n(reset_n),
         .i_valid(w_compare_valid),
         .index_info(max_index_info),
         .o_alpha(alpha),
-        .o_valid(o_valid)
+        .o_valid(o_valid),
+        .led(led),
+        .led_r(led_r),
+        .led_g(led_g),
+        .led_b(led_b)
     );
+
 
 endmodule
 

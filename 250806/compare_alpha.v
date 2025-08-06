@@ -11,7 +11,7 @@ module compare_alpha(
 );
 
     reg signed [`ST3_OUT_BW-1:0] compare_value;
-    reg [$clog2(`ST3_OUT_BW)-1:0] compare_index_info;
+    reg [$clog2(`core_CO)-1:0] compare_index_info;
 
     reg compare_valid;
     
@@ -25,10 +25,10 @@ module compare_alpha(
                     compare_value <= i_cnn_value;
                     compare_index_info <= i_index_info;
                 end
-            end else begin
-                compare_value <=0;
-                compare_index_info <=0;
-            end
+            end 
+        end else if (compare_valid)begin
+            compare_value <=0;
+            compare_index_info <=0;
         end
     end
 

@@ -12,6 +12,7 @@ output                                                          o_ot_valid     ,
 output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap        //1point(19bit)
     );
 
+    // localparam LATENCY = 2;
     localparam COL = `ST2_Pool_X; //24
     localparam ROW = `ST2_Pool_Y; //24
 
@@ -20,23 +21,25 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
 //==============================================================================
 // define max pooling function
 //==============================================================================
-    //2x2 window
-    function [`ST2_Pool_IBW:0] max_pixel;
-        input [2*2*`ST2_Pool_IBW-1 : 0] fmap; // 2x2x(19bit) window
-        reg   [`ST2_Pool_IBW-1:0] a, b, c, d;
-        reg   [`ST2_Pool_IBW-1:0] max1, max2, max_pool;
+    // //2x2 window
+    // function [`ST2_Pool_IBW:0] max_pixel;
+    //     input [2*2*`ST2_Pool_IBW-1 : 0] fmap; // 2x2x(19bit) window
+    //     reg   [`ST2_Pool_IBW-1:0] a, b, c, d;
+    //     reg   [`ST2_Pool_IBW-1:0] max1, max2, max_pool;
 
-        begin
-            a = fmap[0               +: `ST2_Pool_IBW];
-            b = fmap[1*`ST2_Pool_IBW +: `ST2_Pool_IBW];
-            c = fmap[2*`ST2_Pool_IBW +: `ST2_Pool_IBW];
-            d = fmap[3*`ST2_Pool_IBW +: `ST2_Pool_IBW];
-            max1 = (a > b) ? a : b;
-            max2 = (c > d) ? c : d;
-            max_pool = (max1 > max2) ? max1 : max2;
-            max_pixel = max_pool;            
-        end
-    endfunction
+    //     begin
+    //         a = fmap[0               +: `ST2_Pool_IBW];
+    //         b = fmap[1*`ST2_Pool_IBW +: `ST2_Pool_IBW];
+    //         c = fmap[2*`ST2_Pool_IBW +: `ST2_Pool_IBW];
+    //         d = fmap[3*`ST2_Pool_IBW +: `ST2_Pool_IBW];
+    //         max1 = (a > b) ? a : b;
+    //         max2 = (c > d) ? c : d;
+    //         max_pool = (max1 > max2) ? max1 : max2;
+    //         max_pixel = max_pool;            
+    //     end
+    // endfunction
+
+    
 //==============================================================================
 // row,col_counter
 //==============================================================================
@@ -68,9 +71,11 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
         if(!reset_n) begin
             row_delay <= 0;
             col_delay <= 0;  
+
         end else begin
             row_delay <= row;
             col_delay <= col;
+
         end 
     end    
 
@@ -105,33 +110,55 @@ output    [`ST2_Pool_IBW -1 : 0]                                o_ot_fmap       
 // apply max pooling function
 //==============================================================================
    
-    reg [`ST2_Pool_IBW-1:0] o_pooling;
-    reg [`ST2_Pool_IBW-1:0] r_o_pooling;
-    reg r_valid;
 
-    always @(*) begin
-        o_pooling = max_pixel({
-            line_buffer0[col_delay-1], line_buffer0[col_delay],
-            line_buffer1[col_delay-1], line_buffer1[col_delay]
-            });        
-    end
+// reg signed [`ST2_Pool_IBW:0] max_pixel;
+
+    reg signed[`ST2_Pool_IBW-1:0] max_buffer_0;
+    reg signed[`ST2_Pool_IBW-1:0] max_buffer_1;
+    reg signed[`ST2_Pool_IBW-1:0] max_data;
+    reg r_valid;
+    reg r_valid2;
+
+    // always @(*) begin
+    //     o_pooling = max_pixel({
+    //         line_buffer0[col_delay-1], line_buffer0[col_delay],
+    //         line_buffer1[col_delay-1], line_buffer1[col_delay]
+    //         });        
+    // end
 
     always @(posedge clk or negedge reset_n) begin
         if(!reset_n) begin
-            r_o_pooling   <= 0;
-            r_valid       <= 0;
+            max_buffer_0 <= 0;
+            max_buffer_1 <= 0;
+            r_valid      <= 0;
         end else if( (row_delay[0]) && (col_delay[0]) ) begin
-            r_o_pooling <= o_pooling;
+            max_buffer_0 <= (line_buffer0[col_delay-1] > line_buffer1[col_delay-1]) ? line_buffer0[col_delay-1] : line_buffer1[col_delay-1];
+            max_buffer_1 <= (line_buffer0[col_delay]   > line_buffer1[col_delay])   ? line_buffer0[col_delay] : line_buffer1[col_delay];
             r_valid     <= 1;
         end else begin
-            r_o_pooling <= 0;
-            r_valid     <= 0;
+            max_buffer_0 <= 0;
+            max_buffer_1 <= 0;            
+            r_valid      <= 0;
         end
     end    
 
 
-assign o_ot_fmap = r_o_pooling;
-assign o_ot_valid =  r_valid;
+    always @(posedge clk or negedge reset_n) begin
+        if(!reset_n) begin
+            max_data       <= 0;
+            r_valid2       <= 0;
+        end else if( r_valid ) begin
+            max_data       <= (max_buffer_0 > max_buffer_1) ? max_buffer_0 : max_buffer_1;
+            r_valid2       <= r_valid;
+        end else begin
+            max_data       <= 0;
+            r_valid2       <= 0;
+        end
+    end    
+
+
+assign o_ot_fmap = max_data;
+assign o_ot_valid =  r_valid2;
 
 
 endmodule

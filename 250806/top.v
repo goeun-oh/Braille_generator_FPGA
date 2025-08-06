@@ -7,9 +7,12 @@ module top(
     input i_btn,
     input reset,
     input [3:0] sw,
-    output [2:0] led,
-    output [7:0] alpha,
-    output out_valid
+    // output [7:0] alpha,
+    // output out_valid,
+    output [3:0] led,
+    output led_r,
+    output led_g,
+    output led_b
 );
 
 
@@ -30,7 +33,10 @@ module top(
         .sw(sw),
         .out_valid(w_valid),
         .alpha(alpha),
-        .led(led)
+        .led(led),
+        .led_r(led_r),
+        .led_g(led_g),
+        .led_b(led_b)
     );
 
     valid_gen u_valid_gen(
