@@ -27,7 +27,7 @@ class scoreboard extends uvm_scoreboard;
     
     fork
       packet_get();
-    //  data_check();
+      data_check();
     join_none
   
   endtask: run_phase
@@ -39,11 +39,50 @@ class scoreboard extends uvm_scoreboard;
     end
   endtask: packet_get
   
-  //virtual task data_check();
-  // model 만들어서 check하는 부분 만들어 볼 것
-  //if(EXP_CNN_OUT == cnn_vif.cnn_out) pass
-  //else error
- // endtask: data_check
+virtual task data_check();
+  logic [7:0] WEIGHT;
+  logic [7:0] FMAP;
+  logic [15:0] EXP_CNN_OUT;
+
+  forever begin
+    @(posedge cnn_vif.clk);
+    
+    if(apb_vif.PSEL && apb_vif.PENABLE && !apb_vif.PWRITE) begin
+      case (apb_vif.PADDR)
+        32'h00: begin
+          @(posedge apb_vif.PCLK);
+          WEIGHT = apb_vif.PRDATA;
+          `uvm_info(get_type_name(), $sformatf("Weight set to: 0x%02h", WEIGHT), UVM_LOW)
+        end
+
+        32'h08: begin
+          @(posedge apb_vif.PCLK);
+          FMAP = apb_vif.PRDATA;
+          `uvm_info(get_type_name(), $sformatf("Fmap set to: 0x%02h", FMAP), UVM_LOW)
+        end
+
+        32'h04: begin
+          // valid read로 간주될 때 비교
+          EXP_CNN_OUT = WEIGHT * FMAP;
+
+          repeat(2) @(posedge cnn_vif.clk); // 연산 latency 보정
+
+          if (cnn_vif.cnn_out === EXP_CNN_OUT) begin
+            `uvm_info(get_type_name(),
+              $sformatf("[PASS] fmap (0x%02h) × weight (0x%02h) = 0x%04h (cnn_out)",
+                        FMAP, WEIGHT, EXP_CNN_OUT),
+              UVM_LOW)
+          end else begin
+            `uvm_error(get_type_name(),
+              $sformatf("[FAIL] fmap (0x%02h) × weight (0x%02h) = 0x%04h, but cnn_out = 0x%04h",
+                        FMAP, WEIGHT, EXP_CNN_OUT, cnn_vif.cnn_out))
+          end
+        end
+      endcase
+    end
+  end
+endtask
+
   
   virtual task packet_compare();
     logic [31:0] EXP_ADDR;

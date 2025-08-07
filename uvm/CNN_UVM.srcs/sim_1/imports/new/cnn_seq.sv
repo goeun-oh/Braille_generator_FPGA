@@ -43,13 +43,13 @@ class cnn_sequence extends uvm_sequence #(apb_packet);
     
     `uvm_info(get_type_name(), "cnn_seq body() start", UVM_LOW)
     
+    HW_WRITE(32'h0000, 32'h0002);
     HW_WRITE(32'h0008, 32'h0004);
     HW_WRITE(32'h0004, 32'h0001);
-    HW_WRITE(32'h0000, 32'h0002);
     
+    HW_READ(31'h0000, rdata);
     HW_READ(31'h0008, rdata);
     HW_READ(31'h0004, rdata);
-    HW_READ(31'h0000, rdata);
   endtask: body
   
 endclass: cnn_sequence

@@ -1,5 +1,6 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
+"../../../../CNN_UVM.srcs/sources_1/imports/new/apb3_ip.v" \
 "../../../../CNN_UVM.srcs/sources_1/imports/new/top.v" \
 
 sv xil_defaultlib  \
@@ -12,6 +13,7 @@ sv xil_defaultlib  \
 "../../../../CNN_UVM.srcs/sim_1/imports/new/scoreboard.sv" \
 "../../../../CNN_UVM.srcs/sim_1/imports/new/tb_env.sv" \
 "../../../../CNN_UVM.srcs/sim_1/new/cnn_seq.sv" \
+"../../../../CNN_UVM.srcs/sim_1/imports/new/tb_pkg.sv" \
 "../../../../CNN_UVM.srcs/sim_1/imports/new/tb_top.sv" \
 
 # compile glbl module

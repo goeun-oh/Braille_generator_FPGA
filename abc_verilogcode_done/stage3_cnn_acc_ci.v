@@ -1,5 +1,7 @@
 `timescale 1ns / 1ps
-`include "stage3_defines_cnn_core.vh"
+
+
+`include "defines_cnn_core.v"
 
 // 3채널 fully-connected 누적합(with valid chain)
 module stage3_cnn_acc_ci(
@@ -7,10 +9,10 @@ module stage3_cnn_acc_ci(
     input reset_n,
 
     input i_in_valid,
-    input [`pool_CO * `OF_BW-1:0] i_in_pooling,  // 3채널, 34비트씩 flatten
+    input [`pool_CO * `ST3_OF_BW-1:0] i_in_pooling,  // 3채널, 35비트씩 flatten
 
     output o_ot_valid,
-    output [`acc_CO * `ACC_BW -1:0] o_ot_ci_acc
+    output [`acc_CO * `ST3_ACC_BW -1:0] o_ot_ci_acc
 );
     // ---------------------
     // 파라미터/신호 정의
@@ -21,15 +23,16 @@ module stage3_cnn_acc_ci(
     reg signed [7:0] rom[0:143]; // 3*48
 
     // 누적 레지스터(결과 저장)
-    reg  [`acc_CO * `ACC_BW-1:0] acc_kernel;
-    reg  [`acc_CO * `ACC_BW-1:0] r_out;
+    reg  [`acc_CO * `ST3_ACC_BW-1:0] acc_kernel;
+    reg  [`acc_CO * `ST3_ACC_BW-1:0] r_out;
     reg  r_valid;
 
-    wire [`pool_CO-1:0] w_ot_valid;
-    wire signed [`acc_CO * (`KER_BW) - 1:0] w_ot_kernel;
+    wire [`acc_CO - 1:0] w_ot_valid;
+    wire signed [`acc_CO * (`ST3_KER_BW) - 1:0] w_ot_kernel;
 
     // -- 가중치 메모리 로딩
     initial $readmemh("stage3_fc1_weights.mem", rom);
+    reg [`pool_CO*`ST3_W_BW-1:0] w_cnn_weight[0:`acc_CO-1];
 
     // -- pooling index 카운터
 
@@ -51,25 +54,24 @@ module stage3_cnn_acc_ci(
         end
     end
 
-
-
-
     // -- cnn_kernal 인스턴스 생성 및 각 채널 w_ot_valid 연결
+    integer ch;
     genvar mul_inst;
     generate
-        for (mul_inst = 0; mul_inst < `pool_CO; mul_inst = mul_inst + 1) begin: gen_mul
-            wire [7:0] weight0 = rom[mul_inst*`ACC_BW + w_cnt];
-            wire [7:0] weight1 = rom[mul_inst*`ACC_BW + 16 + w_cnt];
-            wire [7:0] weight2 = rom[mul_inst*`ACC_BW + 32 + w_cnt];
-            wire [`pool_CO*`W_BW-1:0] w_cnn_weight = {weight2, weight1, weight0};
+        for (mul_inst = 0; mul_inst < `acc_CO; mul_inst = mul_inst + 1) begin: gen_mul
+            always @(*) begin
+                for (ch = 0; ch < `pool_CO; ch = ch + 1 ) begin
+                    w_cnn_weight [mul_inst][ch* `ST3_W_BW +: `ST3_W_BW] = rom[(mul_inst*`FC_IN_VEC) + (ch * `P_SIZE * `P_SIZE) + w_cnt];
+                end 
+            end
             stage3_cnn_kernal U_cnn_kernal(
                 .clk(clk),
                 .reset_n(reset_n),
                 .i_pooling_valid(i_in_valid),
                 .i_pooling(i_in_pooling),
-                .i_weight(w_cnn_weight),
+                .i_weight(w_cnn_weight[mul_inst]),
                 .o_kernal_valid(w_ot_valid[mul_inst]),
-                .o_kernel(w_ot_kernel[mul_inst * `KER_BW +: `KER_BW])
+                .o_kernel(w_ot_kernel[mul_inst * `ST3_KER_BW +: `ST3_KER_BW])
             );
         end
     endgenerate
@@ -83,16 +85,16 @@ module stage3_cnn_acc_ci(
                 acc_kernel <= 0;
             end else if (&w_ot_valid) begin
                 for (i=0; i< `acc_CO; i = i+1) begin
-                    acc_kernel[i * `ACC_BW +: `ACC_BW] = $signed(acc_kernel[i * `ACC_BW +: `ACC_BW]) + $signed(w_ot_kernel[i * `KER_BW +: `KER_BW]); 
+                    acc_kernel[i * `ST3_ACC_BW +: `ST3_ACC_BW] <= $signed(acc_kernel[i * `ST3_ACC_BW +: `ST3_ACC_BW]) + $signed(w_ot_kernel[i * `ST3_KER_BW +: `ST3_KER_BW]); 
                 end
             end
         end
     endgenerate
 
-    // reg  [`CO * `ACC_BW-1:0] next_acc;
-    // reg  [`CO * `ACC_BW-1:0] r_out;
+    // reg  [`CO * `ST3_ACC_BW-1:0] next_acc;
+    // reg  [`CO * `ST3_ACC_BW-1:0] r_out;
 
-    // (* mark_debug = "true" *) reg signed [`ACC_BW-1:0] d_acc [0 : `acc_CO -1];
+    // (* mark_debug = "true" *) reg signed [`ST3_ACC_BW-1:0] d_acc [0 : `acc_CO -1];
 
     // integer ch;
     // always @(posedge clk or negedge reset_n) begin
@@ -102,7 +104,7 @@ module stage3_cnn_acc_ci(
     //             d_acc [ch] <= 0;
     //         end else if (&w_ot_valid) begin
     //         for (ch = 0; ch < `acc_CO; ch = ch + 1) begin
-    //             d_acc [ch] <= $signed(acc_kernel[ch * `ACC_BW +: `ACC_BW]) + $signed(w_ot_kernel[ch * `KER_BW +: `KER_BW]);
+    //             d_acc [ch] <= $signed(acc_kernel[ch * `ST3_ACC_BW +: `ST3_ACC_BW]) + $signed(w_ot_kernel[ch * `ST3_KER_BW +: `ST3_KER_BW]);
     //         end
     //     end
     // end

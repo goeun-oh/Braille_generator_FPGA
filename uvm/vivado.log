@@ -2,22 +2,45 @@
 # Vivado v2020.2 (64-bit)
 # SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
 # IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
-# Start of session at: Wed Jul 30 15:35:55 2025
-# Process ID: 11008
-# Current directory: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent22320 C:\Users\kccistc\Documents\카카오톡 받은 파일\CNN_UVM\CNN_UVM.xpr
-# Log file: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/vivado.log
-# Journal file: C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM\vivado.jou
+# Start of session at: Mon Aug  4 15:02:27 2025
+# Process ID: 19380
+# Current directory: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent16748 C:\Users\kccistc\Documents\GitHub\Braille_generator_FPGA\uvm\CNN_UVM.xpr
+# Log file: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/vivado.log
+# Journal file: C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm\vivado.jou
 #-----------------------------------------------------------
 start_gui
-open_project {C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.xpr}
-INFO: [Project 1-313] Project file moved from 'D:/Working/CNN_UVM' since last save.
-WARNING: [filemgmt 56-2] Default IP Output Path : Could not find the directory 'C:/Users/kccistc/Documents/카카오톡 받은 파일/CNN_UVM/CNN_UVM.gen/sources_1', nor could it be found using path 'D:/Working/CNN_UVM/CNN_UVM.gen/sources_1'.
+open_project C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/CNN_UVM.xpr
+INFO: [Project 1-313] Project file moved from '/home/goeun/gitHub/Braille_generator_FPGA/uvm' since last save.
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionXsim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionModelSim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionQuesta
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionXcelium
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionVCS
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionRiviera
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorVersionActiveHdl
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionXsim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionModelSim
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionQuesta
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionXcelium
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionVCS
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionRiviera
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimulatorGccVersionActiveHdl
+WARNING: [filemgmt 56-2] Default IP Output Path : Could not find the directory 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/CNN_UVM.gen/sources_1', nor could it be found using path 'C:/home/goeun/gitHub/Braille_generator_FPGA/uvm/CNN_UVM.gen/sources_1'.
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name EnableResourceEstimation
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name SimCompileState
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name ClassicSocBoot
+CRITICAL WARNING: [Project 1-505] Unrecognized Option Name LocalIPRepoLeafDirName
+CRITICAL WARNING: [Project 1-311] Could not find the file 'C:/Users/kccistc/Documents/GitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg', nor could it be found using path 'C:/home/goeun/gitHub/Braille_generator_FPGA/uvm/tb_top_behav.wcfg'.
 Scanning sources...
 Finished scanning sources
+WARNING: [Project 1-231] Project 'CNN_UVM.xpr' was created with a future version and may or may not perform reliably with this version of Vivado. It has been opened in read-only mode for the protection of unrecognized data. Use 'File | Save Project As...' if you wish to alter a copy of the project.
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2020.2/data/ip'.
-open_project: Time (s): cpu = 00:00:02 ; elapsed = 00:00:08 . Memory (MB): peak = 1084.969 ; gain = 0.000
-update_compile_order -fileset sources_1
+open_project: Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 1104.250 ; gain = 0.000
 WARNING: [filemgmt 56-315] Source scanning failed during design analysis. To get more details run synthesis or simulation and check the log.
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Aug  4 15:03:06 2025...
